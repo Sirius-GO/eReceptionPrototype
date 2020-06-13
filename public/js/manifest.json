@@ -1,0 +1,14 @@
+{
+  "short_name": "eReception Hub",
+  "name": "eReception Hub - By Garry Owen",
+  "icons": [
+    {
+      "src": "https://ereceptionhub.co.uk/storage/images/erec_180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "https://ereceptionhub.co.uk",
+  "display": "standalone",
+  "orientation": "landscape"
+}

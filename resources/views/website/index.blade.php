@@ -5,7 +5,7 @@
     @include('inc.carousel')
     <br>
     <center>
-            <img src="../../ereceptionhub/storage/app/public/images/logo.png"><br>
+            <img src="../../storage/images/logo.png"><br>
             <h2 style="color: #222; font-weight: 600;">Digital Sign-in for Staff, Visitors, Contractors, Deliveries and Collections</h2>
             <h3 style="color: #222;">Replace your paper visitors and safeguard your personal information</h3>
     </ceneter>
@@ -41,7 +41,7 @@
             <h3 style="font-weight: 700; color: #804738;">Bronze</h3>
             </div>
             <br>
-            <center><img src="../../ereceptionhub/storage/app/public/images/bronze.png" style="width: 120px;"></center>
+            <center><img src="../../storage/images/bronze.png" style="width: 120px;"></center>
         <hr>
         <ul class="uls">
             <li>Unlimited Sign-in's</li>
@@ -70,7 +70,7 @@
             <h3 style="font-weight: 700; color: #505050;">Silver</h3>
         </div>
         <br>
-    <center><img src="../../ereceptionhub/storage/app/public/images/silver.png" style="width: 120px;"></center>
+    <center><img src="../../storage/images/silver.png" style="width: 120px;"></center>
         <hr>
         <ul class="uls">
             <h6>Everything offered in Bronze, plus</h6>
@@ -97,7 +97,7 @@
                 <h3 style="font-weight: 700; color: #863e1b;">Gold</h3>
             </div>
             <br>
-                <center><img src="../../ereceptionhub/storage/app/public/images/gold.png" style="width: 120px;"></center>
+                <center><img src="../../storage/images/gold.png" style="width: 120px;"></center>
             <hr>
         <ul class="uls">
             <h6>Everything offered in Silver, plus</h6>

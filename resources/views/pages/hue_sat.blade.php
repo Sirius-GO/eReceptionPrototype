@@ -11,7 +11,7 @@
                     <span><b>Current Settings:</b> &nbsp;&nbsp;&nbsp; Hue: {{ $l->hue }} &nbsp;&nbsp;&nbsp; Sat: {{ $l->sat }}</span>
                     <b style="margin-left: 200px;">Preview: </b>
                     <span style="display: inline-block">
-                        <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/staff.png" style="margin-top: 10px; height: 60px; -webkit-filter: hue-rotate(<?php echo $l->hue."deg"; ?>) saturate(<?php echo $l->sat; ?>);">
+                        <img src="https://ereceptionhub.co.uk/storage/images/staff.png" style="margin-top: 10px; height: 60px; -webkit-filter: hue-rotate(<?php echo $l->hue."deg"; ?>) saturate(<?php echo $l->sat; ?>);">
                     </span>
                     @endforeach
                     @endif
@@ -33,19 +33,19 @@
                     @if(app()->isLocale('en'))
                         <div style="position: relative; top: 5vh;">
                             <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                <img src="../../ereceptionhub/storage/app/public/images/staff.png" style="max-height: 14vh; max-width: 35vw;">
+                                <img src="https://ereceptionhub.co.uk/storage/images/staff.png" style="max-height: 14vh; max-width: 35vw;">
                             </div>
                             <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                <img src="../../ereceptionhub/storage/app/public/images/visitor.png" style="max-height: 14vh; max-width: 35vw;">
+                                <img src="https://ereceptionhub.co.uk/storage/images/visitor.png" style="max-height: 14vh; max-width: 35vw;">
                             </div>
                         </div> 
                     @else
                         <div style="position: relative; top: 5vh;">
                             <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                <img src="../../ereceptionhub/storage/app/public/images/staff.png" style="max-height: 14vh; max-width: 35vw;">
+                                <img src="https://ereceptionhub.co.uk/storage/images/staff.png" style="max-height: 14vh; max-width: 35vw;">
                             </div>
                             <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                <img src="../../ereceptionhub/storage/app/public/images/visitor_w.png" style="max-height: 14vh; max-width: 35vw;">
+                                <img src="https://ereceptionhub.co.uk/storage/images/visitor_w.png" style="max-height: 14vh; max-width: 35vw;">
                             </div>
                         </div> 
                     @endif

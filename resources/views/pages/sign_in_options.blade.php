@@ -8,9 +8,9 @@
                     @foreach($company ?? '' as $comp)
                         <?php $cpy = $comp->company_name; ?>
                         @if($comp->company_logo == '')
-                            <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/default_logo.png" style="max-width: 25vw; max-height: 25vh;">
+                            <img src="https://ereceptionhub.co.uk/storage/images/default_logo.png" style="max-width: 25vw; max-height: 25vh;">
                         @else 
-                            <img src="http://localhost:8080/ereceptionhub/storage/app/public{{ $comp->company_logo }}" style="max-width: 25vw; max-height: 25vh;">
+                            <img src="https://ereceptionhub.co.uk/storage{{ $comp->company_logo }}" style="max-width: 25vw; max-height: 25vh;">
                         @endif
                     @endforeach
                 @endif
@@ -22,39 +22,39 @@
                 <div id="signin_out">
                     @if(app()->isLocale('en'))
                     <center>
-                        <a data-toggle="modal" data-target="#department"> 
-                            <img src="../../ereceptionhub/storage/app/public/images/staff.png" style="max-height: 14vh; max-width: 35vw;" class="butns">
+                        <a href="#" data-toggle="modal" data-target="#department"> 
+                            <img src="https://ereceptionhub.co.uk/storage/images/staff.png" style="max-height: 14vh; max-width: 35vw;" class="butns">
                         </a>
                         &nbsp;&nbsp;&nbsp;
-                        <a data-toggle="modal" data-target="#visitor"> 
-                            <img src="../../ereceptionhub/storage/app/public/images/visitor.png" style="max-height: 14vh; max-width: 35vw;" class="butns">
+                        <a href="#" data-toggle="modal" data-target="#visitor"> 
+                            <img src="https://ereceptionhub.co.uk/storage/images/visitor.png" style="max-height: 14vh; max-width: 35vw;" class="butns">
                         </a>
                         <br>
-                        <a data-toggle="modal" data-target="#delivery"> 
-                            <img src="../../ereceptionhub/storage/app/public/images/delivery_b.png" style="max-height: 14vh; max-width: 35vw;" class="butns">
+                        <a href="#" data-toggle="modal" data-target="#delivery"> 
+                            <img src="https://ereceptionhub.co.uk/storage/images/delivery_b.png" style="max-height: 14vh; max-width: 35vw;" class="butns">
                         </a>
                         &nbsp;&nbsp;&nbsp;
-                        <a data-toggle="modal" data-target="#contractor"> 
-                            <img src="../../ereceptionhub/storage/app/public/images/contractor_b.png" style="max-height: 14vh; max-width: 35vw;" class="butns">
+                        <a href="#" data-toggle="modal" data-target="#contractor"> 
+                            <img src="https://ereceptionhub.co.uk/storage/images/contractor_b.png" style="max-height: 14vh; max-width: 35vw;" class="butns">
                         </a>
                         <br>
                     </center>
                     @else
                     <center>
-                        <a data-toggle="modal" data-target="#department"> 
-                            <img src="../../ereceptionhub/storage/app/public/images/staff.png" style="max-height: 14vh; max-width: 35vw;" class="butns">
+                        <a href="#" data-toggle="modal" data-target="#department"> 
+                            <img src="https://ereceptionhub.co.uk/storage/images/staff.png" style="max-height: 14vh; max-width: 35vw;" class="butns">
                         </a>
                         &nbsp;&nbsp;&nbsp;
-                        <a data-toggle="modal" data-target="#visitor"> 
-                            <img src="../../ereceptionhub/storage/app/public/images/visitor_w.png" style="max-height: 14vh; max-width: 35vw;" class="butns">
+                        <a href="#" data-toggle="modal" data-target="#visitor"> 
+                            <img src="https://ereceptionhub.co.uk/storage/images/visitor_w.png" style="max-height: 14vh; max-width: 35vw;" class="butns">
                         </a>
                         <br>
-                        <a data-toggle="modal" data-target="#delivery"> 
-                            <img src="../../ereceptionhub/storage/app/public/images/delivery_w.png" style="max-height: 14vh; max-width: 35vw;" class="butns">
+                        <a href="#" data-toggle="modal" data-target="#delivery"> 
+                            <img src="https://ereceptionhub.co.uk/storage/images/delivery_w.png" style="max-height: 14vh; max-width: 35vw;" class="butns">
                         </a>
                         &nbsp;&nbsp;&nbsp;
-                        <a data-toggle="modal" data-target="#contractor"> 
-                            <img src="../../ereceptionhub/storage/app/public/images/contractor_w.png" style="max-height: 14vh; max-width: 35vw;" class="butns">
+                        <a href="#" data-toggle="modal" data-target="#contractor"> 
+                            <img src="https://ereceptionhub.co.uk/storage/images/contractor_w.png" style="max-height: 14vh; max-width: 35vw;" class="butns">
                         </a>
                         <br>
                     </center>
@@ -62,7 +62,7 @@
                 </div>
             </center>
         </div>
-            <a href="/ereceptionhub/public/hub" class="btn btn-primary btn-lg" style="position: absolute; top: 100px; right: 150px;"> <i class="fa fa-arrow-left"> </i> Go Back </a>
+            <a href="/hub" class="btn btn-primary btn-lg" style="position: absolute; top: 100px; right: 150px;"> <i class="fa fa-arrow-left"> </i> Go Back </a>
     </div>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="department">

@@ -222,7 +222,7 @@ if(strpos($my_url, 'reg') == false){
                                                 @if($rec->curstat === 'In')
                                                     <h5>
                                                         <!--<a href="force_signout/{{$rec->rid}}" class="btn btn-danger btn-xs" style="position: absolute; bottom: 36px; width: 120px; left: 50%; margin-left: -60px;"> <i class="fa fa-sign-out fa-lg"> </i> Force Sign Out</a>-->
-                                                        <a data-toggle="modal" data-target="#force_sign_out" onclick="getMyId({{ $rec->rid }})" class="btn btn-danger btn-xs forced" style="position: absolute; bottom: 36px; width: 120px; left: 50%; margin-left: -60px;"> <i class="fa fa-sign-out fa-lg"> </i> Force Sign Out</a>
+                                                        <a href="#"  data-toggle="modal" data-target="#force_sign_out" onclick="getMyId({{ $rec->rid }})" class="btn btn-danger btn-xs forced" style="position: absolute; bottom: 36px; width: 120px; left: 50%; margin-left: -60px;"> <i class="fa fa-sign-out fa-lg"> </i> Force Sign Out</a>
 
                                                     </h5>
                                                 @else 
@@ -232,7 +232,7 @@ if(strpos($my_url, 'reg') == false){
                                             <div class="card-footer" style="height: 30px; width: 100%;  background-color: rgba(0,0,0,0.3);">
                                                 <!-- Footer -->
                                                 <div style="position: relative; top: 5px;">
-                                                    <a href=""><center><span class="bnt btn-info btn-sm"> <i class="fa fa-search"></i> View Profile </span></center></a>
+                                                    <a href="administration/{{$rec->rid}}"><center><span class="bnt btn-info btn-sm"> <i class="fa fa-search"></i> View Profile </span></center></a>
                                                 </div>
                                             </div>
 
@@ -367,7 +367,7 @@ if(strpos($my_url, 'reg') == false){
                                                     <h5><span class="badge">Car Registration:  </span> <?php echo substr($rec->car_reg, 0, 10); ?></h5>
                                                     @if($rec->curstat === 'In')
                                                         <h5>
-                                                            <a data-toggle="modal" data-target="#force_sign_out" onclick="getMyId({{ $rec->rid }})" class="btn btn-danger btn-xs forced" style="position: absolute; bottom: 36px; width: 120px; left: 50%; margin-left: -60px;"> <i class="fa fa-sign-out fa-lg"> </i> Force Sign Out</a>
+                                                            <a href="#" data-toggle="modal" data-target="#force_sign_out" onclick="getMyId({{ $rec->rid }})" class="btn btn-danger btn-xs forced" style="position: absolute; bottom: 36px; width: 120px; left: 50%; margin-left: -60px;"> <i class="fa fa-sign-out fa-lg"> </i> Force Sign Out</a>
                                                         </h5>
                                                     @else 
                                                         <span class="badge">Sign Out Type: </span> {{ $rec->sign_out_type }}

@@ -76,7 +76,7 @@ use App\Register;
                                         <a href="fire/{{$rec->rid}}" class="btn btn-success btn-xs"> <i class="fa fa-check"></i> &nbsp; PRESENT </a>
 
                                         <!-- OPEN A MODAL AND POST FORM DATA TO CONTTROLLER -->
-                                        <a data-toggle="modal" data-target="#not_present" onclick="getMyId({{ $rec->rid }})" class="btn btn-danger btn-xs"> <i class="fa fa-times"></i> &nbsp; NOT PRESENT </a>
+                                        <a href="#" data-toggle="modal" data-target="#not_present" onclick="getMyId({{ $rec->rid }})" class="btn btn-danger btn-xs"> <i class="fa fa-times"></i> &nbsp; NOT PRESENT </a>
                                     </span>
                                 </span>
                             </div>
@@ -122,7 +122,7 @@ use App\Register;
                                         <a href="fire/{{$rec->rid}}" class="btn btn-success btn-xs"> <i class="fa fa-check"></i> &nbsp; PRESENT </a>
 
                                         <!-- OPEN A MODAL AND POST A FORM TO THE CONTROLLER -->
-                                        <a data-toggle="modal" data-target="#not_present" onclick="getMyId({{ $rec->rid }})" class="btn btn-danger btn-xs"> <i class="fa fa-times"></i> &nbsp; NOT PRESENT </a>
+                                        <a href="#" data-toggle="modal" data-target="#not_present" onclick="getMyId({{ $rec->rid }})" class="btn btn-danger btn-xs"> <i class="fa fa-times"></i> &nbsp; NOT PRESENT </a>
                                     </span>
                                 </span>
                             </div>  

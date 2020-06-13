@@ -12,15 +12,15 @@
                         <div class="row">
                             @foreach($registration as $reg)
                                     <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6" style="background-color: rgba(0,0,0,0.1); padding-top: 12px; display: inline-block; border: solid 1px #aaa; margin-top: 3px; min-height: 250px; min-width: 300px;">
-                                        <img src="http://localhost:8080/ereceptionhub/storage/app/public/mug_shots/{{ $reg->avatar }}" style="position: absolute; width: 200px; left: 10px; top: 10px; border-radius: 50%; border: solid 1px #eee;">
+                                        <img src="https://ereceptionhub.co.uk/storage/mug_shots/{{ $reg->avatar }}" style="position: absolute; width: 200px; left: 10px; top: 10px; border-radius: 50%; border: solid 1px #eee;">
                                         <img style="position: absolute; width: 100px; right: 10px; top: 10px;" src="../qr-code?text={{$reg->rfid}}&size=100" alt="QR Code">
 
                                         @if(count($company ?? '') > 0)
                                             @foreach($company ?? '' as $comp)
                                                 @if($comp->company_logo == '')
-                                                    <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/default_logo.png" style="position: absolute; width: 100px; right: 10px; bottom: 10px;">
+                                                    <img src="https://ereceptionhub.co.uk/storage/images/default_logo.png" style="position: absolute; width: 100px; right: 10px; bottom: 10px;">
                                                 @else 
-                                                    <img src="http://localhost:8080/ereceptionhub/storage/app/public{{ $comp->company_logo }}" style="position: absolute; width: 100px; right: 10px; bottom: 10px;">
+                                                    <img src="https://ereceptionhub.co.uk/storage{{ $comp->company_logo }}" style="position: absolute; width: 100px; right: 10px; bottom: 10px;">
                                                 @endif
                                             @endforeach
                                         @endif
@@ -82,7 +82,7 @@
                         <br><hr><br>
                         <div class="row">
                             <div class="col-12">
-                                <p align="center"><a href="/ereceptionhub/public/administration" class="btn btn-primary"><i class="fa fa-arrow-left fa-lg"></i> &nbsp;Go Back </a></p>
+                                <p align="center"><a href="/administration" class="btn btn-primary"><i class="fa fa-arrow-left fa-lg"></i> &nbsp;Go Back </a></p>
                             </div>
                         </div>
                     @else

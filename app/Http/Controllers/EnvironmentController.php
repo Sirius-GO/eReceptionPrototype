@@ -120,7 +120,7 @@ return redirect('/settings')->with('success', 'Visitor Pass Colours Successfully
           exit();
         }
 
-        if(move_uploaded_file($fileTmpLoc, "../../ereceptionhub/storage/app/public/background_images/$name")){
+        if(move_uploaded_file($fileTmpLoc, "/var/www/vhosts/ereceptionhub.co.uk/ereceptionhub/public/storage/background_images/$name")){
 
 
         //Get Company ID of from Auth and update background image in Layouts table
@@ -141,7 +141,7 @@ return redirect('/settings')->with('success', 'Visitor Pass Colours Successfully
 
         $message = $request->session()->flash('success', 'Your background Image has been successfully uploaded!');
         echo $message;
-        $url = '../public/settings';
+        $url = '../settings';
         echo "<script>window.open('".$url."', '_parent');</script>";
     }
 

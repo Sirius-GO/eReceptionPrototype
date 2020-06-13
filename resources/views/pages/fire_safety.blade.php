@@ -132,7 +132,7 @@
                 <div class="panel-body">
                         <div class="row" >
                             <div class="col-12 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4" style="border: 1px dashed #ddd; padding: 10px; border-radius: 10px; background-color: rgba(0, 0, 0, 0.2);">
-                                <a href="/ereceptionhub/public/firereports" style="width: 90%; margin-left: 5%;" class="btn btn-primary"> <i class="fa fa-fire-extinguisher fa-lg"> </i> View Fire Reports </a>
+                                <a href="/firereports" style="width: 90%; margin-left: 5%;" class="btn btn-primary"> <i class="fa fa-fire-extinguisher fa-lg"> </i> View Fire Reports </a>
                             </div>
                         </div>
                         <br>
@@ -141,7 +141,7 @@
                                 <p style="font-size: 16px; margin-top: 10px;"><span class="badge"> Last Fire Drill: </span> {{$drill}}</p>
                             </div>
                             <div class="col-12 col-md-4 col-lg-4" style="min-height: 50px;">
-                                <a href="/ereceptionhub/public/fire" style="margin-top: 10px; width: 90%; margin-left: 5%;" class="btn btn-danger"> <i class="fa fa-fire-extinguisher fa-lg"> </i> Fire Drill </a>
+                                <a href="/fire" style="margin-top: 10px; width: 90%; margin-left: 5%;" class="btn btn-danger"> <i class="fa fa-fire-extinguisher fa-lg"> </i> Fire Drill </a>
                             </div>
                             <div class="col-12 col-md-4 col-lg-4" style="min-height: 50px; border: 1px dotted #eee;">
                                 <?php if($today < strtotime($due)) { ?>
@@ -157,7 +157,7 @@
                                 <p style="font-size: 16px; margin-top: 10px;"><span class="badge"> Last Daily Check: </span> {{$td}}</p>
                             </div>
                             <div class="col-12 col-md-4 col-lg-4" style="min-height: 50px;">
-                                <a href="/ereceptionhub/public/daily_checklist" style="margin-top: 10px; width: 90%; margin-left: 5%;" class="btn btn-warning"> <i class="fa fa-list-ol fa-lg"> </i> Daily Checklist </a>
+                                <a href="/daily_checklist" style="margin-top: 10px; width: 90%; margin-left: 5%;" class="btn btn-warning"> <i class="fa fa-list-ol fa-lg"> </i> Daily Checklist </a>
                             </div>
                             <div class="col-12 col-md-4 col-lg-4" style="min-height: 50px; border: 1px dotted #eee;">
                                 <?php if($today < strtotime($td_due)) { ?>
@@ -173,7 +173,7 @@
                                 <p style="font-size: 16px; margin-top: 10px;"><span class="badge"> Last Weekly Check: </span> {{$tw}}</p>
                             </div>
                             <div class="col-12 col-md-4 col-lg-4" style="min-height: 50px;">
-                                <a href="/ereceptionhub/public/weekly_checklist" style="margin-top: 10px; width: 90%; margin-left: 5%;" class="btn btn-warning"> <i class="fa fa-list-ol fa-lg"> </i> Weekly Checklist </a>
+                                <a href="/weekly_checklist" style="margin-top: 10px; width: 90%; margin-left: 5%;" class="btn btn-warning"> <i class="fa fa-list-ol fa-lg"> </i> Weekly Checklist </a>
                             </div>
                             <div class="col-12 col-md-4 col-lg-4" style="min-height: 50px; border: 1px dotted #eee;">
                                 <?php if($today < strtotime($tw_due)) { ?>
@@ -189,7 +189,7 @@
                                 <p style="font-size: 16px; margin-top: 10px;"><span class="badge"> Last Monthly Check: </span> {{$tm}}</p>
                             </div>
                             <div class="col-12 col-md-4 col-lg-4" style="min-height: 50px;">
-                                <a href="/ereceptionhub/public/monthly_checklist" style="margin-top: 10px; width: 90%; margin-left: 5%;" class="btn btn-info"> <i class="fa fa-list-ol"> </i> Monthly Checklist </a>
+                                <a href="/monthly_checklist" style="margin-top: 10px; width: 90%; margin-left: 5%;" class="btn btn-info"> <i class="fa fa-list-ol"> </i> Monthly Checklist </a>
                             </div>
                             <div class="col-12 col-md-4 col-lg-4" style="min-height: 50px; border: 1px dotted #eee;">
                                 <?php if($today < strtotime($tm_due)) { ?>
@@ -205,7 +205,7 @@
                                 <p style="font-size: 16px; margin-top: 10px;"><span class="badge"> Last Yearly Check: </span> {{$ty}}</p>
                             </div>
                             <div class="col-12 col-md-4 col-lg-4" style="min-height: 50px;">
-                                <a href="/ereceptionhub/public/yearly_checklist" style="margin-top: 10px; width: 90%; margin-left: 5%;" class="btn btn-info"> <i class="fa fa-list-ol"> </i> Yearly Checklist </a>
+                                <a href="/yearly_checklist" style="margin-top: 10px; width: 90%; margin-left: 5%;" class="btn btn-info"> <i class="fa fa-list-ol"> </i> Yearly Checklist </a>
                             </div>
                             <div class="col-12 col-md-4 col-lg-4" style="min-height: 50px; border: 1px dotted #eee;">
                                 <?php if($today < strtotime($ty_due)) { ?>
@@ -221,7 +221,7 @@
                                 <p style="font-size: 16px; margin-top: 10px;"><span class="badge"> Last Risk Assessment: </span> {{$tra}}</p>
                             </div>
                             <div class="col-12 col-md-4 col-lg-4" style="min-height: 50px;">
-                                <a href="/ereceptionhub/public/fire_risk_assessment" style="margin-top: 10px; width: 90%; margin-left: 5%;" class="btn btn-default"> <i class="fa fa-exclamation-triangle"> </i> Fire Risk Assessment </a>
+                                <a href="/fire_risk_assessment" style="margin-top: 10px; width: 90%; margin-left: 5%;" class="btn btn-default"> <i class="fa fa-exclamation-triangle"> </i> Fire Risk Assessment </a>
                             </div>
                             <div class="col-12 col-md-4 col-lg-4" style="min-height: 50px; border: 1px dotted #eee;">
                                 <?php if($today < strtotime($tra_due)) { ?>

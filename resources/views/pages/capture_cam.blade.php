@@ -24,7 +24,7 @@
     </form>
 </div>
 
-
+<a href="/account" class="btn btn-primary" style="position: absolute; top: 100px; right: 50px;"> <i class="fa fa-arrow-left"> </i> Go Back </a>
 
 
 </div>

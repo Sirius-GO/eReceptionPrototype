@@ -1,9 +1,14 @@
-<<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
+       <meta charset="utf-8">
+       <link rel="icon" type="image/png" sizes="64x64" href="https://ereceptionhub.co.uk/storage/images/erec.ico">
+       <link rel="apple-touch-icon" sizes="180x180" href="https://ereceptionhub.co.uk/storage/images/erec_180.png">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+       <meta name="apple-mobile-web-app-capable" content="yes" />
+       <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+       <link rel="apple-touch-startup-image" href="https://ereceptionhub.co.uk/storage/images/launch.png">
+       <link rel="manifest" href="https://ereceptionhub.co.uk/js/manifest.json">
         <title>eReception Hub</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -11,7 +16,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="icon" type="image/png" sizes="64x64" href="../../cornerstone/storage/app/public/images/cornerstone_logo.ico">
+
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Styles -->
@@ -22,7 +27,7 @@
                 margin: 0;
                 color: #eee;
                 background-color: #eee !important;
-                background-image: URL('http://localhost:8080/ereceptionhub/storage/app/public/images/bg_tile3.png');
+                background-image: URL('https://ereceptionhub.co.uk/storage/images/bg_tile3.png');
                 background-repeat: repeat;
                 overflow-x: hidden;
             }
@@ -127,8 +132,27 @@
                         display: block;
                     }
                 }
-        </style>
 
+		.jumbo_img {
+		   background-image: url("https://ereceptionhub.co.uk/storage/images/about_banner.jpg");
+		   background-repeat: no-repeat;
+    		   background-color: #8ca417;
+		}
+
+                .jumbo_serv {
+                   background-image: url("https://ereceptionhub.co.uk/storage/images/services_banner.jpg");
+                   background-repeat: no-repeat;
+                   background-color: #8ca417;
+                }
+
+                .jumbo_cont {
+                   background-image: url("https://ereceptionhub.co.uk/storage/images/contact_banner.jpg");
+                   background-repeat: no-repeat;
+                   background-color: #8ca417;
+                }
+
+        </style>
+    <script type="text/javascript" src="https://ereceptionhub.co.uk/js/links.js"></script>
     </head>
     <body>
         @include('inc.webnav')

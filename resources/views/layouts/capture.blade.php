@@ -4,14 +4,22 @@
 
     <title>eReception Hub</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>-->
+    <script src="https://ereceptionhub.co.uk/js/webcam.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="icon" type="image/png" sizes="64x64" href="https://ereceptionhub.co.uk/storage/images/erec.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://ereceptionhub.co.uk/storage/images/erec_180.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
     <style type="text/css">
 
         body, html {
             color: #333;
             background-color: #eee !important;
-            background-image: URL('http://localhost:8080/ereceptionhub/storage/app/public/images/bg_tile3.png');
+            background-image: URL('https://ereceptionhub.co.uk/storage/images/bg_tile3.png');
             background-repeat: repeat;
             overflow-x: hidden;
         } 
@@ -23,7 +31,7 @@
             padding: 20px;
             left: 50%;
             margin-left: -400px;
-            top: 130px;
+            top: 150px;
             background-color: rgba(0, 0, 0, 0.5);
             border-radius: 10px;
         }
@@ -47,7 +55,7 @@
             padding: 20px;
             left: 50%;
             margin-left: 60px;
-            top: 130px;
+            top: 150px;
             background-color: rgba(0, 0, 0, 0.5);
             border-radius: 10px;
         }
@@ -83,6 +91,7 @@
 
     </style>
 </head>
+    <script type="text/javascript" src="https://ereceptionhub.co.uk/js/links.js"></script>
 
 <body>
 

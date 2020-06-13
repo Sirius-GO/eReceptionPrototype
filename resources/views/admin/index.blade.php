@@ -16,7 +16,7 @@ use App\Company;
                     @if(auth()->user()->user_level =='10')
                         <hr>
                         <center>
-                            <a href="/ereceptionhub/public/administration/create" class="btn btn-primary btn-lg"> <i class="fa fa-plus"></i> Add New User </a>
+                            <a href="/administration/create" class="btn btn-primary btn-lg"> <i class="fa fa-plus"></i> Add New User </a>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <a data-toggle="modal" data-target="#bulk_reg"><span class="btn btn-primary btn-lg"><i class="fa fa-user-plus"></i> Bulk Registrations </a>
                         </center>
@@ -31,8 +31,8 @@ use App\Company;
                             <!-- ================  Access Pass Layout FULL WIDTH =====================  -->
                             <div id="id_card1_{{$reg->id}}" style="display: none;">
                                 <span>
-                                    <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/Access_Pass_v2.png" style="position: relative; width: 1000px;">
-                                    <img src="http://localhost:8080/ereceptionhub/storage/app/public/mug_shots/{{$reg->avatar}}" style="position: absolute; width: 347px; left: 187px; top: 41px; border-radius: 50%;  border: solid 1px #eee;">
+                                    <img src="https://ereceptionhub.co.uk/storage/images/Access_Pass_v2.png" style="position: relative; width: 1000px;">
+                                    <img src="https://ereceptionhub.co.uk/storage/images/mug_shots/{{$reg->avatar}}" style="position: absolute; width: 347px; left: 187px; top: 41px; border-radius: 50%;  border: solid 1px #eee;">
                                     <span style="position: absolute; color: #000; font-weight: 700; left: 590px; top: 87px; font-family: tahoma; font-size: 40px;"><p>{{$reg->first_name}} {{$reg->last_name}}</p></span>
                                     <img src="qr-code?text={{$reg->rfid}}&size=300" alt="QR Code" style="position: absolute; left: 650px; top: 320px;">
                                     <span style="position: absolute; color: #000; font-weight: 700; left: 590px; top: 180px; max-width: 333px; font-family: tahoma; font-size: 40px;"><p>{{$reg->job_title}}</p></span>
@@ -56,11 +56,11 @@ use App\Company;
                                             $s = $l->sat_pass;                                 
                                         ?>
 
-                                            <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/Access_Pass_v2.png" 
+                                            <img src="https://ereceptionhub.co.uk/storage/images/Access_Pass_v2.png" 
                                             style="position: relative; width: 380px; margin: 30px; border: solid 1px #000; -webkit-filter: hue-rotate(<?php echo $h."deg"; ?>) saturate(<?php echo $s; ?>); ">
                                         @endforeach
                                     @endif
-                                    <img src="http://localhost:8080/ereceptionhub/storage/app/public/mug_shots/{{$reg->avatar}}"
+                                    <img src="https://ereceptionhub.co.uk/storage/mug_shots/{{$reg->avatar}}"
                                     style="position: absolute; width: 138px; left: 71px; top: 16px; border-radius: 50%;  border: solid 1px #eee; margin: 30px;">
                                     <span style="margin: 30px; position: absolute; color: #000; font-weight: 700; left: 224px; top: 38px; font-family: tahoma; font-size: 15px;">
                                         <p>{{$reg->first_name}} {{$reg->last_name}}</p>
@@ -76,7 +76,7 @@ use App\Company;
                                             $comp_name = $comp->company_name;
                                         }
                                     ?>
-                                    <span style="margin: 30px; position: absolute; color: #808080; font-weight: 700; left: 77px; top: 167px; max-width: 179px; font-family: tahoma; font-size: 15px;">
+                                    <span style="margin: 30px; position: absolute; color: #ddd; font-weight: 700; left: 77px; top: 167px; max-width: 179px; font-family: tahoma; font-size: 15px;">
                                         <p>{{$comp_name}}</p>
                                     </span>
                                 </span>
@@ -95,13 +95,13 @@ use App\Company;
                                                 return true;
                                             }                                      
                                         </script>
-                                        <img src="http://localhost:8080/ereceptionhub/storage/app/public/mug_shots/{{$reg->avatar}}" style="width: 60%; margin-left: 20%; border-radius: 50%;  border: solid 1px #eee;">
+                                        <img src="https://ereceptionhub.co.uk/storage/mug_shots/{{$reg->avatar}}" style="width: 60%; margin-left: 20%; border-radius: 50%;  border: solid 1px #eee;">
                                         <h6><span class="badge" style="background-color: #1e7553;">Name: </span> {{$reg->first_name}} {{$reg->last_name}} </h6>
                                         <h6><span class="badge" style="background-color: #1e7553;">Current Status: </span> {{$reg->current_status}} </h6>
                                         <hr>
-                                        <p align="center"><a href="/ereceptionhub/public/administration/{{$reg->id}}" class="btn btn-primary brn-sm"><i class="fa fa-search"></i> View Full Details </a></p>
+                                        <p align="center"><a href="/administration/{{$reg->id}}" class="btn btn-primary brn-sm"><i class="fa fa-search"></i> View Full Details </a></p>
                                         @if(auth()->user()->user_level =='10')
-                                            <a href="/ereceptionhub/public/administration/{{$reg->id}}/edit" class="btn btn-success btn-sm pull-left"><i class="fa fa-pencil"></i> Edit </a>
+                                            <a href="/administration/{{$reg->id}}/edit" class="btn btn-success btn-sm pull-left"><i class="fa fa-pencil"></i> Edit </a>
                                         @endif
                                         <span>
                                             @if(!Auth::guest())
@@ -125,7 +125,7 @@ use App\Company;
                                                     }
                                             }
                                         </script>
-                                                                                <!--<a href="/ereceptionhub/public/administration/{{$reg->id}}/delete" class="btn btn-danger btn-sm pull-right"><i class="fa fa-trash"></i> Delete </a>-->
+                                                                                <!--<a href="/administration/{{$reg->id}}/delete" class="btn btn-danger btn-sm pull-right"><i class="fa fa-trash"></i> Delete </a>-->
                                         </span>
                                     </div>
                             @endforeach

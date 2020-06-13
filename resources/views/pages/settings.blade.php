@@ -34,15 +34,15 @@
                             @if(count($layout ?? '') > 0)
                                 @foreach($layout ?? '' as $l)
                                     @if($l->bg_image == '')
-                                        <img src="http://localhost:8080/ereceptionhub/storage/app/public/background_images/wallpaper_C4D.jpg" height="100px" style="max-width: 98%">
+                                        <img src="https://ereceptionhub.co.uk/storage/background_images/wallpaper_C4D.jpg" height="100px" style="max-width: 98%">
                                     @else 
-                                        <img src="http://localhost:8080/ereceptionhub/storage/app/public/background_images/{{ $l->bg_image }}" height="100px" style="max-width: 98%">
+                                        <img src="https://ereceptionhub.co.uk/storage/background_images/{{ $l->bg_image }}" height="100px" style="max-width: 98%">
                                     @endif
                                 @endforeach
                             @endif
                             </center>
                         </p>
-                        <a data-toggle="modal" data-target="#bg_image_upload"><span class="btn btn-primary" style="position: absolute; bottom: 5px; width: 90%; left: 50%; margin-left: -45%;"> <i class="fa fa-image fa-lg"> </i> {{ __('messages.bg') }} </span></a>
+                        <a href="#" data-toggle="modal" data-target="#bg_image_upload"><span class="btn btn-primary" style="position: absolute; bottom: 5px; width: 90%; left: 50%; margin-left: -45%;"> <i class="fa fa-image fa-lg"> </i> {{ __('messages.bg') }} </span></a>
                     </div></div>
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3"><div style="height: 200px;">
                         <p><span class="badge" style="background-color: #1e7553;">Background Colour Preview: </span><br>
@@ -66,7 +66,7 @@
                                     $h = $l->hue; 
                                     $s = $l->sat;                                 
                                 ?>
-                                <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/staff.png" style="margin-top: 10px; max-width: 90%; -webkit-filter: hue-rotate(<?php echo $h."deg"; ?>) saturate(<?php echo $s; ?>);">
+                                <img src="https://ereceptionhub.co.uk/storage/images/staff.png" style="margin-top: 10px; max-width: 90%; -webkit-filter: hue-rotate(<?php echo $h."deg"; ?>) saturate(<?php echo $s; ?>);">
                             @endforeach
                             @endif
         
@@ -98,7 +98,7 @@
                                     $h = $l->hue_pass; 
                                     $s = $l->sat_pass;                                 
                                 ?>
-                                <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/Access_Pass_v2.png" style="width: 70%; margin-left: 15%; -webkit-filter: hue-rotate(<?php echo $h."deg"; ?>) saturate(<?php echo $s; ?>); border: solid 1px #000;">
+                                <img src="https://ereceptionhub.co.uk/storage/images/Access_Pass_v2.png" style="width: 70%; margin-left: 15%; -webkit-filter: hue-rotate(<?php echo $h."deg"; ?>) saturate(<?php echo $s; ?>); border: solid 1px #000;">
                             @endforeach
                             @endif
         
@@ -112,7 +112,7 @@
                                     $h = $l->hue_vis; 
                                     $s = $l->sat_vis;                                 
                                 ?>
-                                <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/Access_Pass_Visitor_v2.png" style="width: 70%; margin-left: 15%; -webkit-filter: hue-rotate(<?php echo $h."deg"; ?>) saturate(<?php echo $s; ?>); border: solid 1px #000;">
+                                <img src="https://ereceptionhub.co.uk/storage/images/Access_Pass_Visitor_v2.png" style="width: 70%; margin-left: 15%; -webkit-filter: hue-rotate(<?php echo $h."deg"; ?>) saturate(<?php echo $s; ?>); border: solid 1px #000;">
                             @endforeach
                             @endif
         

@@ -29,7 +29,7 @@
                             <input type="hidden" name="currency_code" value="GBP">
                             <button class="btn btn-primary btn-lg" name="submit" alt="PayPal – The safer, easier way to pay online!"><i class="fa fa-paypal fa-lg"></i> Buy Subscription</button>
                             <br><br>
-                            <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/payments_accepted.png" width="300px;">
+                            <img src="https://ereceptionhub.co.uk/storage/images/payments_accepted.png" width="300px;">
                             <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
                             </form>
                             <br><br>
@@ -62,7 +62,7 @@
                                     <p>4.<br>Confirm<br>Payment<br><i class="fa fa-check"></i> </p>
                                 </div>
                             </div>
-                            <img src="http://localhost:8080/ereceptionhub/storage/app/public//images/secure1.png" align="right">
+                            <img src="https://ereceptionhub.co.uk/storage/images/secure1.png" align="right">
                             <br><br><br><br><br>
                             <hr>
                             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -88,11 +88,11 @@
                                 <input type="hidden" name="currency_code" value="GBP">
                                 <button class="btn btn-primary btn-lg" name="submit" alt="PayPal – The safer, easier way to pay online!"><i class="fa fa-paypal fa-lg"></i> Buy Now </button>
                                 <br><br>
-                                <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/payments_accepted.png" width="300px;">
+                                <img src="https://ereceptionhub.co.uk/storage/images/payments_accepted.png" width="300px;">
                                 <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
                                 </form>
                                 <br>
-                                <img src="http://localhost:8080/ereceptionhub/storage/app/public//images/secure.png" align="right">
+                                <img src="https://ereceptionhub.co.uk/storage/images/secure.png" align="right">
                                 <br><br><br><br><br><br>
 
                                 <hr>
@@ -112,6 +112,9 @@
             </div>
         </div>
     </div>
+<a href="/account" class="btn btn-primary" style="position: absolute; top: 100px; right: 70px;"> <i class="fa fa-arrow-left"> </i> Go Back </a>
+
+
 </div>
 
 @endsection

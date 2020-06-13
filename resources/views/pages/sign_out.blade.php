@@ -15,9 +15,9 @@
                                 <div style="width: 98%; height: 275px; background-color: rgba(255, 255, 255, 0.5); padding: 10px; border-radius: 10px;">
                                     <center>
                                         @if($p->img)
-                                        <img src="../../ereceptionhub/storage/app/public/mug_shots/{{$p->img}}" style="width: 90%;  max-width: 120px; border-radius: 50%;  border: solid 1px #eee; margin-bottom: 5px;">
+                                        <img src="https://ereceptionhub.co.uk/storage/mug_shots/{{$p->img}}" style="width: 90%;  max-width: 120px; border-radius: 50%;  border: solid 1px #eee; margin-bottom: 5px;">
                                         @else 
-                                        <img src="../../ereceptionhub/storage/app/public/mug_shots/avatar.png" style="width: 90%; max-width: 120px; border-radius: 50%;  border: solid 1px #eee; margin-bottom: 5px;">
+                                        <img src="https://ereceptionhub.co.uk/storage/mug_shots/avatar.png" style="width: 90%; max-width: 120px; border-radius: 50%;  border: solid 1px #eee; margin-bottom: 5px;">
                                         @endif
                                         <hr style="border-color: #333; margin: 0 0 0 0;">
                                             <span style="font-size: 10px; font-weight: 800;">{{ $p->name }}</span>
@@ -37,7 +37,7 @@
                 </div>
                 <center>
                     <hr><br>
-                    <a href="/ereceptionhub/public/hub" class="btn btn-primary btn-lg"> <i class="fa fa-arrow-left"> </i> Go Back </a>
+                    <a href="/hub" class="btn btn-primary btn-lg"> <i class="fa fa-arrow-left"> </i> Go Back </a>
                 </center>
             </div>
         </div>

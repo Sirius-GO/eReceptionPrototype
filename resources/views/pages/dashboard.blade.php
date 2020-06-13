@@ -42,7 +42,7 @@ use App\Location;
                         ?>
                         <center>
                             <p>Hub Location: {{ $loc_name }}</p><br>
-                            <a href="hub" class="btn btn-primary btn_lg" style="font-size: 20px;"> <img src="../../ereceptionhub/storage/app/public/images/erec.ico" height="30px"> Display <img src="../../ereceptionhub/storage/app/public/images/logo_w.png" height="22px"> </a><br><br>
+                            <a href="hub" class="btn btn-primary btn_lg" style="font-size: 20px;"> <img src="../../storage/images/erec.ico" height="30px"> Display <img src="../../storage/images/logo_w.png" height="22px"> </a><br><br>
                         </center>
                         @else 
                         <center>

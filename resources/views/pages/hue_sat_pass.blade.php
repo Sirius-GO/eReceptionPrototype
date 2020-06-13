@@ -11,7 +11,7 @@
                     <span><b>Current Settings:</b> &nbsp;&nbsp;&nbsp; Hue: {{ $l->hue_pass }} &nbsp;&nbsp;&nbsp; Sat: {{ $l->sat_pass }}</span>
                     <b style="margin-left: 200px;">Preview: </b>
                     <span style="display: inline-block">
-                        <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/Access_Pass_v2.png" style="margin-top: 10px; height: 60px; -webkit-filter: hue-rotate(<?php echo $l->hue_pass."deg"; ?>) saturate(<?php echo $l->sat_pass; ?>);">
+                        <img src="https://ereceptionhub.co.uk/storage/images/Access_Pass_v2.png" style="margin-top: 10px; height: 60px; -webkit-filter: hue-rotate(<?php echo $l->hue_pass."deg"; ?>) saturate(<?php echo $l->sat_pass; ?>);">
                     </span>
                     @endforeach
                     @endif
@@ -32,13 +32,13 @@
                     @if(app()->isLocale('en'))
                         <div style="position: relative; top: 5vh;">
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                <img src="../../ereceptionhub/storage/app/public/images/Access_Pass_v2.png" style="max-width: 20vw;">
+                                <img src="https://ereceptionhub.co.uk/storage/images/Access_Pass_v2.png" style="max-width: 20vw;">
                             </div>
                         </div> 
                     @else
                         <div style="position: relative; top: 5vh;">
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                <img src="../../ereceptionhub/storage/app/public/images/Access_Pass_v2.png" style="max-width: 20vw;">
+                                <img src="https://ereceptionhub.co.uk/storage/images/Access_Pass_v2.png" style="max-width: 20vw;">
                             </div>
                         </div> 
                     @endif

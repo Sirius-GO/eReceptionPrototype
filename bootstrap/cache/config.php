@@ -4,13 +4,13 @@
     'name' => 'eReception-Hub',
     'env' => 'local',
     'debug' => true,
-    'url' => 'http://localhost',
+    'url' => 'https://ereceptionhub.co.uk',
     'asset_url' => NULL,
     'timezone' => 'Europe/London',
     'locale' => 'en',
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
-    'key' => 'base64:Ordb1scBng76SS2cn4uE/0fvbxpF6xiTGnlHoEonpj0=',
+    'key' => 'base64:z0FQqymK/ccqHAdQ0wRrhLdZD60hIaFTmelsdOcFQIw=',
     'cipher' => 'AES-256-CBC',
     'providers' => 
     array (
@@ -179,7 +179,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\xampp2\\htdocs\\ereceptionhub\\storage\\framework/cache/data',
+        'path' => '/var/www/vhosts/ereceptionhub.co.uk/ereceptionhub/storage/framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -244,8 +244,8 @@
         'host' => '127.0.0.1',
         'port' => '3306',
         'database' => 'ereception',
-        'username' => 'root',
-        'password' => '',
+        'username' => 'ereception',
+        'password' => '$tone@321',
         'unix_socket' => '',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
@@ -264,8 +264,8 @@
         'host' => '127.0.0.1',
         'port' => '3306',
         'database' => 'ereception',
-        'username' => 'root',
-        'password' => '',
+        'username' => 'ereception',
+        'password' => '$tone@321',
         'charset' => 'utf8',
         'prefix' => '',
         'prefix_indexes' => true,
@@ -279,8 +279,8 @@
         'host' => '127.0.0.1',
         'port' => '3306',
         'database' => 'ereception',
-        'username' => 'root',
-        'password' => '',
+        'username' => 'ereception',
+        'password' => '$tone@321',
         'charset' => 'utf8',
         'prefix' => '',
         'prefix_indexes' => true,
@@ -322,13 +322,13 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp2\\htdocs\\ereceptionhub\\storage\\app',
+        'root' => '/var/www/vhosts/ereceptionhub.co.uk/ereceptionhub/storage/app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp2\\htdocs\\ereceptionhub\\storage\\app/public',
-        'url' => 'http://localhost/storage',
+        'root' => '/var/www/vhosts/ereceptionhub.co.uk/ereceptionhub/storage/app/public',
+        'url' => 'https://ereceptionhub.co.uk/storage',
         'visibility' => 'public',
       ),
       's3' => 
@@ -373,13 +373,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\xampp2\\htdocs\\ereceptionhub\\storage\\logs/laravel.log',
+        'path' => '/var/www/vhosts/ereceptionhub.co.uk/ereceptionhub/storage/logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\xampp2\\htdocs\\ereceptionhub\\storage\\logs/laravel.log',
+        'path' => '/var/www/vhosts/ereceptionhub.co.uk/ereceptionhub/storage/logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -429,7 +429,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'C:\\xampp2\\htdocs\\ereceptionhub\\storage\\logs/laravel.log',
+        'path' => '/var/www/vhosts/ereceptionhub.co.uk/ereceptionhub/storage/logs/laravel.log',
       ),
     ),
   ),
@@ -452,7 +452,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\xampp2\\htdocs\\ereceptionhub\\resources\\views/vendor/mail',
+        0 => '/var/www/vhosts/ereceptionhub.co.uk/ereceptionhub/resources/views/vendor/mail',
       ),
     ),
     'log_channel' => NULL,
@@ -531,7 +531,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'C:\\xampp2\\htdocs\\ereceptionhub\\storage\\framework/sessions',
+    'files' => '/var/www/vhosts/ereceptionhub.co.uk/ereceptionhub/storage/framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -551,9 +551,9 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\xampp2\\htdocs\\ereceptionhub\\resources\\views',
+      0 => '/var/www/vhosts/ereceptionhub.co.uk/ereceptionhub/resources/views',
     ),
-    'compiled' => 'C:\\xampp2\\htdocs\\ereceptionhub\\storage\\framework\\views',
+    'compiled' => '/var/www/vhosts/ereceptionhub.co.uk/ereceptionhub/storage/framework/views',
   ),
   'flare' => 
   array (

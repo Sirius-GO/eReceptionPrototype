@@ -15,7 +15,7 @@
             <p>Copyright &copy;<br>Cornerstone Retail Services<br>Jaunary 2019</p>
         </div>
         <div class="col-4 col-md-4 col-lg-4">
-            <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/logo_w.png" height="20px"><br>
+            <img src="https://ereceptionhub.co.uk/storage/images/logo_w.png" height="20px"><br>
         </div>
     </div>
 </footer>

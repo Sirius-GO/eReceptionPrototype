@@ -16,19 +16,19 @@
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <ul class="nav navbar-nav">
-                    <!--<li><a href="../../ereceptionhub/public/"> <i class="fa fa-home"> </i> Home</a></li>-->
+                    <!--<li><a href="../../"> <i class="fa fa-home"> </i> Home</a></li>-->
             </ul>
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li><a href="{{ url('locale/en') }}" > <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/british_flag.jpg" title="English" style="height: 30px; margin-top: -10px; margin-bottom: -10px;"></a></li>
-                    <li><a href="{{ url('locale/welsh') }}" > <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/welsh_flag.jpg" title="Welsh" style="height: 30px; margin-top: -10px; margin-bottom: -10px;"></a></li>
+                    <li><a href="{{ url('locale/en') }}" > <img src="../../storage/images/british_flag.jpg" title="English" style="height: 30px; margin-top: -10px; margin-bottom: -10px;"></a></li>
+                    <li><a href="{{ url('locale/welsh') }}" > <img src="../../storage/images/welsh_flag.jpg" title="Welsh" style="height: 30px; margin-top: -10px; margin-bottom: -10px;"></a></li>
                     <li><a href="{{ route('login') }}" style="font-size: 15px; color: #fff;"> <i class="fa fa-sign-in fa-lg"> </i> Admin Login</a></li>
                     <!-- <li><a href="{{ route('register') }}"> <i class="fa fa-user-plus"> </i> Registration</a></li>-->
                 @else
-                    <li><a href="{{ url('locale/en') }}" > <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/british_flag.jpg" title="English" style="height: 30px; margin-top: -10px; margin-bottom: -10px;"></a></li>
-                    <li><a href="{{ url('locale/welsh') }}" > <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/welsh_flag.jpg" title="Welsh" style="height: 30px; margin-top: -10px; margin-bottom: -10px;"></a></li>
+                    <li><a href="{{ url('locale/en') }}" > <img src="../../storage/images/british_flag.jpg" title="English" style="height: 30px; margin-top: -10px; margin-bottom: -10px;"></a></li>
+                    <li><a href="{{ url('locale/welsh') }}" > <img src="../../storage/images/welsh_flag.jpg" title="Welsh" style="height: 30px; margin-top: -10px; margin-bottom: -10px;"></a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="background-color: rgba(100,100,100,1); color: #fff;">
                                 <i class="fa fa-user fa-lg"> </i> {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}<span class="caret"></span>
@@ -36,17 +36,17 @@
 
                         <ul class="dropdown-menu" role="menu" style="background-color: rgba(255,255,255,1); color: #333;">
                             @if(auth()->user()->user_level > 1)
-                                <li><a href="../../ereceptionhub/public/dashboard"> <i class="fa fa-tachometer"> </i> Admin Dashboard </a><li>
-                                <li><a href="../../ereceptionhub/public/register_in_out"> <i class="fa fa-list"> </i> Register </a><li>
+                                <li><a href="../../dashboard"> <i class="fa fa-tachometer"> </i> Admin Dashboard </a><li>
+                                <li><a href="../../register_in_out"> <i class="fa fa-list"> </i> Register </a><li>
                             @endif
-                            <li><a href="../../ereceptionhub/public/account"> <i class="fa fa-user"> </i> My Account </a><li>
+                            <li><a href="../../account"> <i class="fa fa-user"> </i> My Account </a><li>
                             @if(auth()->user()->user_level > '4')
-                                <li><a href="../../ereceptionhub/public/administration"> <i class="fa fa-user-plus"> </i> User Administration </a><li>                                        
-                                <li><a href="../../ereceptionhub/public/firesafety"> <i class="fa fa-fire-extinguisher"> </i> Fire Safety </a><li>
+                                <li><a href="../../administration"> <i class="fa fa-user-plus"> </i> User Administration </a><li>                                        
+                                <li><a href="../../firesafety"> <i class="fa fa-fire-extinguisher"> </i> Fire Safety </a><li>
                             @endif
-                            <li><a href="../../ereceptionhub/public/policies"> <i class="fa fa-file"> </i> Policies </a><li>
+                            <li><a href="../../policies"> <i class="fa fa-file"> </i> Policies </a><li>
                             @if(auth()->user()->user_level > '4')
-                                <li><a href="../../ereceptionhub/public/settings"> <i class="fa fa-cogs"> </i> Environment Settings </a><li>
+                                <li><a href="../../settings"> <i class="fa fa-cogs"> </i> Environment Settings </a><li>
                             @endif
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();

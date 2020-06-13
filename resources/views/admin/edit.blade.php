@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-12">
                     <br>
-                            <a href="../../../../ereceptionhub/public/administration" class="btn btn-primary text-white btn-sm" > <i class="fa fa-chevron-left"> </i> Go Back</a>
+                            <a href="../../../../administration" class="btn btn-primary text-white btn-sm" > <i class="fa fa-chevron-left"> </i> Go Back</a>
                         
                           </div>
                     </div>

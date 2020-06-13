@@ -16,7 +16,7 @@
 <div class="row">
     <div id="cam">
 <!--<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>-->
-<script src="../../ereceptionhub/resources/js/instascan.min.js"></script>
+<script src="https://ereceptionhub.co.uk/js/instascan.min.js"></script>
 <script type="text/javascript">
     var scanner = new Instascan.Scanner({ video: document.getElementById('preview'), scanPeriod: 2, mirror: false });
     scanner.addListener('scan',function(content){
@@ -68,6 +68,6 @@
 
 
 </div>
-<a href="/ereceptionhub/public/hub" class="btn btn-primary btn-lg" style="position: absolute; top: 100px; right: 150px;"> <i class="fa fa-arrow-left"> </i> Go Back </a>
+<a href="/hub" class="btn btn-primary btn-lg" style="position: absolute; top: 100px; right: 50px;"> <i class="fa fa-arrow-left"> </i> Go Back </a>
 </div>
 @endsection

@@ -9,49 +9,49 @@
             <div class="carousel-inner">
                 <!-- Slide 1 -->
                 <div class="carousel-item active">
-                        <img src="../../ereceptionhub/storage/app/public/images/banner1.jpg" width="100%" style="height: 50vh; max-height: 600px" class="bd-placeholder-img"/>
+                        <img src="../../storage/images/banner1.jpg" width="100%" style="height: 50vh; max-height: 600px" class="bd-placeholder-img"/>
                         <div class="container">
                             <div class="carousel-caption text-right">
                                 <br>
                                 <h1 style="-webkit-text-stroke: 1px #a9c240; font-weight: 900; color: #111;">Reception <span class="narrow"></span>Management</h1>
                                 <p style="-webkit-text-stroke: 1px #a9c240; font-weight: 900; font-size: 20px; color: #111;">Business, Education <span class="narrow"></span>and Health</p>
-                                <p><a class="btn btn-primary" style="color: #fff;" href="/cornerstone/public/services" role="button">Find Out More</a></p>
+                                <p><a class="btn btn-primary" style="color: #fff;" href="/services" role="button">Find Out More</a></p>
                             </div>
                         </div>
                   </div>
                 <!-- Slide 2 -->
                 <div class="carousel-item">
-                    <img src="../../ereceptionhub/storage/app/public/images/banner2.jpg" width="100%" style="height: 50vh; max-height: 600px" class="bd-placeholder-img"/>
+                    <img src="../../storage/images/banner2.jpg" width="100%" style="height: 50vh; max-height: 600px" class="bd-placeholder-img"/>
                     <div class="container">
                         <div class="carousel-caption text-right">
                             <br>
                             <h1 style="-webkit-text-stroke: 1px #fdde6e; font-weight: 900; color: #111;">Fire Safety</h1>
                             <p style="-webkit-text-stroke: 1px #fdde6e; font-weight: 900; font-size: 20px; color: #111;">Fire Drills and <span class="narrow"></span>Fire Checks</p>
-                            <p><a class="btn btn-primary" style="color: #fff;" href="/cornerstone/public/about" role="button">Find Out More</a></p>
+                            <p><a class="btn btn-primary" style="color: #fff;" href="/about" role="button">Find Out More</a></p>
                         </div>
                     </div>
                 </div>
                 <!-- Slide 3 -->
                 <div class="carousel-item">
-                    <img src="../../ereceptionhub/storage/app/public/images/banner3.jpg" width="100%" style="height: 50vh; max-height: 600px" class="bd-placeholder-img"/>
+                    <img src="../../storage/images/banner3.jpg" width="100%" style="height: 50vh; max-height: 600px" class="bd-placeholder-img"/>
                     <div class="container">
                         <div class="carousel-caption text-right">
                             <br>
                             <h1 style="-webkit-text-stroke: 1px #bdc5ca; font-weight: 900; color: #111;">Reports</h1>
                             <p style="-webkit-text-stroke: 1px #bdc5ca; font-weight: 900; font-size: 20px; color: #111;">Multi-Site Overview</p>
-                            <p><a class="btn btn-primary" style="color: #fff;" href="/cornerstone/public/services" role="button">Find Out More</a></p>
+                            <p><a class="btn btn-primary" style="color: #fff;" href="/services" role="button">Find Out More</a></p>
                         </div>
                     </div>
                 </div>
                 <!-- Slide 4 -->
                 <div class="carousel-item">
-                    <img src="../../ereceptionhub/storage/app/public/images/banner4.jpg" width="100%" style="height: 50vh; max-height: 600px" class="bd-placeholder-img"/>
+                    <img src="../../storage/images/banner4.jpg" width="100%" style="height: 50vh; max-height: 600px" class="bd-placeholder-img"/>
                     <div class="container">
                         <div class="carousel-caption text-right">
                             <br>
                             <h1 style="-webkit-text-stroke: 1px #ccc; font-weight: 900; color: #111;">Customised <span class="narrow"></span>Branding</h1>
                             <p style="-webkit-text-stroke: 1px #ccc; font-weight: 900; font-size: 20px; color: #111;">Company Logo, <span class="narrow"></span>Bespoke Theme</p>
-                            <p><a class="btn btn-primary" style="color: #fff;" href="/cornerstone/public/services" role="button">Find Out More</a></p>
+                            <p><a class="btn btn-primary" style="color: #fff;" href="/services" role="button">Find Out More</a></p>
                         </div>
                     </div>
                 </div>

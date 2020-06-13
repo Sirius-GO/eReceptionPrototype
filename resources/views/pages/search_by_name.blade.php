@@ -14,7 +14,7 @@
                             <div class="col-6 col-xs-6 col-sm-4 col-md-3 col-lg-2" style="color: #333; margin-top: 10px;">
                                 <div style="width: 98%; height: 275px; background-color: rgba(255, 255, 255, 0.5); padding: 10px; border-radius: 10px;">
                                     <center>
-                                        <img src="../../ereceptionhub/storage/app/public/mug_shots/{{$p->avatar}}" style="width: 90%;  max-width: 120px; margin-bottom: 5px;  border-radius: 50%;  border: solid 1px #eee;">
+                                        <img src="https://ereceptionhub.co.uk/storage/mug_shots/{{$p->avatar}}" style="width: 90%;  max-width: 120px; margin-bottom: 5px;  border-radius: 50%;  border: solid 1px #eee;">
                                         <hr style="border-color: #333; margin: 0 0 0 0;">
                                             <span style="font-size: 10px; font-weight: 800;">{{ $p->first_name }} {{ $p->last_name }}</span>
                                         <hr style="border-color: #333; margin: 0 0 0 0;">

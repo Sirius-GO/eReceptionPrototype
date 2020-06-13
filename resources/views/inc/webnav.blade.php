@@ -1,21 +1,21 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" style="padding: 0px; margin-top: 0px;" href="#"><img src="../../ereceptionhub/storage/app/public/images/erec.ico" height="40px"><img src="../../ereceptionhub/storage/app/public/images/logo_w.png" style="height: 30px;"></a>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" style="padding: 0px; margin-top: 0px;" href="#"><img src="../../storage/images/erec.ico" height="40px"><img src="../../storage/images/logo_w.png" style="height: 30px;"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active" id="home">
-          <a class="nav-link" href="/ereceptionhub/public/home"> <i class="fa fa-home"></i> Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/home"> <i class="fa fa-home"></i> Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item" id="about">
-            <a class="nav-link" href="/ereceptionhub/public/about"> <i class="fa fa-info"></i> About Us</a>
+            <a class="nav-link" href="/about"> <i class="fa fa-info"></i> About Us</a>
         </li>
         <li class="nav-item" id="services">
-            <a class="nav-link" href="/ereceptionhub/public/services"> <i class="fa fa-cogs"></i> Our Servies</a>
+            <a class="nav-link" href="/services"> <i class="fa fa-cogs"></i> Our Servies</a>
         </li>
         <li class="nav-item" id="contact">
-            <a class="nav-link" href="/ereceptionhub/public/contact"> <i class="fa fa-phone"></i> Contact Us</a>
+            <a class="nav-link" href="/contact"> <i class="fa fa-phone"></i> Contact Us</a>
         </li>
     </ul>
 
@@ -32,16 +32,16 @@
                                 </a>
     
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
-                                    <a class="dropdown-item" href="../../ereceptionhub/public/dashboard"> <i class="fa fa-tachometer"> </i> Admin Dashboard </a>
-                                    <a class="dropdown-item" href="../../ereceptionhub/public/register_in_out"> <i class="fa fa-list"> </i> Register </a>
-                                    <a class="dropdown-item" href="../../ereceptionhub/public/account"> <i class="fa fa-user"> </i> My Account </a>
+                                    <a class="dropdown-item" href="../../dashboard"> <i class="fa fa-tachometer"> </i> Admin Dashboard </a>
+                                    <a class="dropdown-item" href="../../register_in_out"> <i class="fa fa-list"> </i> Register </a>
+                                    <a class="dropdown-item" href="../../account"> <i class="fa fa-user"> </i> My Account </a>
                                     @if(auth()->user()->user_level > '4')
-                                        <a class="dropdown-item" href="../../ereceptionhub/public/administration"> <i class="fa fa-user-plus"> </i> User Administration </a>
-                                        <a class="dropdown-item" href="../../ereceptionhub/public/firesafety"> <i class="fa fa-fire-extinguisher"> </i> Fire Safety </a>
+                                        <a class="dropdown-item" href="../../administration"> <i class="fa fa-user-plus"> </i> User Administration </a>
+                                        <a class="dropdown-item" href="../../firesafety"> <i class="fa fa-fire-extinguisher"> </i> Fire Safety </a>
                                     @endif
-                                    <a class="dropdown-item" href="../../ereceptionhub/public/policies"> <i class="fa fa-file"> </i> Policies </a>
+                                    <a class="dropdown-item" href="../../policies"> <i class="fa fa-file"> </i> Policies </a>
                                     @if(auth()->user()->user_level > '4')
-                                        <a class="dropdown-item" href="../../ereceptionhub/public/settings"> <i class="fa fa-cogs"> </i> Environment Settings </a>
+                                        <a class="dropdown-item" href="../../settings"> <i class="fa fa-cogs"> </i> Environment Settings </a>
                                     @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();

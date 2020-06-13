@@ -6,7 +6,7 @@
         <div class="col-12">
             <div class="panel" style="background-color: rgba(0,0,0,0.5); color: #fff; padding: 20px; max-width: 90vw; margin: auto;">
                 <button onclick="printFireReport()" class="btn btn-default btn-sm"><i class="fa fa-print"></i> Print Fire Report </button> &nbsp;&nbsp;
-                <a href="/ereceptionhub/public/firereports" class="btn btn-primary btn-sm pull-right"> <i class="fa fa-arrow-left"> </i> Go Back </a>
+                <a href="/firereports" class="btn btn-primary btn-sm pull-right"> <i class="fa fa-arrow-left"> </i> Go Back </a>
                 <div class="panel-header"><h2>{{ __('messages.View_F_Report') }}</h2></div>
 
                 <div class="panel-body" id="fire_report">

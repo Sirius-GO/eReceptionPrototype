@@ -340,7 +340,7 @@ class RegistrationsController extends Controller
           exit();
         }
 
-        if(move_uploaded_file($fileTmpLoc, "../../ereceptionhub/storage/app/public/company_logos/$name")){
+        if(move_uploaded_file($fileTmpLoc, "/var/www/vhosts/ereceptionhub.co.uk/ereceptionhub/public/storage/company_logos/$name")){
 
 
         //Get Company ID of from Auth and update company logo in Companies table
@@ -357,7 +357,7 @@ class RegistrationsController extends Controller
 
         $message = $request->session()->flash('success', 'Your Company Logo has been successfully uploaded!');
         echo $message;
-        $url = '../public/account';
+        $url = '../account';
         echo "<script>window.open('".$url."', '_parent');</script>";
     }
 
@@ -372,7 +372,7 @@ class RegistrationsController extends Controller
 
 
         $img = $request->input('image1');
-        $folderPath = "../../ereceptionhub/storage/app/public/mug_shots/";
+        $folderPath = "/var/www/vhosts/ereceptionhub.co.uk/ereceptionhub/public/storage/mug_shots/";
         $image_parts = explode(";base64,", $img);
         $image_type_aux = explode("image/", $image_parts[0]);
         $image_type = $image_type_aux[1];

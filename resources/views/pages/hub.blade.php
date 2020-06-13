@@ -8,9 +8,9 @@
                     @foreach($company ?? '' as $comp)
                         <?php $cpy = $comp->company_name; ?>
                         @if($comp->company_logo == '')
-                            <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/default_logo.png" style="max-width: 25vw; max-height: 25vh;">
+                            <img src="https://ereceptionhub.co.uk/storage/images/default_logo.png" style="max-width: 25vw; max-height: 25vh;">
                         @else 
-                            <img src="http://localhost:8080/ereceptionhub/storage/app/public{{ $comp->company_logo }}" style="max-width: 25vw; max-height: 25vh;">
+                            <img src="https://ereceptionhub.co.uk/storage{{ $comp->company_logo }}" style="max-width: 25vw; max-height: 25vh;">
                         @endif
                     @endforeach
                 @endif
@@ -25,39 +25,39 @@
             <div id="signin_out1">
                 @if(app()->isLocale('en'))
                 <center>
-                    <a href="/ereceptionhub/public/sign_in_options" alt="sign in choices" title="sign in optins">
-                        <img src="../../ereceptionhub/storage/app/public/images/in.png" style="max-height: 14vh; max-width: 35vw;">
+                    <a href="/sign_in_options" alt="sign in choices" title="sign in optins">
+                        <img src="https://ereceptionhub.co.uk/storage/images/in.png" style="max-height: 14vh; max-width: 35vw;">
                     </a>
                         &nbsp;&nbsp;&nbsp;
-                    <a href="/ereceptionhub/public/scan" alt="Scan In" title="Scan In">
-                        <img src="../../ereceptionhub/storage/app/public/images/scan_in.png" style="max-height: 14vh; max-width: 35vw;">
+                    <a href="/scan" alt="Scan In" title="Scan In">
+                        <img src="https://ereceptionhub.co.uk/storage/images/scan_in.png" style="max-height: 14vh; max-width: 35vw;">
                     </a>
                     <br>
-                    <a data-toggle="modal" data-target="#sname"> 
-                        <img src="../../ereceptionhub/storage/app/public/images/out.png" style="max-height: 14vh; max-width: 35vw;">
+                    <a href="#" data-toggle="modal" data-target="#sname"> 
+                        <img src="https://ereceptionhub.co.uk/storage/images/out.png" style="max-height: 14vh; max-width: 35vw;">
                     </a>
                     &nbsp;&nbsp;&nbsp;
-                    <a href="/ereceptionhub/public/scanout" alt="Scan Out" title="Scan In">
-                        <img src="../../ereceptionhub/storage/app/public/images/scan_out.png" style="max-height: 14vh; max-width: 35vw;">
+                    <a href="/scanout" alt="Scan Out" title="Scan In">
+                        <img src="https://ereceptionhub.co.uk/storage/images/scan_out.png" style="max-height: 14vh; max-width: 35vw;">
                     </a>
                     <br>
                 </center>
                 @else
                 <center>
-                    <a href="/ereceptionhub/public/sign_in_options" alt="sign in choices" title="sign in optins">
-                        <img src="../../ereceptionhub/storage/app/public/images/in_w.png" style="max-height: 14vh; max-width: 35vw;">
+                    <a href="/sign_in_options" alt="sign in choices" title="sign in optins">
+                        <img src="https://ereceptionhub.co.uk/storage/images/in_w.png" style="max-height: 14vh; max-width: 35vw;">
                     </a>
                     &nbsp;&nbsp;&nbsp;
-                    <a href="/ereceptionhub/public/scan" alt="Scan In" title="Scan In">
-                        <img src="../../ereceptionhub/storage/app/public/images/scan_in_w.png" style="max-height: 14vh; max-width: 35vw;">
+                    <a href="/scan" alt="Scan In" title="Scan In">
+                        <img src="https://ereceptionhub.co.uk/storage/images/scan_in_w.png" style="max-height: 14vh; max-width: 35vw;">
                     </a>
                     <br>
-                    <a data-toggle="modal" data-target="#sname"> 
-                        <img src="../../ereceptionhub/storage/app/public/images/out_w.png" style="max-height: 14vh; max-width: 35vw;">
+                    <a href="#" data-toggle="modal" data-target="#sname"> 
+                        <img src="https://ereceptionhub.co.uk/storage/images/out_w.png" style="max-height: 14vh; max-width: 35vw;">
                     </a>
                     &nbsp;&nbsp;&nbsp;
-                    <a href="/ereceptionhub/public/scanout" alt="Scan Out" title="Scan Out">
-                        <img src="../../ereceptionhub/storage/app/public/images/scan_out_w.png" style="max-height: 14vh; max-width: 35vw;">
+                    <a href="/scanout" alt="Scan Out" title="Scan Out">
+                        <img src="https://ereceptionhub.co.uk/storage/images/scan_out_w.png" style="max-height: 14vh; max-width: 35vw;">
                     </a>
                     <br> 
                 </center>

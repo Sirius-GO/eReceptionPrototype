@@ -17,9 +17,9 @@ $layouts = Layout::where('company_id', auth()->user()->company_id)->take(1)->get
         $sw = $l->welcome_stroke;
         $ch = $l->choice;
         if($bg !='' && $ch == 'image'){
-            $bg_url = 'http://localhost:8080/ereceptionhub/storage/app/public/background_images/'.$bg;
+            $bg_url = 'https://ereceptionhub.co.uk/storage/background_images/'.$bg;
         } elseif($ch == 'image'){
-            $bg_url = 'http://localhost:8080/ereceptionhub/storage/app/public/background_images/wallpaper_C4D.jpg';
+            $bg_url = 'https://ereceptionhub.co.uk/storage/background_images/wallpaper_C4D.jpg';
         } else {
             $bg_url = '';
         }
@@ -39,7 +39,7 @@ $layouts = Layout::where('company_id', auth()->user()->company_id)->take(1)->get
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- High Charts CDN -->
-    <script src="../public/js/highcharts.js"></script>
+    <script src="../js/highcharts.js"></script>
 
     <!-- Charts CDN 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>-->
@@ -47,7 +47,15 @@ $layouts = Layout::where('company_id', auth()->user()->company_id)->take(1)->get
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>    
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="icon" type="image/png" sizes="64x64" href="http://localhost:8080/ereceptionhub/storage/app/public/images/erec.ico">
+
+
+    <link rel="icon" type="image/png" sizes="64x64" href="https://ereceptionhub.co.uk/storage/images/erec.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://ereceptionhub.co.uk/storage/images/erec_180.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
         <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
@@ -70,6 +78,14 @@ $layouts = Layout::where('company_id', auth()->user()->company_id)->take(1)->get
         p {
             word-break: break-all; 
         }
+
+	/* remove all borders from links */
+	a {
+	 text-decoration: none;
+	}
+	a img {outline : none;}
+	img {border : 0;}
+
         .fade-in {
         margin-top: 10vh;
         animation: fadeIn ease 1s;
@@ -229,7 +245,7 @@ $layouts = Layout::where('company_id', auth()->user()->company_id)->take(1)->get
     #preview_box{
         position: absolute;
         width: 60vw;
-        height: calc(60vw*0.7);
+        height: calc(60vw*0.75);
         max-height: 75vh;
         left: 50%;
         margin-left: -30vw;
@@ -331,6 +347,8 @@ $layouts = Layout::where('company_id', auth()->user()->company_id)->take(1)->get
                 margin-left: 10px;
             }
     </style>
+    <script type="text/javascript" src="https://ereceptionhub.co.uk/js/links.js"></script>
+
     <title>{{ config('app.name', 'eReception-Hub') }}</title>
 
 </head>

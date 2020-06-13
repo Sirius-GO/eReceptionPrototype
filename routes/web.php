@@ -94,6 +94,7 @@ Route::post('administration', ['as' => 'bulk_reg.store', 'uses' => 'Registration
 
 
 //Website Controller
+Route::get('/', 'WebsiteController@index');
 Route::get('/home', 'WebsiteController@index');
 Route::get('/about', 'WebsiteController@about');
 Route::get('/services', 'WebsiteController@services');
@@ -108,3 +109,7 @@ Route::post('/settings', ['as' => 'environment.wallpaperstore', 'uses' => 'Envir
 Route::post('colourpick', ['as' => 'colour.select', 'uses' => 'EnvironmentController@colourSelect']);
 Route::post('choice', ['as' => 'environment.choice', 'uses' => 'EnvironmentController@choiceStore']);
 Route::post('txtchange', ['as' => 'txt.pick', 'uses' => 'EnvironmentController@txtChange']);
+
+
+//Logout
+Route::get('logout', 'Auth\LoginController@logout');

@@ -22,7 +22,7 @@ use App\Departments;
                    <!-- User Credentials -->
                     <div class="row" style="background-color: rgba(255,255,255,0.5); padding: 10px;">
                         <h3>User Credentials                        
-                            <a data-toggle="modal" data-target="#user_cred"><span class="btn btn-primary pull-right"><i class="fa fa-pencil fa-lg"> </i> Edit </span></a>
+                            <a href="#" data-toggle="modal" data-target="#user_cred"><span class="btn btn-primary pull-right"><i class="fa fa-pencil fa-lg"> </i> Edit </span></a>
                         </h3>                                
                     </div>
 
@@ -44,7 +44,7 @@ use App\Departments;
                         </div>
                         <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="min-height: 160px; border-bottom: dotted 1px;">
                             <p><span class="badge" style="background-color: #1e7553;">Avatar: </span><br>
-                                <img src="http://localhost:8080/ereceptionhub/storage/app/public/mug_shots/{{ auth()->user()->avatar }}" style="height: 100px; border-radius: 50%;  border: solid 1px #eee;">
+                                <img src="../../storage/mug_shots/{{ auth()->user()->avatar }}" style="height: 100px; border-radius: 50%;  border: solid 1px #eee;">
                                 <a href="capture_cam"><span class="btn btn-primary"><i class="fa fa-upload fa-lg"> </i> Upload </span></a>
                             </p>
                         </div>
@@ -95,7 +95,7 @@ use App\Departments;
                         <div class="row">
                         <div class="row" style="background-color: rgba(255,255,255,0.5); padding: 10px;">
                             <h3>Company Credentials
-                            <a data-toggle="modal" data-target="#comp_cred"><span class="btn btn-primary pull-right"><i class="fa fa-pencil fa-lg"> </i> Edit </span></a>
+                            <a href="#" data-toggle="modal" data-target="#comp_cred"><span class="btn btn-primary pull-right"><i class="fa fa-pencil fa-lg"> </i> Edit </span></a>
                             </h3> 
                         </div>                               
                             <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="min-height: 160px; border-bottom: dotted 1px;">
@@ -179,13 +179,13 @@ use App\Departments;
                                 @if(count($company ?? '') > 0)
                                     @foreach($company ?? '' as $comp)
                                         @if($comp->company_logo == '')
-                                            <img src="http://localhost:8080/ereceptionhub/storage/app/public/images/default_logo.png" height="100px">
+                                            <img src="../../storage/images/default_logo.png" height="100px">
                                         @else 
-                                            <img src="http://localhost:8080/ereceptionhub/storage/app/public{{ $comp->company_logo }}" height="100px">
+                                            <img src="../../storage{{ $comp->company_logo }}" height="100px">
                                         @endif
                                     @endforeach
                                 @endif
-                                    <a data-toggle="modal" data-target="#company_logo_upload"><span class="btn btn-primary"><i class="fa fa-upload fa-lg"> </i> Upload </span></a>
+                                    <a href="#" data-toggle="modal" data-target="#company_logo_upload"><span class="btn btn-primary"><i class="fa fa-upload fa-lg"> </i> Upload </span></a>
                             </p>
                         </div>
                         </div>
@@ -195,7 +195,7 @@ use App\Departments;
                             <!-- Account Credentials -->
                             <div class="row" style="background-color: rgba(255,255,255,0.5); padding: 10px;">
                                 <h3>Account Credentials
-                                    <a data-toggle="modal" data-target="#account_cred"><span class="btn btn-primary pull-right"><i class="fa fa-pencil fa-lg"> </i> Edit </span></a>
+                                    <a href="#" data-toggle="modal" data-target="#account_cred"><span class="btn btn-primary pull-right"><i class="fa fa-pencil fa-lg"> </i> Edit </span></a>
                                 </h3>                                
                             </div>                                
                             <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="min-height: 160px; border-bottom: dotted 1px;">
@@ -246,12 +246,12 @@ use App\Departments;
                                             {{ $loc->location_name }} Hub {{ $loc->location_code }}
                                             <br> 
                                         @endforeach
-                                        <span class="btn btn-primary btn-sm"><a data-toggle="modal" data-target="#loc_edit"><i class="fa fa-pencil fa-lg"> </i> Edit </a></span>
+                                        <span class="btn btn-primary btn-sm"><a href="#" data-toggle="modal" data-target="#loc_edit"><i class="fa fa-pencil fa-lg"> </i> Edit </a></span>
                                         <br>
-                                        <span class="btn btn-primary"><a data-toggle="modal" data-target="#loc_add"> <i class="fa fa-plus fa-lg"> </i> Add Location </span></a>&nbsp;&nbsp;&nbsp;
+                                        <span class="btn btn-primary"><a href="#" data-toggle="modal" data-target="#loc_add"> <i class="fa fa-plus fa-lg"> </i> Add Location </span></a>&nbsp;&nbsp;&nbsp;
                                     @else
                                         None Set<br>
-                                        <span class="btn btn-primary"><a data-toggle="modal" data-target="#loc_add"> <i class="fa fa-plus fa-lg"> </i> Add Location</span></a>&nbsp;&nbsp;&nbsp;
+                                        <span class="btn btn-primary"><a href="#" data-toggle="modal" data-target="#loc_add"> <i class="fa fa-plus fa-lg"> </i> Add Location</span></a>&nbsp;&nbsp;&nbsp;
                                     @endif
                                 </p>
                             </div>
@@ -262,12 +262,12 @@ use App\Departments;
                                             {{ $dep->department_name }} 
                                             <br> 
                                         @endforeach
-                                        <span class="btn btn-primary btn-sm"><a data-toggle="modal" data-target="#dep_edit"><i class="fa fa-pencil fa-lg"> </i> Edit </a></span>
+                                        <span class="btn btn-primary btn-sm"><a href="#" data-toggle="modal" data-target="#dep_edit"><i class="fa fa-pencil fa-lg"> </i> Edit </a></span>
                                         <br>
-                                        <span class="btn btn-primary"><a data-toggle="modal" data-target="#dep_add"><i class="fa fa-plus fa-lg"> </i> Add Department </a></span>&nbsp;&nbsp;&nbsp;
+                                        <span class="btn btn-primary"><a href="#" data-toggle="modal" data-target="#dep_add"><i class="fa fa-plus fa-lg"> </i> Add Department </a></span>&nbsp;&nbsp;&nbsp;
                                     @else
                                         None Set<br>
-                                        <span class="btn btn-primary"><a data-toggle="modal" data-target="#dep_add"><i class="fa fa-plus fa-lg"> </i> Add Department </a></span>&nbsp;&nbsp;&nbsp;
+                                        <span class="btn btn-primary"><a href="#" data-toggle="modal" data-target="#dep_add"><i class="fa fa-plus fa-lg"> </i> Add Department </a></span>&nbsp;&nbsp;&nbsp;
                                     @endif
                                 </p>
                             </div>
