@@ -38,6 +38,7 @@
                                     @if(auth()->user()->user_level > '4')
                                         <a class="dropdown-item" href="../../administration"> <i class="fa fa-user-plus"> </i> User Administration </a>
                                         <a class="dropdown-item" href="../../firesafety"> <i class="fa fa-fire-extinguisher"> </i> Fire Safety </a>
+										<a class="dropdown-item" href="../../reports"> <i class="fa fa-folder"> </i> Reports </a>
                                     @endif
                                     <a class="dropdown-item" href="../../policies"> <i class="fa fa-file"> </i> Policies </a>
                                     @if(auth()->user()->user_level > '4')

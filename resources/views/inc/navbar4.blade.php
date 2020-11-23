@@ -41,6 +41,7 @@
                                 @if(auth()->user()->user_level > '4')
                                     <li><a href="../../../../administration"> <i class="fa fa-user-plus"> </i> User Administration </a><li>                                        
                                     <li><a href="../../../../firesafety"> <i class="fa fa-fire-extinguisher"> </i> Fire Safety </a><li>
+									<li><a href="../../../../reports"> <i class="fa fa-folder"> </i> Reports </a><li>
                                 @endif
                                 <li><a href="../../../../policies"> <i class="fa fa-file"> </i> Policies </a><li>
                                 @if(auth()->user()->user_level > '4')

@@ -33,6 +33,11 @@ Route::get('/capture_cam', 'PagesController@capture_cam');
 Route::get('/subscriptions', 'PagesController@subscriptions');
 Route::get('/checkout_success', 'PagesController@checkout_success');
 Route::get('/checkout_cancel', 'PagesController@checkout_cancel');
+Route::get('/reports', 'PagesController@reports');
+Route::post('reports', ['as' => 'download.report', 'uses' => 'PagesController@downloadReport']);
+Route::post('reports2', ['as' => 'download.failed', 'uses' => 'PagesController@downloadFailed']);
+Route::post('reports3', ['as' => 'download.in', 'uses' => 'PagesController@downloadSignedIn']);
+
 
 //DailyChecklist
 Route::get('/daily_checklist', 'PagesController@daily_checklist');
@@ -96,6 +101,10 @@ Route::post('administration', ['as' => 'bulk_reg.store', 'uses' => 'Registration
 //Website Controller
 Route::get('/', 'WebsiteController@index');
 Route::get('/home', 'WebsiteController@index');
+//Route::get('/defaultsite', 'WebsiteController@index');
+Route::get('/defaultsite', function () {
+    return redirect('/');
+});
 Route::get('/about', 'WebsiteController@about');
 Route::get('/services', 'WebsiteController@services');
 Route::get('/contact', 'WebsiteController@contact');

@@ -43,5 +43,6 @@ return [
     'vis_col'       => 'Change Visitor Pass Colour',
     'subscriptions'    => 'Subscriptions',
     'checkout_success' => 'Checkout - Transaction Successful',
-    'checkout_cancel'  => 'Checkout - Transaction Cancelled'
+    'checkout_cancel'  => 'Checkout - Transaction Cancelled',
+	'reports'  		   => 'Reports'
 ];

@@ -168,6 +168,8 @@ class PagesController extends Controller
                         ->get();
 
 
+
+	
             return view('pages.fire')->with('entries', $entries);
     }
 
@@ -1253,7 +1255,7 @@ class PagesController extends Controller
         $ca = substr($today, 0, 10);
 
         if($in_out ==='In'){
-            $entries = Register::select(\DB::raw("*, registers.id as rid, registers.current_status as curstat, registers.created_at as crestat, registers.sign_out_time as upstat"))
+            $entries = Register::select(\DB::raw("*, registers.id as rid, registers.user_id as uuu, registers.current_status as curstat, registers.created_at as crestat, registers.sign_out_time as upstat"))
                         ->leftJoin('users', 'registers.user_id', '=', 'users.id')
                         ->leftJoin('locations', 'registers.location_id', 'locations.id')
                         ->leftJoin('companies', 'users.company_id', 'companies.id')
@@ -1379,6 +1381,480 @@ class PagesController extends Controller
         return view('pages.checkout_cancel');
     }
 
+    //Reports
+    public function reports(){
+
+            $entries = Register::select(\DB::raw("*, registers.id as rid, registers.current_status as curstat, registers.created_at as crestat, registers.sign_out_time as upstat"))
+                        ->leftJoin('users', 'registers.user_id', '=', 'users.id')
+                        ->leftJoin('locations', 'registers.location_id', 'locations.id')
+                        ->leftJoin('companies', 'users.company_id', 'companies.id')
+                        ->leftJoin('departments', 'users.department_id', 'departments.id')
+                        ->where('registers.current_status', 'In')
+                        ->where('registers.current_status', '<>', 'NA')
+                        ->where('registers.company_id', auth()->user()->company_id)
+                        ->orderby('registers.id', 'desc')
+                        ->get();
+
+
+
+	
+            return view('pages.reports')->with('entries', $entries);
+    }
+	
+
+	public function downloadReport(Request $request){
+		
+			//Validate the form
+			$this->validate($request, [
+				'start_date' => 'required',
+				'end_date' => 'required',
+				'report_type' => 'required'
+			]);
+
+			$sd = $request->input('start_date'). ' 00:00:00';
+			$ed = $request->input('end_date'). ' 23:59:59';
+			$rt = $request->input('report_type');
+				
+
+		
+	
+		
+			if($rt == 'All'){
+				$entries = Register::select(\DB::raw("*, users.id as uid, registers.id as rid, registers.current_status as curstat, registers.created_at as crestat, registers.sign_out_time as upstat"))
+					->leftJoin('users', 'registers.user_id', '=', 'users.id')
+					->leftJoin('locations', 'registers.location_id', 'locations.id')
+					->leftJoin('companies', 'users.company_id', 'companies.id')
+					->leftJoin('departments', 'users.department_id', 'departments.id')
+					
+					->whereBetween('registers.created_at', [$sd, $ed])
+					->where('registers.company_id', auth()->user()->company_id)
+					
+					->orwhereBetween('registers.sign_out_time', [$sd, $ed])
+					->where('registers.company_id', auth()->user()->company_id)
+					
+					->orderby('registers.id', 'asc')
+					->get();
+			}
+			if($rt == 'Hourly_Paid'){
+				$entries = Register::select(\DB::raw("*, users.id as uid, registers.id as rid, registers.current_status as curstat, registers.created_at as crestat, registers.sign_out_time as upstat"))
+					->leftJoin('users', 'registers.user_id', '=', 'users.id')
+					->leftJoin('locations', 'registers.location_id', 'locations.id')
+					->leftJoin('companies', 'users.company_id', 'companies.id')
+					->leftJoin('departments', 'users.department_id', 'departments.id')
+					
+					->whereBetween('registers.created_at', [$sd, $ed])
+					->where('registers.company_id', auth()->user()->company_id)
+					->where('hourly_rate', '>', '0')		
+					
+					->orwhereBetween('registers.sign_out_time', [$sd, $ed])
+					->where('registers.company_id', auth()->user()->company_id)
+					->where('hourly_rate', '>', '0')
+					
+					->orderby('users.id', 'asc')
+					->get();
+			}
+			if($rt == 'All_Staff'){
+				$entries = Register::select(\DB::raw("*, users.id as uid, registers.id as rid, registers.current_status as curstat, registers.created_at as crestat, registers.sign_out_time as upstat"))
+					->leftJoin('users', 'registers.user_id', '=', 'users.id')
+					->leftJoin('locations', 'registers.location_id', 'locations.id')
+					->leftJoin('companies', 'users.company_id', 'companies.id')
+					->leftJoin('departments', 'users.department_id', 'departments.id')
+					
+					->whereBetween('registers.created_at', [$sd, $ed])
+					->where('registers.company_id', auth()->user()->company_id)
+					->where('reg_type', 'staff')
+					
+					->orwhereBetween('registers.sign_out_time', [$sd, $ed])
+					->where('registers.company_id', auth()->user()->company_id)
+					->where('reg_type', 'staff')				
+					
+					->orderby('registers.id', 'asc')
+					->get();
+			}
+			if($rt == 'Visitors'){
+				$entries = Register::select(\DB::raw("*, users.id as uid, registers.id as rid, registers.current_status as curstat, registers.created_at as crestat, registers.sign_out_time as upstat"))
+					->leftJoin('users', 'registers.user_id', '=', 'users.id')
+					->leftJoin('locations', 'registers.location_id', 'locations.id')
+					->leftJoin('companies', 'users.company_id', 'companies.id')
+					->leftJoin('departments', 'users.department_id', 'departments.id')
+					
+					->whereBetween('registers.created_at', [$sd, $ed])
+					->where('registers.company_id', auth()->user()->company_id)
+					->where('reg_type', 'visitor')
+					
+					->orwhereBetween('registers.sign_out_time', [$sd, $ed])
+					->where('registers.company_id', auth()->user()->company_id)
+					->where('reg_type', 'visitor')			
+					
+					->orderby('registers.id', 'asc')
+					->get();
+			}
+			if($rt == 'Del_Collect'){
+				$entries = Register::select(\DB::raw("*, users.id as uid, registers.id as rid, registers.current_status as curstat, registers.created_at as crestat, registers.sign_out_time as upstat"))
+					->leftJoin('users', 'registers.user_id', '=', 'users.id')
+					->leftJoin('locations', 'registers.location_id', 'locations.id')
+					->leftJoin('companies', 'users.company_id', 'companies.id')
+					->leftJoin('departments', 'users.department_id', 'departments.id')
+					
+					->whereBetween('registers.created_at', [$sd, $ed])
+					->where('registers.company_id', auth()->user()->company_id)
+					->where('reg_type', 'delivery')
+					
+					->orwhereBetween('registers.sign_out_time', [$sd, $ed])
+					->where('registers.company_id', auth()->user()->company_id)
+					->where('reg_type', 'collection')
+					
+					->orwhereBetween('registers.created_at', [$sd, $ed])
+					->where('registers.company_id', auth()->user()->company_id)
+					->where('reg_type', 'delivery')
+					
+					->orwhereBetween('registers.sign_out_time', [$sd, $ed])
+					->where('registers.company_id', auth()->user()->company_id)
+					->where('reg_type', 'collection')
+					
+					->orderby('registers.id', 'asc')
+					->get();
+			}
+			if($rt == 'Contractors'){
+				$entries = Register::select(\DB::raw("*, users.id as uid, registers.id as rid, registers.current_status as curstat, registers.created_at as crestat, registers.sign_out_time as upstat"))
+					->leftJoin('users', 'registers.user_id', '=', 'users.id')
+					->leftJoin('locations', 'registers.location_id', 'locations.id')
+					->leftJoin('companies', 'users.company_id', 'companies.id')
+					->leftJoin('departments', 'users.department_id', 'departments.id')
+					
+					->whereBetween('registers.created_at', [$sd, $ed])
+					->where('registers.company_id', auth()->user()->company_id)
+					->where('reg_type', 'contractor')
+					
+					->orwhereBetween('registers.sign_out_time', [$sd, $ed])
+					->where('registers.company_id', auth()->user()->company_id)
+					->where('reg_type', 'contractor')
+					
+					->orderby('registers.id', 'asc')
+					->get();
+			}
+		
+			if($rt == 'Forced'){
+				$entries = Register::select(\DB::raw("*, users.id as uid, registers.id as rid, registers.current_status as curstat, registers.created_at as crestat, registers.sign_out_time as upstat"))
+					->leftJoin('users', 'registers.user_id', '=', 'users.id')
+					->leftJoin('locations', 'registers.location_id', 'locations.id')
+					->leftJoin('companies', 'users.company_id', 'companies.id')
+					->leftJoin('departments', 'users.department_id', 'departments.id')
+					
+					->where('registers.company_id', auth()->user()->company_id)
+					->whereBetween('registers.created_at', [$sd, $ed])
+					->where('sign_out_type', 'FORCED')
+					
+					->orwhereBetween('registers.sign_out_time', [$sd, $ed])
+					->where('registers.company_id', auth()->user()->company_id)
+					->where('sign_out_type', 'FORCED')
+					
+					->orderby('users.id', 'asc')
+					->get();
+			}
+
+		//return $entries;
+
+			$dt = date('dmY');
+
+			header("Content-Type: application/vnd.ms-excel;");
+			header("Content-disposition: attachment; filename=$rt.$dt.xls");
+
+			echo '<html>';
+			echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=Windows-1252\">";
+			echo '<br /><br />';
+			echo '<body style="background-color: #ffffff;">';
+			echo '<br><br><table border="1" style="font-family: tahoma, sans-serif; font-size:12px;">';
+				echo '<tr style="background-color: #ffff00; font-size: 15px;"><td colspan="14"> <b>Report Date Range - From: </b> ' . $sd . '  <b>To: </b>' . $ed . '</td></tr>';
+			echo '<tr>';
+			echo '<td bgcolor="#1b95cd" style="width:60px; vertical-align:middle;" align="center"><b>ID</b></td>';
+			echo '<td bgcolor="#1b95cd" style="width:150px; vertical-align:middle;"align="center"><b>Name</b></td>';
+			if($rt != 'Hourly_Paid'){
+				echo '<td bgcolor="#1b95cd" style="width:100px; vertical-align:middle;"align="center"><b>Reg Type</b></td>';
+			}
+			echo '<td bgcolor="#1b95cd" style="width:60px; vertical-align:middle;"align="center"><b>Status</b></td>';
+			echo '<td bgcolor="#1b95cd" style="width:100px; vertical-align:middle;"align="center"><b>Sign Type</b></td>';
+			if($rt != 'Hourly_Paid' && $rt != 'All_Staff'){
+				echo '<td bgcolor="#1b95cd" style="width:150px; vertical-align:middle;"align="center"><b>Visiting Who</b></td>';
+			}
+			echo '<td bgcolor="#1b95cd" style="width:120px; vertical-align:middle;" align="center"><b>Sign Location</b></td>';
+			if($rt != 'Hourly_Paid' && $rt != 'All_Staff'){
+				echo '<td bgcolor="#1b95cd" style="width:80px; vertical-align:middle;"align="center"><b>Car Reg</b></td>';
+			}
+			echo '<td bgcolor="#1b95cd" style="width:250px; vertical-align:middle;"align="center"><b>Company</b></td>';
+			echo '<td bgcolor="#1b95cd" style="width:90px; vertical-align:middle;"align="center"><b>In Date</b></td>';
+			echo '<td bgcolor="#1b95cd" style="width:70px; vertical-align:middle;"align="center"><b>In Time</b></td>';
+			echo '<td bgcolor="#1b95cd" style="width:90px; vertical-align:middle;"align="center"><b>Out Date</b></td>';
+			echo '<td bgcolor="#1b95cd" style="width:70px; vertical-align:middle;"align="center"><b>Out Time</b></td>';
+			echo '<td bgcolor="#1b95cd" style="width:140px; vertical-align:middle;"align="center"><b>Time On-site (D:H:M:S)</b></td>';
+			if($rt == 'Hourly_Paid'){
+		    	echo '<td bgcolor="#1b95cd" style="width:80px; vertical-align:middle;"align="center"><b>Earnings</b></td>';
+			}
+			echo '<br />';
+			echo '</tr>';
+
+		if(count($entries)> 0){
+			foreach($entries as $ent){
+				$a = $ent->uid .' | '.$ent->rid;;
+				$b = $ent->name;
+				$c = $ent->reg_type;
+				$d = $ent->curstat;
+				$e = $ent->sign_out_type;
+				$f = $ent->first_name . ' ' . $ent->last_name;
+				$g = $ent->location_name;
+				$h = $ent->car_reg;
+				$i = $ent->from_company;
+				$j = $ent->crestat;
+				$jj = strtotime($j);
+				$k = $ent->upstat;
+				$kk = strtotime($k);
+				$diff = $kk - $jj;
+				$l = number_format(($kk - $jj)/60);
+				$ll = number_format(($kk - $jj)/60/60);
+				$m = $ent->hourly_rate;
+				$n = number_format((float)$ll*$m,2);
+				
+				
+				$days = floor($diff / (60 * 60 * 24));
+				$diff -= $days * (60 * 60 * 24);
+
+				$hours = floor($diff / (60 * 60));
+				$diff -= $hours * (60 * 60);
+
+				$minutes = floor($diff / 60);
+				$diff -= $minutes * 60;
+
+				$seconds = floor($diff);
+				$diff -= $seconds;
+
+				$onsite = "{$days}d {$hours}h {$minutes}m {$seconds}s";
+				$earnings = number_format((float)(($days * 24) + $hours + ($minutes / 60) + ($seconds / 3600))*$m,2);
+				
+				
+				echo '<tr>';
+						echo '<td bgcolor="#eeeeee" align="center">' . $a . '</td><td bgcolor="#eeeeee" align="left">' . $b . '</td>';
+						echo ($rt != 'Hourly_Paid')?'<td bgcolor="#eeeeee">' . $c . '</td>':'';
+						echo '<td bgcolor="#eeeeee" align="center">' . $d . '</td>';
+						echo '<td bgcolor="#eeeeee" align="left">' . $e . '</td>';
+						echo ($rt != 'Hourly_Paid' && $rt != 'All_Staff')?'<td bgcolor="#eeeeee" align="left">' . $f . '</td>':'';
+						echo '<td bgcolor="#eeeeee" align="left">' . $g . '</td>';
+						echo ($rt != 'Hourly_Paid' && $rt != 'All_Staff')?'<td bgcolor="#eeeeee" align="center">' . $h . '</td>':'';
+						echo '<td bgcolor="#eeeeee" align="left">' . $i . '</td>';
+						echo '<td bgcolor="#eeeeee" align="center" style="vnd.ms-excel.dateformat:dd.mm.yy">' . substr($j, 0, 10) . '</td>';
+						echo '<td bgcolor="#eeeeee" align="center">' . substr($j, 11, 8) . '</td>';
+						echo '<td bgcolor="#eeeeee" align="center" style="vnd.ms-excel.dateformat:dd.mm.yy">' . substr($k, 0, 10) . '</td>';
+						echo '<td bgcolor="#eeeeee" align="center">' . substr($k, 11, 8) . '</td>';
+						echo '<td bgcolor="#eeeeee" align="center">' . $onsite .'</td>';
+						if($rt == 'Hourly_Paid'){
+							echo '<td bgcolor="#eeeeee" align="center" style="vnd.ms-excel.numberformat:0.00">' . $earnings . '</td>';
+						}
+						echo '<br />';
+				echo '</tr>';				
+			}//End of foreach
+				//return redirect('reports')->with('success', 'Your Report has been prepared and downoaded - Double-Click to open. Thank you. '.$sd .' - ' . $ed);
+		} else {
+				return redirect('reports')->with('error', 'No Entries have been found for your search. '.$sd .' - ' . $ed);
+		}
+		
+		echo '</table>';
+		echo '</body>';
+		echo '</html>';
+		
+		
+		
+
+	}
+
+	
+
+
+	public function downloadFailed(Request $request){
+		
+
+	
+		
+		            $entries = Register::select(\DB::raw("*, users.id as uid, registers.id as rid, registers.current_status as curstat, registers.created_at as crestat, registers.sign_out_time as upstat"))
+                        ->leftJoin('users', 'registers.user_id', '=', 'users.id')
+                        ->leftJoin('locations', 'registers.location_id', 'locations.id')
+                        ->leftJoin('companies', 'users.company_id', 'companies.id')
+                        ->leftJoin('departments', 'users.department_id', 'departments.id')
+                        ->where('registers.company_id', auth()->user()->company_id)
+						->where('registers.current_status', 'in')
+                        ->orderby('registers.id', 'asc')
+                        ->get();
+
+
+
+			$rt = 'Failed_to_Sign_Out';
+			$dt = date('dmY');
+
+
+			header("Content-Type: application/vnd.ms-excel");
+			header("Content-disposition: attachment; filename=$rt.$dt.xls");
+		
+
+			echo '<html>';
+			echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=Windows-1252\">";
+			echo '<br /><br />';
+			echo '<body style="background-color: #ffffff;">';
+			echo '<br><br><table border="1" style="font-family: tahoma, sans-serif; font-size:12px;">';
+			echo '<tr>';
+			echo '<td bgcolor="#ff0000" style="color: #fff; width:60px; vertical-align:middle;" align="center"><b>ID</b></td>';
+			echo '<td bgcolor="#ff0000" style="color: #fff; width:150px; vertical-align:middle;"align="center"><b>Name</b></td>';
+			echo '<td bgcolor="#ff0000" style="color: #fff; width:100px; vertical-align:middle;"align="center"><b>Sign Type</b></td>';
+			echo '<td bgcolor="#ff0000" style="color: #fff; width:120px; vertical-align:middle;" align="center"><b>Sign Location</b></td>';
+			echo '<td bgcolor="#ff0000" style="color: #fff; width:250px; vertical-align:middle;"align="center"><b>Company</b></td>';
+			echo '<td bgcolor="#ff0000" style="color: #fff; width:90px; vertical-align:middle;"align="center"><b>In Date</b></td>';
+			echo '<td bgcolor="#ff0000" style="color: #fff; width:70px; vertical-align:middle;"align="center"><b>In Time</b></td>';
+			echo '<td bgcolor="#ff0000" style="color: #fff; width:140px; vertical-align:middle;"align="center"><b>Time On-site (D:H:M:S)</b></td>';
+			echo '<br />';
+			echo '</tr>';
+
+		if(count($entries)> 0){
+			foreach($entries as $ent){
+				$a = $ent->uid .' | '.$ent->rid;;
+				$b = $ent->name;
+				$e = $ent->sign_out_type;
+				$g = $ent->location_name;
+				$i = $ent->from_company;
+				$j = $ent->crestat;
+				$jj = strtotime($j);
+				$kk = time();
+				$diff = $kk - $jj;
+				$check = $kk - $jj;
+				
+				$days = floor($diff / (60 * 60 * 24));
+				$diff -= $days * (60 * 60 * 24);
+				$hours = floor($diff / (60 * 60));
+				$diff -= $hours * (60 * 60);
+				$minutes = floor($diff / 60);
+				$diff -= $minutes * 60;
+				$seconds = floor($diff);
+				$diff -= $seconds;
+
+				$onsite = "{$days}d {$hours}h {$minutes}m {$seconds}s";
+				
+				if($check > 54000){
+					
+					echo '<tr>';
+							echo '<td bgcolor="#eeeeee" align="center">' . $a . '</td>';
+							echo '<td bgcolor="#eeeeee" align="left">' . $b . '</td>';
+							echo '<td bgcolor="#eeeeee" align="left">' . $e . '</td>';
+							echo '<td bgcolor="#eeeeee" align="left">' . $g . '</td>';
+							echo '<td bgcolor="#eeeeee" align="left">' . $i . '</td>';
+							echo '<td bgcolor="#eeeeee" align="center" style="vnd.ms-excel.dateformat:dd.mm.yy">' . substr($j, 0, 10) . '</td>';
+							echo '<td bgcolor="#eeeeee" align="center">' . substr($j, 11, 8) . '</td>';
+							echo '<td bgcolor="#eeeeee" align="center">' . $onsite .'</td>';
+							echo '<br />';
+					echo '</tr>';	
+				} else {
+					echo '<tr><td colspan="8"> This Record Doesn\'t Match </td></tr>';
+				}
+
+			}// End of foreach
+		}//end of main if
+		echo '</table>';
+		echo '</body>';
+		echo '</html>';	
+		
+		
+	//return back()->with('success', 'Your Report has been prepared and downoaded - Double-Click to open. Thank you.');
+
+	}
+	
+
+
+
+	public function downloadSignedIn(Request $request){
+		
+
+		
+		            $entries = Register::select(\DB::raw("*, users.id as uid, registers.id as rid, registers.current_status as curstat, registers.created_at as crestat, registers.sign_out_time as upstat"))
+                        ->leftJoin('users', 'registers.user_id', '=', 'users.id')
+                        ->leftJoin('locations', 'registers.location_id', 'locations.id')
+                        ->leftJoin('companies', 'users.company_id', 'companies.id')
+                        ->leftJoin('departments', 'users.department_id', 'departments.id')
+                        ->where('registers.company_id', auth()->user()->company_id)
+						->where('registers.current_status', 'in')
+                        ->orderby('registers.id', 'asc')
+                        ->get();
+
+
+
+			$rt = 'Currently_Signed_In';
+			$dt = date('dmY');
+
+
+			header("Content-Type: application/vnd.ms-excel");
+			header("Content-disposition: attachment; filename=$rt.$dt.xls");
+		
+
+			echo '<html>';
+			echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=Windows-1252\">";
+			echo '<br /><br />';
+			echo '<body style="background-color: #ffffff;">';
+			echo '<br><br><table border="1" style="font-family: tahoma, sans-serif; font-size:12px;">';
+			echo '<tr>';
+			echo '<td bgcolor="#1c971c" style="color: #fff; width:60px; vertical-align:middle;" align="center"><b>ID</b></td>';
+			echo '<td bgcolor="#1c971c" style="color: #fff; width:150px; vertical-align:middle;"align="center"><b>Name</b></td>';
+			echo '<td bgcolor="#1c971c" style="color: #fff; width:100px; vertical-align:middle;"align="center"><b>Sign Type</b></td>';
+			echo '<td bgcolor="#1c971c" style="color: #fff; width:120px; vertical-align:middle;" align="center"><b>Sign Location</b></td>';
+			echo '<td bgcolor="#1c971c" style="color: #fff; width:250px; vertical-align:middle;"align="center"><b>Company</b></td>';
+			echo '<td bgcolor="#1c971c" style="color: #fff; width:90px; vertical-align:middle;"align="center"><b>In Date</b></td>';
+			echo '<td bgcolor="#1c971c" style="color: #fff; width:70px; vertical-align:middle;"align="center"><b>In Time</b></td>';
+			echo '<td bgcolor="#1c971c" style="color: #fff; width:140px; vertical-align:middle;"align="center"><b>Time On-site (D:H:M:S)</b></td>';
+			echo '<br />';
+			echo '</tr>';
+
+		if(count($entries)> 0){
+			foreach($entries as $ent){
+				$a = $ent->uid .' | '.$ent->rid;;
+				$b = $ent->name;
+				$e = $ent->sign_out_type;
+				$g = $ent->location_name;
+				$i = $ent->from_company;
+				$j = $ent->crestat;
+				$jj = strtotime($j);
+				$kk = time();
+				$diff = $kk - $jj;
+				$m = $ent->hourly_rate;
+				
+				$days = floor($diff / (60 * 60 * 24));
+				$diff -= $days * (60 * 60 * 24);
+
+				$hours = floor($diff / (60 * 60));
+				$diff -= $hours * (60 * 60);
+
+				$minutes = floor($diff / 60);
+				$diff -= $minutes * 60;
+
+				$seconds = floor($diff);
+				$diff -= $seconds;
+
+				$onsite = "{$days}d {$hours}h {$minutes}m {$seconds}s";
+					echo '<tr>';
+							echo '<td bgcolor="#eeeeee" align="center">' . $a . '</td>';
+							echo '<td bgcolor="#eeeeee" align="left">' . $b . '</td>';
+							echo '<td bgcolor="#eeeeee" align="left">' . $e . '</td>';
+							echo '<td bgcolor="#eeeeee" align="left">' . $g . '</td>';
+							echo '<td bgcolor="#eeeeee" align="left">' . $i . '</td>';
+							echo '<td bgcolor="#eeeeee" align="center" style="vnd.ms-excel.dateformat:dd.mm.yy">' . substr($j, 0, 10) . '</td>';
+							echo '<td bgcolor="#eeeeee" align="center">' . substr($j, 11, 8) . '</td>';
+							echo '<td bgcolor="#eeeeee" align="center">' . $onsite .'</td>';
+							echo '<br />';
+					echo '</tr>';	
+
+
+			}// End of foreach
+		}//end of main if
+		echo '</table>';
+		echo '</body>';
+		echo '</html>';	
+		
+		
+	//return back()->with('success', 'Your Report has been prepared and downoaded - Double-Click to open. Thank you.');
+
+	}
 
 
 }

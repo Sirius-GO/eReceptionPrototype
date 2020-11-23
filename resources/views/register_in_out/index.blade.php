@@ -232,7 +232,7 @@ if(strpos($my_url, 'reg') == false){
                                             <div class="card-footer" style="height: 30px; width: 100%;  background-color: rgba(0,0,0,0.3);">
                                                 <!-- Footer -->
                                                 <div style="position: relative; top: 5px;">
-                                                    <a href="administration/{{$rec->rid}}"><center><span class="bnt btn-info btn-sm"> <i class="fa fa-search"></i> View Profile </span></center></a>
+                                                    <a href="administration/{{$rec->uuu}}"><center><span class="bnt btn-info btn-sm"> <i class="fa fa-search"></i> View Profile </span></center></a>
                                                 </div>
                                             </div>
 

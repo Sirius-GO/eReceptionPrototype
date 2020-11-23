@@ -109,7 +109,7 @@ class EreceptionController extends Controller
         $signin->name = $name;
         $signin->reg_type = 'Staff';
         $signin->current_status = 'In';
-        $signin->sign_out_type = NULL;
+        $signin->sign_out_type = 'MANUAL';
         $signin->who = '0';
         $signin->location_id = $loc;
         $signin->car_reg = NULL;
@@ -198,7 +198,7 @@ class EreceptionController extends Controller
         $signin->name = $name;
         $signin->reg_type = 'Staff';
         $signin->current_status = 'In';
-        $signin->sign_out_type = NULL;
+        $signin->sign_out_type = 'SCAN';
         $signin->who = '0';
         $signin->location_id = $loc;
         $signin->car_reg = NULL;
@@ -275,7 +275,7 @@ class EreceptionController extends Controller
         $signin->name = $name;
         $signin->reg_type = 'Visitor';
         $signin->current_status = 'In';
-        $signin->sign_out_type = NULL;
+        $signin->sign_out_type = 'MANUAL';
         $signin->who = $who;
         $signin->location_id = $loc; // Needs to be included from session data
         $signin->car_reg = $car_reg;

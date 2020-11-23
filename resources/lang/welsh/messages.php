@@ -41,7 +41,8 @@ return [
     'vis_col'       => 'Newid Lliw Pas Ymwelydd',
     'subscriptions' => 'Tanysgrifiadau',
     'checkout_success' => 'Til - Trafodiad yn Llwyddiannus',
-    'checkout_cancel'  => 'Til - Canslo Trafodiad'
+    'checkout_cancel'  => 'Til - Canslo Trafodiad',
+	'reports'  		   => 'Adroddiadau'
 
 
 

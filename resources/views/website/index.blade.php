@@ -7,11 +7,11 @@
     <center>
             <img src="../../storage/images/logo.png"><br>
             <h2 style="color: #222; font-weight: 600;">Digital Sign-in for Staff, Visitors, Contractors, Deliveries and Collections</h2>
-            <h3 style="color: #222;">Replace your paper visitors and safeguard your personal information</h3>
+            <h3 style="color: #222;">Replace your paper visitors book and safeguard your personal information</h3>
     </ceneter>
     
 <div class="row">
-    <div class="col-12 col-md-6 col-lg-3 mybox">
+    <div class="col-12 col-md-6 col-lg-6 col-xl-3 mybox">
         <div class="mybox2">
             <div style="background-color: rgba(187, 211, 73, 0.5); padding: 10px; margin: -10px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
                 <h3 style="font-weight: 700; color: #eee;">Key Features</h3>
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 mybox">
+    <div class="col-12 col-md-6 col-lg-6 col-xl-3 mybox">
         <div class="mybox2">
             <div style="background-color: rgba(188, 138, 99, 0.5); padding: 10px; margin: -10px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
             <h3 style="font-weight: 700; color: #804738;">Bronze</h3>
@@ -48,23 +48,20 @@
             <li>Secure Access</li>
             <li>Real-Time Dashboard</li>
             <li>Data Exports *</li>
-            <li>Unlimited Notifications **</li>
+            <li>Unlimited Email Notifications</li>
             <li>Custom Branding</li>
             <li>GDPR Compliant</li>
-            <li>Health & Safety Briefing</li>
-            <li>Digital Sigantures</li>
-            <li>Visitor Experience Feedback</li>
+            <li>Health &amp; Safety Briefing</li>
         <hr>
-        * Extensive Fire, Staff and Visitor Reports
-        <br>
-        ** Email or SMS. SMS attracts extra charges          
+        * Extensive Fire Reports
+        <br>         
         <a href="" class="btn btn-primary" style="position: absolute; bottom: 10px; width: 120px; left: 50%; margin-left: -60px;"> Find Out More </a>
         </ul>
 
         <br>
         </div>
     </div>
-    <div class="col-12 col-md-6 col-lg-3 mybox">
+    <div class="col-12 col-md-6 col-lg-6 col-xl-3 mybox">
     <div class="mybox2">
         <div style="background-color: rgba(139, 139, 139, 0.5); padding: 10px; margin: -10px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
             <h3 style="font-weight: 700; color: #505050;">Silver</h3>
@@ -91,7 +88,7 @@
         </ul>
         </div>
     </div>
-    <div class="col-12 col-md-6 col-lg-3 mybox">
+    <div class="col-12 col-md-6 col-lg-6 col-xl-3 mybox">
         <div class="mybox2">
             <div style="background-color: rgba(216, 152, 68, 0.5); padding: 10px; margin: -10px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
                 <h3 style="font-weight: 700; color: #863e1b;">Gold</h3>
@@ -101,9 +98,10 @@
             <hr>
         <ul class="uls">
             <h6>Everything offered in Silver, plus</h6>
-            <li>Payroll Data Export</li>
-            <li>Visitor Photos</li>
-            <li>Clocking and Payroll *</li>
+            <li>Hourly Paid Attendance Data Export</li>
+			<li>Site Attendance Staff Data Export</li>
+			<li>Site Attendance Visitors Data Export</li>
+            <li>Clocking In and Out *</li>
             <li>Future Updates Included</li>
             <br>
             <br>
@@ -111,9 +109,9 @@
             <br>
             <br>
             <hr>
-            * Download a CSV for Sage or Xero
+            * Download a CSV for payroll
             <br>
-
+	    
             <a href="" class="btn btn-primary" style="position: absolute; bottom: 10px; width: 120px; left: 50%; margin-left: -60px;"> Find Out More </a>
         </ul>
         </div>

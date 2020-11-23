@@ -83,13 +83,13 @@ use App\Company;
                             </div>
 
                                     <div class="col-6 col-sm-6 col-md-3 col-lg-3" style="background-color: rgba(0,0,0,0.1); padding: 10px; display: inline-block; border: solid 1px #aaa; margin-top: 3px;">
-                                        <button onclick="printID({{$reg->id}})" class="btn btn-default btn-sm" style="position: absolute; top: 3px; right: 3px;"><i class="fa fa-print"></i> Print ID </button><br>
+                                        <a href="#" onclick="printID({{$reg->id}})" class="btn btn-default btn-sm" style="position: absolute; top: 3px; right: 3px;"><i class="fa fa-print"></i> Print ID </a><br>
                                         <script>
                                             function printID(id){
                                                 var printContents = document.getElementById('id_card_' + id).innerHTML;
                                                 w = window.open();
                                                 w.document.write(printContents);
-                                                w.document.write('<scr' + 'ipt type="text/javascript">' + 'window.onload = function() { window.print(); window.close(); };' + '</sc' + 'ript>');
+                                                w.document.write('<scr' + 'ipt type="text/javascript">' + 'window.onload = function() { window.print(); setTimeout(function () { window.close(); }, 3000);  };' + '</sc' + 'ript>');
                                                 w.document.close(); // necessary for IE >= 10
                                                 w.focus(); // necessary for IE >= 10
                                                 return true;

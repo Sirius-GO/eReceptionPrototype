@@ -82,7 +82,7 @@
                         <br><hr><br>
                         <div class="row">
                             <div class="col-12">
-                                <p align="center"><a href="/administration" class="btn btn-primary"><i class="fa fa-arrow-left fa-lg"></i> &nbsp;Go Back </a></p>
+                                <p align="center"><a href="javascript:history.go(-1)" class="btn btn-primary"><i class="fa fa-arrow-left fa-lg"></i> &nbsp;Go Back </a></p>
                             </div>
                         </div>
                     @else
