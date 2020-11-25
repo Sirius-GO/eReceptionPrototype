@@ -18,7 +18,7 @@
                 <center><h1 class="welcome">{{ __('messages.welcome') }}<br>
                     <span style="font-size: 3vw;">{{ $cpy }}</span></h1>
                 </center>
-                <br><br><br>
+                <br><br>
 
         </div>
         <div class="row">
@@ -64,6 +64,21 @@
                 @endif
             </div>
         </div>
+		
+		
+		<div class="row">
+                @if(count($layout ?? '') > 0)
+                    @foreach($layout ?? '' as $l)
+						@if($l->hub_msg_ctrl === 1)
+                       		<div style="padding: 20px; width: 70%; font-size: 17px; border-radius: 20px; font-weight: 550; background-color: rgba(0,0,0,0.4); margin: auto;">
+								<span style="white-space: pre-wrap;">{{$l->hub_msg}}</span>
+					   		</div>
+						@endif
+                    @endforeach
+                @endif
+		</div>
+		
+		
     </div>
 
     <div class="modal fade" tabindex="-1" role="dialog" id="sname">

@@ -42,7 +42,9 @@ return [
     'subscriptions' => 'Tanysgrifiadau',
     'checkout_success' => 'Til - Trafodiad yn Llwyddiannus',
     'checkout_cancel'  => 'Til - Canslo Trafodiad',
-	'reports'  		   => 'Adroddiadau'
+	'reports'  		   => 'Adroddiadau',
+	'msg'              => 'Newid Neges',
+	'preregister'      => 'Rhag-gofrestru Ymwelydd'
 
 
 

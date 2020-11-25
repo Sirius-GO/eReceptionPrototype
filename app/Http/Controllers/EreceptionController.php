@@ -291,6 +291,43 @@ class EreceptionController extends Controller
         $signin->checker = $checker;
         $signin->sign_out_time = now();
         $signin->save();
+		  
+		  
+		  
+		//================================= SEND AN EMAIL NOTIFICATION ==============================
+		  
+			//Email Vars
+		  	  $visiting_email = User::where('id', $who)->pluck('email');
+			  $visiting_name = User::where('id', $who)->pluck('first_name');
+		   	  $to = $visiting_email[0];
+			  $subject = 'eReception Hub Notification Message';
+			  $addressee = $visiting_name[0];
+			  $from = 'notifications@ereceptionhub.co.uk';
+		  
+		 //Send email notification
+		 //=======================
+		 //
+			  
+		
+		  $txt = '<html><head><title>eReceptionHub Mail</title><style>body { font-family: tahoma, sans-serif; width: 100%; background-color: #ddd;}</style></head><body><img src="https://ereceptionhub.co.uk/storage/images/banner1.jpg" style="margin-top: -10px;"><span style="max-width: 90%; margin: 0px 5% 0px 5%;"><br><br>';
+		  $txt .= 'Hello ';
+		  $txt .= $addressee;
+		  $txt .= ', <br><br> You have a visitor waiting for you. <br><br> Your visitor is ';
+		  $txt .= $name;
+		  $txt .= ', from ';
+		  $txt .= $company;
+		  $txt .= '.<br><br>Thank you,<br><br><b>eReception Hub<br><span style="color: #777;">System Messaging Service</span></b><br><br><br>Need to report this message? Please forward it to admin@ereceptionhub.co.uk with your comments.<br>';
+		  $txt .= '</span></body></html>';
+		  // To send HTML mail, the Content-type header must be set
+		  $headers = 'Content-type: text/html; charset=iso-8859-1' . '\r\n';
+		  //SEND MAIL
+		  mail($to,$subject,$txt,$headers,"-f ".$from); 
+		  
+		  
+		  
+		  
+		  
+		  
       
       } else {
         return redirect('/hub')->with('error', 'You have already signed in today!');
@@ -352,6 +389,36 @@ class EreceptionController extends Controller
         $signin->checker = $checker;
         $signin->sign_out_time = now();
         $signin->save();
+		  
+		  
+		//================================= SEND AN EMAIL NOTIFICATION ==============================
+		  
+			//Email Vars
+		  	  $visiting_email = User::where('id', $who)->pluck('email');
+			  $visiting_name = User::where('id', $who)->pluck('first_name');
+		   	  $to = $visiting_email[0];
+			  $subject = 'eReception Hub ' . $reg_type . ' Notification Message';
+			  $addressee = $visiting_name[0];
+			  $from = 'notifications@ereceptionhub.co.uk';
+		  
+		 //Send email notification
+		 //=======================
+		 //
+			  
+		
+		  $txt = '<html><head><title>eReceptionHub Mail</title><style>body { font-family: tahoma, sans-serif; width: 100%; background-color: #ddd;}</style></head><body><img src="https://ereceptionhub.co.uk/storage/images/banner1.jpg" style="margin-top: -10px;"><span style="max-width: 90%; margin: 0px 5% 0px 5%;"><br><br>';
+		  $txt .= 'Hello ';
+		  $txt .= $addressee;
+		  $txt .= ', <br><br> You have a ';
+		  $txt .= $reg_type;
+		  $txt .= ' waiting for you. <br><br> The courier company is ';
+		  $txt .= $company;
+		  $txt .= '.<br><br>Thank you,<br><br><b>eReception Hub<br><span style="color: #777;">System Messaging Service</span></b><br><br><br>Need to report this message? Please forward it to admin@ereceptionhub.co.uk with your comments.<br>';
+		  $txt .= '</span></body></html>';
+		  // To send HTML mail, the Content-type header must be set
+		  $headers = 'Content-type: text/html; charset=iso-8859-1' . '\r\n';
+		  //SEND MAIL
+		  mail($to,$subject,$txt,$headers,"-f ".$from); 		  
       
       } else {
         return redirect('/hub')->with('error', 'You have already registered your delivery / collection. The recipient has been notified!');
@@ -416,6 +483,36 @@ class EreceptionController extends Controller
         $signin->checker = $checker;
         $signin->sign_out_time = now();
         $signin->save();
+		  
+		  
+		//================================= SEND AN EMAIL NOTIFICATION ==============================
+		  
+			//Email Vars
+		  	  $visiting_email = User::where('id', $who)->pluck('email');
+			  $visiting_name = User::where('id', $who)->pluck('first_name');
+		   	  $to = $visiting_email[0];
+			  $subject = 'eReception Hub Contractor Notification Message';
+			  $addressee = $visiting_name[0];
+			  $from = 'notifications@ereceptionhub.co.uk';
+		  
+		 //Send email notification
+		 //=======================
+		 //
+			  
+		
+		  $txt = '<html><head><title>eReceptionHub Mail</title><style>body { font-family: tahoma, sans-serif; width: 100%; background-color: #ddd;}</style></head><body><img src="https://ereceptionhub.co.uk/storage/images/banner1.jpg" style="margin-top: -10px;"><span style="max-width: 90%; margin: 0px 5% 0px 5%;"><br><br>';
+		  $txt .= 'Hello ';
+		  $txt .= $addressee;
+		  $txt .= ', <br><br> You have a contractor waiting for you. <br><br> Your visitor is ';
+		  $txt .= $name;
+		  $txt .= ', from ';
+		  $txt .= $company;
+		  $txt .= '.<br><br>Thank you,<br><br><b>eReception Hub<br><span style="color: #777;">System Messaging Service</span></b><br><br><br>Need to report this message? Please forward it to admin@ereceptionhub.co.uk with your comments.<br>';
+		  $txt .= '</span></body></html>';
+		  // To send HTML mail, the Content-type header must be set
+		  $headers = 'Content-type: text/html; charset=iso-8859-1' . '\r\n';
+		  //SEND MAIL
+		  mail($to,$subject,$txt,$headers,"-f ".$from); 
       
       } else {
         return redirect('/hub')->with('error', 'You have already signed in today!');
@@ -534,7 +631,8 @@ class EreceptionController extends Controller
           'last_name' => 'required|max:100',
           'email' => 'required|max:100',
           'mobile_no' => 'max:100',
-          'rfid' => 'max:100'
+          'rfid' => 'max:100',
+		  'hrate' => 'required'
       ]);
 
       //Do update here
@@ -546,6 +644,7 @@ class EreceptionController extends Controller
       $name->rfid = $request->input('rfid');
       $name->dob = $request->input('dob');
       $name->gender = $request->input('gender');
+	  $name->hourly_rate = $request->input('hrate');
       $name->save();
 
       return back()->with('success', 'User Credentials Updated');

@@ -118,7 +118,11 @@
         
                         <a href="hue_sat_vis" class="btn btn-primary" style="position: absolute; bottom: 5px; width: 90%; left: 50%; margin-left: -45%;"> <i class="fa fa-paint-brush fa-lg"> </i> {{ __('messages.vis_col') }} </a><br><br>
                     </div></div>
-
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3"><div style="height: 200px;">
+                        <p><span class="badge" style="background-color: #1e7553;">eReceptionHub Message: </span><br>
+       					<div style="width: 100%; height: relative; border: solid 1px #fff; padding: 10px;"> Message Message Message Message Message Message Message Message Message Message... </div> 
+                        <a href="#" data-toggle="modal" data-target="#change_msg" class="btn btn-primary" style="position: absolute; bottom: 5px; width: 90%; left: 50%; margin-left: -45%;"> <i class="fa fa-comment fa-lg"> </i> {{ __('messages.msg') }} </a><br><br>
+                    </div></div>
 
 
                 </div>
@@ -264,4 +268,42 @@
         document.getElementById('textInput').value=val; 
     }
 </script>
+
+
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="change_msg">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-info">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" style="color: #333;">Change Hub Message</h4>
+        </div>
+        <div class="modal-body">
+            <center>
+            <form action="{{ route('change.msg') }}" method="post">
+                {{ csrf_field()}}
+                <div class="form-group">
+                    <label style="color: #333;">Enter your message text below: </label>
+					@if(count($layout ?? '') > 0)
+                            @foreach($layout as $l)
+								<textarea name="hub_msg" style="white-space: pre-wrap;" class="form-control" rows="6" required> {{ $l->hub_msg }} </textarea>
+								<br>
+								<label style="color: #333;">Display Message: (toggle on / off)</label>
+								@if($l->hub_msg_ctrl == 1)
+									<input type="checkbox" name="hub_msg_ctrl" value="1" checked>
+								@else 
+									<input type="checkbox" name="hub_msg_ctrl" value="1">
+								@endif
+							@endforeach
+					@endif
+                </div>
+                <button type="submit" name="submit" class="btn btn-primary">
+                    <i class="fa fa-comment fa-lg"></i> Update Hub Message
+                </button>
+            </form>
+            </center>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 @endsection

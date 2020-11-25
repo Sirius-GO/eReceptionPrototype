@@ -13,7 +13,6 @@ use App\Layout;
 use App\FireDrill;
 use App\FireTest;
 
-
 class PagesController extends Controller
 {
     /**
@@ -43,8 +42,9 @@ class PagesController extends Controller
     public function hub(){
 
         $company = Company::WHERE('id', auth()->user()->company_id)->get();
+		$layout = Layout::WHERE('id', auth()->user()->company_id)->get();
 
-        return view('pages.hub')->with('company', $company);
+        return view('pages.hub')->with('company', $company)->with('layout', $layout);
     }
 
     //sign_in_options
@@ -1564,8 +1564,8 @@ class PagesController extends Controller
 			echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=Windows-1252\">";
 			echo '<br /><br />';
 			echo '<body style="background-color: #ffffff;">';
-			echo '<br><br><table border="1" style="font-family: tahoma, sans-serif; font-size:12px;">';
-				echo '<tr style="background-color: #ffff00; font-size: 15px;"><td colspan="14"> <b>Report Date Range - From: </b> ' . $sd . '  <b>To: </b>' . $ed . '</td></tr>';
+			echo '<table><tr style="background-color: #ffff00; font-size: 15px;"><td colspan="6"><b>Report Date Range - From: </b> ' . $sd . '  <b>To: </b>' . $ed . '</td></tr></table>';
+			echo '<table border="1" style="font-family: tahoma, sans-serif; font-size:12px;">';
 			echo '<tr>';
 			echo '<td bgcolor="#1b95cd" style="width:60px; vertical-align:middle;" align="center"><b>ID</b></td>';
 			echo '<td bgcolor="#1b95cd" style="width:150px; vertical-align:middle;"align="center"><b>Name</b></td>';
@@ -1588,6 +1588,7 @@ class PagesController extends Controller
 			echo '<td bgcolor="#1b95cd" style="width:70px; vertical-align:middle;"align="center"><b>Out Time</b></td>';
 			echo '<td bgcolor="#1b95cd" style="width:140px; vertical-align:middle;"align="center"><b>Time On-site (D:H:M:S)</b></td>';
 			if($rt == 'Hourly_Paid'){
+				echo '<td bgcolor="#1b95cd" style="width:80px; vertical-align:middle;"align="center"><b> Hourly Rate</b></td>';
 		    	echo '<td bgcolor="#1b95cd" style="width:80px; vertical-align:middle;"align="center"><b>Earnings</b></td>';
 			}
 			echo '<br />';
@@ -1613,6 +1614,7 @@ class PagesController extends Controller
 				$ll = number_format(($kk - $jj)/60/60);
 				$m = $ent->hourly_rate;
 				$n = number_format((float)$ll*$m,2);
+				$rate = number_format((float)$m,2);
 				
 				
 				$days = floor($diff / (60 * 60 * 24));
@@ -1646,6 +1648,7 @@ class PagesController extends Controller
 						echo '<td bgcolor="#eeeeee" align="center">' . substr($k, 11, 8) . '</td>';
 						echo '<td bgcolor="#eeeeee" align="center">' . $onsite .'</td>';
 						if($rt == 'Hourly_Paid'){
+							echo '<td bgcolor="#eeeeee" align="center" style="vnd.ms-excel.numberformat:0.00">' . $rate . '</td>';
 							echo '<td bgcolor="#eeeeee" align="center" style="vnd.ms-excel.numberformat:0.00">' . $earnings . '</td>';
 						}
 						echo '<br />';
@@ -1855,6 +1858,152 @@ class PagesController extends Controller
 	//return back()->with('success', 'Your Report has been prepared and downoaded - Double-Click to open. Thank you.');
 
 	}
+
+	
+	public function preregister(){
+
+		return view('pages.preregister');
+
+	}
+
+    public function storePreRegister(Request $request)
+    {
+
+        //if(auth()->user()->user_level < '5'){
+        //   return redirect('/account')->with('error', 'Unauthorised Page');
+        //}
+
+      //Validate the form
+      $this->validate($request, [
+          'first_name' => 'required',
+          'last_name' => 'required',
+          'email' => 'required',
+          'mobile' => 'required',
+		  'company' => 'required',
+          'job_title' => 'required',
+		  'mdate' => 'required',
+		  'mtime' => 'required'
+      ]);
+		
+
+
+              //Create New Registration
+		
+			try{
+
+
+              //User Table
+              $reg = new User;
+              $reg->first_name = $request->input('first_name');
+              $reg->last_name = $request->input('last_name');
+              $reg->user_level = 0;
+              $reg->company_id = 0;
+              $reg->department_id = 0;
+              $reg->avatar = 'avatar.png';
+              $reg->current_status = 'Out';
+              $reg->last_time = time();
+              $reg->reg_id = NULL;
+              $reg->account_id = auth()->user()->account_id;
+              $reg->dob = '0000-00-00';
+              $reg->gender = '';
+              $reg->mobile_no = $request->input('mobile');
+              $reg->job_title = $request->input('job_title');
+              $reg->rfid = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email'));
+              $reg->email = $request->input('email');
+              $reg->email_verified_at = now();
+              $reg->password = bcrypt($request->input('mobile'));
+			  $reg->vis_company = $request->input('company');
+              $reg->save();
+		
+			} catch (\Illuminate\Database\QueryException $e) {
+				$errorCode = $e->errorInfo[1];
+				if($errorCode == 1062){
+
+					$vis_id = User::where('email', $request->input('email'))->pluck('id');
+					$cmp_id = User::where('email', $request->input('email'))->pluck('company_id');
+					
+					
+					if($cmp_id[0] === 0){
+					  //Update Pre Visit Record
+					  $reg = User::Find($vis_id[0]);
+					  $reg->last_time = time();
+					  $reg->account_id = auth()->user()->account_id;
+					  $reg->mobile_no = $request->input('mobile');
+					  $reg->job_title = $request->input('job_title');
+					  $reg->rfid = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email'));
+					  $reg->email = $request->input('email');
+					  $reg->email_verified_at = now();
+					  $reg->password = bcrypt($request->input('mobile'));
+					  $reg->vis_company = $request->input('company');
+					  $reg->save();
+					} else {
+						return back()->with('error', 'You entered a staff members email address. You cannot register a staff member as a visitor.');
+					}
+				}
+            }	
+		
+			//================================== EMAIL CLIENT WITH PRE REGISTRATION DETAILS =====================================
+		  
+			//Email Vars
+			  $company_name = Company::where('id', auth()->user()->company_id)->pluck('company_name');
+			  $company_address = Company::where('id', auth()->user()->company_id)->pluck('ho_address');
+		   	  $to = $request->input('email');
+			  $subject = 'eReception Hub Notification Message from ' . $company_name[0];
+			  $addressee = $request->input('first_name');
+			  $from_mail = User::where('id', auth()->user()->id)->pluck('email');
+			  $from = $from_mail[0];
+		
+			  $mdate = $request->input('mdate');
+			  $mdate2 = strtotime($mdate);
+		      $mdt = date('jS F, Y', $mdate2);
+		
+		      $mtime = $request->input('mtime');
+			  $mtime2 = strtotime($mtime);
+		      $mtm = date('h:i:sa', $mtime2);
+		
+		      $with_name = User::where('id', auth()->user()->id)->pluck('first_name');
+		      $with_name2 = User::where('id', auth()->user()->id)->pluck('last_name');
+			  $wname = $with_name[0] . ' ' . $with_name2[0];
+			  
+			  $qrC = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email'));
+		  
+		 //Send email notification
+		 //=======================
+		 //
+		
+		  $txt = '<html><head><title>eReceptionHub Mail</title><style>body { font-family: tahoma, sans-serif; width: 100%; background-color: #ddd;}</style></head><body><img src="https://ereceptionhub.co.uk/storage/images/banner1.jpg" style="margin-top: -10px;"><span style="max-width: 90%; margin: 0px 5% 0px 5%;"><br><br>'. "\r\n";
+		  $txt .= 'Hello ';
+		  $txt .= $addressee;
+		  $txt .= ', <br><br> You are invited to a meeting with ';
+		  $txt .= $wname;
+		  $txt .= ' at: <br><br><b>'. "\r\n";
+		  $txt .= $company_name[0];
+		  $txt .= '</b>, our address is: <br> ';
+		  $txt .= $company_address[0];
+		  $txt .= '. <br><br>The meeting will be held on ';
+		  $txt .= $mdt;
+		  $txt .= ' at ';
+		  $txt .= $mtm;
+		  $txt .= '.'. "\r\n";
+		  $txt .= '<br><br>On arrival, please click  the <b>Scan In</b> button on our Reception Console and scan the QR code below. You can do this either directly from your smartphone or alternatively you can print this email and scan the printed copy.<br><br>We look forward to seeing you on the day. '. "\r\n";
+		  $txt .= '<br><br><img style="width: 100px;" src="https://ereceptionhub.co.uk/qr-code.php?text=';
+		  $txt .= $qrC;
+		  $txt .= '&size=200" alt="QR Code">';
+		  $txt .= '<br><br>Thank you,<br><br><b>eReception Hub<br><span style="color: #777;">System Messaging Service</span></b>';
+		  $txt .= '<br><br><b>PP ';
+		  $txt .= $wname;
+		  $txt .= '</b><br>';		  
+		  $txt .= '<br><br><br>Need to report this message? Please forward it to admin@ereceptionhub.co.uk with your comments.<br>'. "\r\n";
+		  $txt .= '</span></body></html>';
+		
+		  // To send HTML mail, the Content-type header must be set
+		  $headers = 'Content-type: text/html; charset=iso-8859-1' . '\r\n';
+		  //SEND MAIL
+		  mail($to,$subject,$txt,$headers,"-f ".$from); 
+
+          return back()->with('success', 'Pre Registration Successful');
+
+    }
 
 
 }

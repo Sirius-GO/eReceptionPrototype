@@ -361,7 +361,7 @@ $layouts = Layout::where('company_id', auth()->user()->company_id)->take(1)->get
         @include('inc.messages')
         <div class="fade-in">
             @yield('content')
-            <br><br><br><br><br>
+            <br><br>
         </div>
         @include('inc.footer')
     </div>

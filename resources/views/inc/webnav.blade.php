@@ -37,6 +37,7 @@
                                     <a class="dropdown-item" href="../../account"> <i class="fa fa-user"> </i> My Account </a>
                                     @if(auth()->user()->user_level > '4')
                                         <a class="dropdown-item" href="../../administration"> <i class="fa fa-user-plus"> </i> User Administration </a>
+										<a class="dropdown-item" href="../../preregister"> <i class="fa fa-id-card"> </i> Pre Register a Visitor </a>
                                         <a class="dropdown-item" href="../../firesafety"> <i class="fa fa-fire-extinguisher"> </i> Fire Safety </a>
 										<a class="dropdown-item" href="../../reports"> <i class="fa fa-folder"> </i> Reports </a>
                                     @endif

@@ -37,6 +37,10 @@ Route::get('/reports', 'PagesController@reports');
 Route::post('reports', ['as' => 'download.report', 'uses' => 'PagesController@downloadReport']);
 Route::post('reports2', ['as' => 'download.failed', 'uses' => 'PagesController@downloadFailed']);
 Route::post('reports3', ['as' => 'download.in', 'uses' => 'PagesController@downloadSignedIn']);
+Route::get('/preregister', 'PagesController@preregister');
+Route::post('preregister', ['as' => 'pre.register', 'uses' => 'PagesController@storePreRegister']);
+
+
 
 
 //DailyChecklist
@@ -118,7 +122,7 @@ Route::post('/settings', ['as' => 'environment.wallpaperstore', 'uses' => 'Envir
 Route::post('colourpick', ['as' => 'colour.select', 'uses' => 'EnvironmentController@colourSelect']);
 Route::post('choice', ['as' => 'environment.choice', 'uses' => 'EnvironmentController@choiceStore']);
 Route::post('txtchange', ['as' => 'txt.pick', 'uses' => 'EnvironmentController@txtChange']);
-
+Route::post('changeMsg', ['as' => 'change.msg', 'uses' => 'EnvironmentController@changeMsg']);
 
 //Logout
 Route::get('logout', 'Auth\LoginController@logout');

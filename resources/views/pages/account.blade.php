@@ -87,6 +87,16 @@ use App\Departments;
                                 {{ auth()->user()->current_status }}<br> 
                             </p>
                         </div>
+						<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="min-height: 160px; border-bottom: dotted 1px;">
+                            <p><span class="badge" style="background-color: #1e7553;">Hourly Rate: </span><br>
+								@if( auth()->user()->hourly_rate === '0.00')
+									Salaried Staff<br>
+								@else 
+                                	£{{ auth()->user()->hourly_rate }}<br> 
+								@endif
+                            </p>
+                        </div>
+						 
                         </div>
 
                         <br>
@@ -317,6 +327,8 @@ use App\Departments;
                     <option value="Gender Diverse"> Gender Diverse </option>
                     <option value="Non Binary"> Non Binary </option>
                 </select>
+				<label  style="color: #333;">Hourly rate (For Salaried Staff set to 0.00)</label>
+                <input type="text" class="form-control" name="hrate" value="{{ auth()->user()->hourly_rate ? auth()->user()->hourly_rate : '' }}">	
                 </div>
                 <button type="submit" name="submit" class="btn btn-success">
                     <i class="fa fa-pencil fa-lg"></i> Update

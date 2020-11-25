@@ -1,7 +1,7 @@
 <!-- Footer -->
 <footer class="text-center">
-    <br>
     <div class="row">
+		<br>
         <div class="col-4 col-md-4 col-lg-4">
             <i class="fa fa-facebook-official fa-lg"></i>
             <i class="fa fa-instagram fa-lg"></i>

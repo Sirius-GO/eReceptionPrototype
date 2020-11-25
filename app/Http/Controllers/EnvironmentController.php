@@ -226,7 +226,28 @@ return redirect('/settings')->with('success', 'Visitor Pass Colours Successfully
       return redirect('/settings')->with('success', 'Hub Text Settings Successfully Updated.');
   }
 
+  public function changeMsg(Request $request){
+	  //Validate the form
+      $this->validate($request, [
+        'hub_msg' => 'required'
+        ]);
+	
+	  $company_id = auth()->user()->company_id;
 
+      $layout = Layout::where('company_id', $company_id)->take(1)->get();
+      foreach($layout as $l){
+          $id = $l->id;
 
+      $msg = Layout::Find($id);
+      $msg->hub_msg = $request->input('hub_msg');
+      $msg->hub_msg_ctrl = $request->input('hub_msg_ctrl');
+      $msg->save();
+      }
+	  
+	  return redirect('/settings')->with('success', 'Hub Message Settings Successfully Updated.');
+  }
+	
+	
+	
 
 }

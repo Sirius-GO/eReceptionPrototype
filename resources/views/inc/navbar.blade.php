@@ -39,7 +39,8 @@
                                 <li><a href="../../register_in_out"> <i class="fa fa-list"> </i> Register </a><li>
                                 <li><a href="../../account"> <i class="fa fa-user"> </i> My Account </a><li>
                                 @if(auth()->user()->user_level > '4')
-                                    <li><a href="../../administration"> <i class="fa fa-user-plus"> </i> User Administration </a><li>                                        
+                                    <li><a href="../../administration"> <i class="fa fa-user-plus"> </i> User Administration </a><li>   
+									<li><a href="../../preregister"> <i class="fa fa-id-card"> </i> Pre Register a Visitor </a><li> 
                                     <li><a href="../../firesafety"> <i class="fa fa-fire-extinguisher"> </i> Fire Safety </a><li>
 									<li><a href="../../reports"> <i class="fa fa-folder"> </i> Reports </a><li>
                                 @endif

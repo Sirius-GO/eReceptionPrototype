@@ -44,5 +44,7 @@ return [
     'subscriptions'    => 'Subscriptions',
     'checkout_success' => 'Checkout - Transaction Successful',
     'checkout_cancel'  => 'Checkout - Transaction Cancelled',
-	'reports'  		   => 'Reports'
+	'reports'  		   => 'Reports',
+	'msg'              => 'Change Message',
+	'preregister'      => 'Pre-Register a Visitor'
 ];

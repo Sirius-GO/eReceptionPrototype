@@ -398,5 +398,10 @@ class RegistrationsController extends Controller
 
         return redirect('account');
     }
+	
+	
+	
+	
+	
 
 }
