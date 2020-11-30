@@ -9,6 +9,7 @@ use App\Departments;
 use App\Location;
 use App\Register;
 use App\User;
+use App\Previsitor;
 use App\Layout;
 use App\FireDrill;
 use App\FireTest;
@@ -1451,6 +1452,7 @@ class PagesController extends Controller
 					->where('hourly_rate', '>', '0')
 					
 					->orderby('users.id', 'asc')
+					->orderby('registers.id', 'asc')
 					->get();
 			}
 			if($rt == 'All_Staff'){
@@ -1573,6 +1575,10 @@ class PagesController extends Controller
 			echo '<tr>';
 			echo '<td bgcolor="#1b95cd" style="width:60px; vertical-align:middle;" align="center"><b>ID</b></td>';
 			echo '<td bgcolor="#1b95cd" style="width:150px; vertical-align:middle;"align="center"><b>Name</b></td>';
+			if($rt == 'Hourly_Paid'){
+				echo '<td bgcolor="#1b95cd" style="width:100px; vertical-align:middle;"align="center"><b>Clock Number</b></td>';
+				echo '<td bgcolor="#1b95cd" style="width:100px; vertical-align:middle;"align="center"><b>Payroll Number</b></td>';
+			}
 			if($rt != 'Hourly_Paid'){
 				echo '<td bgcolor="#1b95cd" style="width:100px; vertical-align:middle;"align="center"><b>Reg Type</b></td>';
 			}
@@ -1619,6 +1625,8 @@ class PagesController extends Controller
 				$m = $ent->hourly_rate;
 				$n = number_format((float)$ll*$m,2);
 				$rate = number_format((float)$m,2);
+				$cn = $ent->clock_no;
+				$pn = $ent->payroll_no;
 				
 				
 				$days = floor($diff / (60 * 60 * 24));
@@ -1639,6 +1647,8 @@ class PagesController extends Controller
 				
 				echo '<tr>';
 						echo '<td bgcolor="#eeeeee" align="center">' . $a . '</td><td bgcolor="#eeeeee" align="left">' . $b . '</td>';
+						echo ($rt === 'Hourly_Paid')?'<td bgcolor="#eeeeee"  align="center">' . $cn . '</td>':'';
+						echo ($rt === 'Hourly_Paid')?'<td bgcolor="#eeeeee"  align="center">' . $pn . '</td>':'';
 						echo ($rt != 'Hourly_Paid')?'<td bgcolor="#eeeeee">' . $c . '</td>':'';
 						echo '<td bgcolor="#eeeeee" align="center">' . $d . '</td>';
 						echo '<td bgcolor="#eeeeee" align="left">' . $e . '</td>';
@@ -1873,10 +1883,6 @@ class PagesController extends Controller
     public function storePreRegister(Request $request)
     {
 
-        //if(auth()->user()->user_level < '5'){
-        //   return redirect('/account')->with('error', 'Unauthorised Page');
-        //}
-
       //Validate the form
       $this->validate($request, [
           'first_name' => 'required',
@@ -1890,14 +1896,16 @@ class PagesController extends Controller
       ]);
 		
 			$mdate = $request->input('mdate');
-
-              //Create New Registration
+			$mtime = $request->input('mtime');
+	
+		
+            //Create New Visitor Pre Registration
 		
 			try{
 
 
               //User Table
-              $reg = new User;
+              $reg = new Previsitor;
               $reg->first_name = $request->input('first_name');
               $reg->last_name = $request->input('last_name');
               $reg->user_level = 0;
@@ -1912,33 +1920,35 @@ class PagesController extends Controller
               $reg->gender = '';
               $reg->mobile_no = $request->input('mobile');
               $reg->job_title = $request->input('job_title');
-              $reg->rfid = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email').'|'. $mdate);
+              $reg->rfid = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email').'|'. $mdate .'|'. $mtime);
               $reg->email = $request->input('email');
               $reg->email_verified_at = now();
               $reg->password = bcrypt($request->input('mobile'));
 			  $reg->vis_company = $request->input('company');
+			  $reg->car_reg = $request->input('car_reg');
               $reg->save();
 		
 			} catch (\Illuminate\Database\QueryException $e) {
 				$errorCode = $e->errorInfo[1];
 				if($errorCode == 1062){
 
-					$vis_id = User::where('email', $request->input('email'))->pluck('id');
-					$cmp_id = User::where('email', $request->input('email'))->pluck('company_id');
+					$vis_id = Previsitor::where('email', $request->input('email'))->pluck('id');
+					$cmp_id = Previsitor::where('email', $request->input('email'))->pluck('company_id');
 					
 					
 					if($cmp_id[0] === 0){
 					  //Update Pre Visit Record
-					  $reg = User::Find($vis_id[0]);
+					  $reg = Previsitor::Find($vis_id[0]);
 					  $reg->last_time = time();
 					  $reg->account_id = auth()->user()->account_id;
 					  $reg->mobile_no = $request->input('mobile');
 					  $reg->job_title = $request->input('job_title');
-					  $reg->rfid = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email').'|'. $mdate);
+					  $reg->rfid = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email').'|'. $mdate .'|'. $mtime);
 					  $reg->email = $request->input('email');
 					  $reg->email_verified_at = now();
 					  $reg->password = bcrypt($request->input('mobile'));
 					  $reg->vis_company = $request->input('company');
+					  $reg->car_reg = $request->input('car_reg');
 					  $reg->save();
 					} else {
 						return back()->with('error', 'You entered a staff members email address. You cannot register a staff member as a visitor.');
@@ -1969,7 +1979,7 @@ class PagesController extends Controller
 		      $with_name2 = User::where('id', auth()->user()->id)->pluck('last_name');
 			  $wname = $with_name[0] . ' ' . $with_name2[0];
 			  
-			  $qrC = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email').'|'. $mdate);
+			  $qrC = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email').'|'. $mdate .'|'. $mtime);
 		  
 		 //Send email notification
 		 //=======================

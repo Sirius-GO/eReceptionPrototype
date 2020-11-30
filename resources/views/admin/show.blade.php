@@ -75,7 +75,27 @@
                                                 if($reg->user_level === 1){ echo 'Staff User';}
                                             ?>
                                         </h6>
-
+                                        <h6><span class="badge" style="background-color: #1e7553;">Hourly Rate / Salaried: </span>
+                                            @if($reg->hourly_rate > 0)
+												{{ $reg->hourly_rate }}
+											@else 
+												Salaried Staff
+											@endif
+                                        </h6>
+                                        <h6><span class="badge" style="background-color: #1e7553;">Clock Number: </span>
+											@if($reg->clock_no)
+                                            {{ $reg->clock_no }}
+											@else 
+												Not Set
+											@endif											
+                                        </h6>										
+                                        <h6><span class="badge" style="background-color: #1e7553;">Payroll Number: </span>
+											@if($reg->payroll_no)
+                                            {{ $reg->payroll_no }}
+											@else 
+												Not Set
+											@endif											
+                                        </h6>										
                                     </div>
                             @endforeach
                         </div>

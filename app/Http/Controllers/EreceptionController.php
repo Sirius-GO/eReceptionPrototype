@@ -9,6 +9,7 @@ use App\Company;
 use App\Location;
 use App\Departments;
 use App\Register;
+use App\Previsitor;
 use DB;
 
 class EreceptionController extends Controller
@@ -146,6 +147,13 @@ class EreceptionController extends Controller
       return redirect('/hub')->with('success', 'You have signed in successfully!');
 
     }
+	
+	
+
+	
+	
+	
+	
 
     public function scan_in(Request $request)
     {
@@ -158,6 +166,15 @@ class EreceptionController extends Controller
         $loc = '0';
       }
 
+		//Determine if a previsitor or member of staff
+		$userinfocheck = User::where('rfid', $id)->get('rfid');
+		if(count($userinfocheck) > 0){
+			// Do Nothing
+		} else {
+			return $this->visitor_scan_in($id, $t, $loc);
+		}
+		
+		
       if(date("H") < 12){
  
         $salutation = "Good morning";
@@ -188,17 +205,12 @@ class EreceptionController extends Controller
 		$staff_id = $u->account_id;
       }
 
-		if($cid > 0){
+
 		  $company = Company::where('id', $cid)->take(1)->get();
 		  foreach($company as $c){
 			$cname = $c->company_name;
 		  }
-		} else {
-			$cname = $vis_com;
-		}
-		
-		
-		
+
       if($check_status === 'Out'){
         //Insert new record into registers
         $signin =  new Register;
@@ -222,10 +234,87 @@ class EreceptionController extends Controller
         $signin->checker = $checker;
         $signin->sign_out_time = now();
         $signin->save();
+
+        $reg = Register::orderby('id', 'desc')->where('user_id', $uid)->take(1)->get();
+        foreach($reg as $r){
+          $reg_id = $r->id;
+        }
+		  
+        //Update users table for user($id) - current_status and last_time
+        $users = User::find($uid);
+        $users->current_status = 'In';
+        $users->last_time = time();
+        $users->reg_id = $reg_id;
+        $users->save();
+      
+      } else {
+        return redirect('/hub')->with('error', $salutation . ' ' . $fname . ', you are already signed in!');
+      }
+
+      //Redirect back to home ready for the next users to sign in or out
+      	return redirect('/hub')->with('success',  $salutation . ' ' . $fname . ', you have signed in successfully!');
+
+    }
+
+
+	
+	
+	public function visitor_scan_in($id, $t, $loc)
+    {
+      if(date("H") < 12){
+ 
+        $salutation = "Good morning";
+    
+      }elseif(date("H") > 11 && date("H") < 18){
+    
+        $salutation = "Good afternoon";
+    
+      }elseif(date("H") > 17){
+    
+        $salutation = "Good evening";
+    
+      }
+  
+      //Check the previsitor table for the existence of the QR Code in the RFID column
+      $vis_info = Previsitor::where('rfid', $id)->take(1)->get();
+	  if(count($vis_info) > 0){
+		  foreach($vis_info as $v){
+			$name = $v->first_name . ' ' . $v->last_name;
+			$checker = $id . ' | ' . $name . ' | ' .  substr($t, 0 , 10);
+			$img = $v->avatar;
+			$cid = $v->company_id;
+			$uid = $v->id;
+			$fname = $v->first_name;
+			//Are you currently signed in?
+			$check_status = $v->current_status;
+			$vis_com = $v->vis_company;
+			$staff_id = $v->account_id; // Who is being visited
+			$car_reg = $v->car_reg;
+		  }
+	  } else {
+		   return redirect('/hub')->with('error', 'The scanned QR Code does not exist on our systems.');
+	  }
+		
+      if($check_status === 'Out'){
+        //Insert new record into registers
+        $signin =  new Register;
+        $signin->user_id = $uid;
+        $signin->name = $name;
+        $signin->reg_type = 'Visitor';
+        $signin->current_status = 'In';
+        $signin->sign_out_type = 'SCAN';
+        $signin->who = $staff_id;
+        $signin->location_id = $loc;
+        $signin->car_reg = $car_reg;
+        $signin->from_company = $vis_com;
+        $signin->company_id = auth()->user()->company_id;
+        $signin->img = $img;
+        $signin->checker = $checker;
+        $signin->sign_out_time = now();
+        $signin->save();
 		  
 		  
 		  
-		if($cid === 0){
 			//Inform Staff Member of Visitor Arrival
 			$staff_fn = User::where('id', $staff_id)->pluck('first_name');
 			$staff_ln = User::where('id', $staff_id)->pluck('last_name');
@@ -247,42 +336,35 @@ class EreceptionController extends Controller
 		  $txt .= ', <br><br> You have a visitor waiting for you. <br><br> Your visitor is ';
 		  $txt .= $name;
 		  $txt .= ', from ';
-		  $txt .= $cname;
+		  $txt .= $vis_com;
 		  $txt .= '.<br><br>Thank you,<br><br><b>eReception Hub<br><span style="color: #777;">System Messaging Service</span></b><br><br><br>Need to report this message? Please forward it to admin@ereceptionhub.co.uk with your comments.<br>';
 		  $txt .= '</span></body></html>';
 		  // To send HTML mail, the Content-type header must be set
 		  $headers = 'Content-type: text/html; charset=iso-8859-1' . '\r\n';
 		  //SEND MAIL
 		  mail($to,$subject,$txt,$headers,"-f ".$from); 
-			
-		}
 
 
         $reg = Register::orderby('id', 'desc')->where('user_id', $uid)->take(1)->get();
         foreach($reg as $r){
           $reg_id = $r->id;
         }
-        //Update users table for user($id) - current_status and last_time
-        $users = User::find($uid);
-        $users->current_status = 'In';
-        $users->last_time = time();
-        $users->reg_id = $reg_id;
-        $users->save();
+        //Update Previsitor table for visitor($id) - current_status and last_time
+        $vis = Previsitor::find($uid);
+        $vis->current_status = 'In';
+        $vis->last_time = time();
+        $vis->reg_id = $reg_id;
+        $vis->save();
       
       } else {
         return redirect('/hub')->with('error', $salutation . ' ' . $fname . ', you are already signed in!');
       }
 
-      //Redirect back to home ready for the next users to sign in or out
-	  if($cid > 0){
-      	return redirect('/hub')->with('success',  $salutation . ' ' . $fname . ', you have signed in successfully!');
-	  } else {
 		 return redirect('/hub')->with('success',  $salutation . ' ' . $fname . ', you have signed in successfully and ' . $staff . ' has been informed of your arrival.'); 
-	  }
-
     }
-
-
+	
+	
+	
     public function visitor_sign_in(Request $request)
     {
 
@@ -368,11 +450,6 @@ class EreceptionController extends Controller
 		  $headers = 'Content-type: text/html; charset=iso-8859-1' . '\r\n';
 		  //SEND MAIL
 		  mail($to,$subject,$txt,$headers,"-f ".$from); 
-		  
-		  
-		  
-		  
-		  
 		  
       
       } else {
@@ -626,22 +703,39 @@ class EreceptionController extends Controller
     
       }
 
+		//Determine if visitor or staff
+
       $user_info = User::where('rfid', $id)->take(1)->get();
+	  
+		
+		if(count($user_info)>0){
+		  foreach($user_info as $u){
+			$reg_id = $u->reg_id;
+			$fname = $u->first_name;
+			$x = 1;
+		  }
+		} else {
+		  $vis_info = Previsitor::where('rfid', $id)->take(1)->get();
+		  foreach($vis_info as $v){
+			$reg_id = $v->reg_id;
+			$fname = $v->first_name;
+			$x = 0;
+		  }
+		}
 
-      foreach($user_info as $u){
-        $reg_id = $u->reg_id;
-        $fname = $u->first_name;
-      }
-
-
+		
       $reginfo = Register::where('id', $reg_id)->take(1)->get();
 
-      foreach($reginfo as $u){
-        //Are you currently signed out?
-        $check_status = $u->current_status;
-        $user_id = $u->user_id;
-      }
-
+	  if(count($reginfo)>0){
+		  foreach($reginfo as $u){
+			//Are you currently signed out?
+			$check_status = $u->current_status;
+			$user_id = $u->user_id;
+		  }
+	  } else {
+		  return redirect('/hub')->with('error', 'You either previously signed out or the QR Code doesn\'t exist.');
+	  }
+		
       if($check_status === 'In'){
         //Update registers
         $signout = Register::find($reg_id);
@@ -649,8 +743,8 @@ class EreceptionController extends Controller
         $signout->sign_out_type = 'SCAN';
         $signout->sign_out_time = now();
         $signout->save();
-
-        if($user_id > 0){
+  
+		if($user_id > 0 && $x === 1){
           //Update users table for user($id) - current_status and last_time
           $users = User::find($user_id);
           $users->current_status = 'Out';
@@ -658,9 +752,18 @@ class EreceptionController extends Controller
           $users->reg_id = $reg_id;
           $users->save();
         }
+		  
+		if($user_id > 0 && $x === 0){
+          //Update users table for user($id) - current_status and last_time
+          $users = Previsitor::find($user_id);
+          $users->current_status = 'Out';
+          $users->last_time = time();
+          $users->reg_id = $reg_id;
+          $users->save();
+        }
         
       } else {
-        return redirect('/hub')->with('error', $salutation . ' ' . $fname . ', you are already signed out!');
+        return redirect('/hub')->with('error', $salutation . ' ' . $fname . ', you are already signed out!' . $reg_id.' ' .$user_id);
       }
 
       //Redirect back to home ready for the next users to sign in or out
@@ -677,8 +780,7 @@ class EreceptionController extends Controller
           'last_name' => 'required|max:100',
           'email' => 'required|max:100',
           'mobile_no' => 'max:100',
-          'rfid' => 'max:100',
-		  'hrate' => 'required'
+          'rfid' => 'max:100'
       ]);
 
       //Do update here
@@ -690,7 +792,6 @@ class EreceptionController extends Controller
       $name->rfid = $request->input('rfid');
       $name->dob = $request->input('dob');
       $name->gender = $request->input('gender');
-	  $name->hourly_rate = $request->input('hrate');
       $name->save();
 
       return back()->with('success', 'User Credentials Updated');

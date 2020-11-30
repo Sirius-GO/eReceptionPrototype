@@ -66,7 +66,21 @@
                                         @endforeach  
                                 </select>
                             </div>        
-                        </div>      
+                        </div>  
+					    <div class="row">
+							<div class="col-12 col-12-sm col-md-4 col-lg-4 col-xl-4">
+								{{Form::label('hourly_rate', 'Hourly Rate')}}
+								{{Form::text('hourly_rate', $registration->hourly_rate, ['class' => 'form-control', 'placeholder' => 'Hourly Rate', 'maxlength' => '7'])}}
+							</div>
+							<div class="col-12 col-12-sm col-md-4 col-lg-4 col-xl-4">
+								{{Form::label('clock_no', 'Clock Number')}}
+								{{Form::text('clock_no', $registration->clock_no, ['class' => 'form-control', 'placeholder' => 'Clock Number (Max 50 Chars)', 'maxlength' => '50'])}}
+							</div>
+							<div class="col-12 col-12-sm col-md-4 col-lg-4 col-xl-4">
+								{{Form::label('payroll_no', 'Payroll Number')}}
+								{{Form::text('payroll_no', $registration->payroll_no, ['class' => 'form-control', 'placeholder' => 'Payroll Number (Max 50 Chars)', 'maxlength' => '50'])}}
+							</div>
+						</div>
                         <div class="row">
                             <div class="col-12">
                                 <br>

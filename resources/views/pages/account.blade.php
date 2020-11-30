@@ -96,6 +96,26 @@ use App\Departments;
 								@endif
                             </p>
                         </div>
+						<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="min-height: 160px; border-bottom: dotted 1px;">
+                            <p><span class="badge" style="background-color: #1e7553;">Clock Number: </span><br>
+								@if(!auth()->user()->clock_no)
+									Not Set<br>
+								@else 
+                                	{{ auth()->user()->clock_no }}<br> 
+								@endif
+                            </p>
+                        </div>
+						<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="min-height: 160px; border-bottom: dotted 1px;">
+                            <p><span class="badge" style="background-color: #1e7553;">Payroll Number: </span><br>
+								@if(!auth()->user()->payroll_no)
+									Not Set<br>
+								@else 
+                                	{{ auth()->user()->payroll_no }}<br> 
+								@endif
+                            </p>
+                            </p>
+                        </div>						 
+						 
 						 
                         </div>
 
@@ -326,9 +346,7 @@ use App\Departments;
                     <option value="Female"> Female </option>
                     <option value="Gender Diverse"> Gender Diverse </option>
                     <option value="Non Binary"> Non Binary </option>
-                </select>
-				<label  style="color: #333;">Hourly rate (For Salaried Staff set to 0.00)</label>
-                <input type="text" class="form-control" name="hrate" value="{{ auth()->user()->hourly_rate ? auth()->user()->hourly_rate : '' }}">	
+                </select>	
                 </div>
                 <button type="submit" name="submit" class="btn btn-success">
                     <i class="fa fa-pencil fa-lg"></i> Update

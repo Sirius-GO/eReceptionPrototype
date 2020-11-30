@@ -98,6 +98,9 @@ class RegistrationsController extends Controller
               $reg->gender = $request->input('gender');
               $reg->mobile_no = $request->input('mobile_no');
               $reg->job_title = $request->input('job_title');
+			  $reg->hourly_rate = $request->input('hourly_rate');
+			  $reg->clock_no = $request->input('clock_no');
+		      $reg->payroll_no = $request->input('payroll_no');
               $reg->rfid = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email'));
               $reg->email = $request->input('email');
               $reg->email_verified_at = now();
@@ -273,7 +276,7 @@ class RegistrationsController extends Controller
             $reg->user_level = $request->input('user_level');
             $reg->company_id = auth()->user()->company_id;
             $reg->department_id = $request->input('department_id');
-            $reg->avatar = 'avatar.png';
+            //$reg->avatar = 'avatar.png';
             //$reg->current_status = 'Out';
             $reg->last_time = time();
             $reg->account_id = auth()->user()->account_id;
@@ -281,6 +284,9 @@ class RegistrationsController extends Controller
             $reg->gender = $request->input('gender');
             $reg->mobile_no = $request->input('mobile_no');
             $reg->job_title = $request->input('job_title');
+			$reg->hourly_rate = $request->input('hourly_rate');
+			$reg->clock_no = $request->input('clock_no');
+			$reg->payroll_no = $request->input('payroll_no');		
             $reg->rfid = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email'));
             $reg->email = $request->input('email');
             $reg->email_verified_at = now();

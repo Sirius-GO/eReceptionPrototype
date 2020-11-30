@@ -18,13 +18,13 @@ class DocumentsController extends Controller
 	public function showDoc(){
 		
 		//	get data
-		$docs = Document::where('company_id', auth()->user()->company_id)->get();
+		$docs = Document::where('company_id', auth()->user()->company_id)->orderby('doc_no', 'asc')->get();
 		
 		// return page
 		return view('pages.documents')->with('docs', $docs);
 	}	
 	
-    public function createdDoc(Request $request){
+    public function createDoc(Request $request){
 		//Validate the form
 		  $this->validate($request, [
 			'doc_no' => 'required',
@@ -38,6 +38,7 @@ class DocumentsController extends Controller
         $doc =  new Document;
 		$doc->company_id = auth()->user()->company_id;
         $doc->user_id = auth()->user()->id;
+		$doc->doc_no = $request->input('doc_no');
         $doc->title = $request->input('title');
         $doc->content = $request->input('content');
 		$doc->sig_req = $request->input('sig_req');
@@ -64,6 +65,7 @@ class DocumentsController extends Controller
         $doc =  Document::find($id);
 		$doc->company_id = auth()->user()->company_id;
         $doc->user_id = auth()->user()->id;
+		$doc->doc_no = $request->input('doc_no');
         $doc->title = $request->input('title');
         $doc->content = $request->input('content');
 		$doc->sig_req = $request->input('sig_req');
