@@ -44,7 +44,8 @@ return [
     'checkout_cancel'  => 'Til - Canslo Trafodiad',
 	'reports'  		   => 'Adroddiadau',
 	'msg'              => 'Newid Neges',
-	'preregister'      => 'Rhag-gofrestru Ymwelydd'
+	'preregister'      => 'Rhag-gofrestru Ymwelydd',
+	'documents'        => 'Dogfennau Hwb ac E-Arwydd'
 
 
 

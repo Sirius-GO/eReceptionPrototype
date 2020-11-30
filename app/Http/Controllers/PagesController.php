@@ -1556,6 +1556,10 @@ class PagesController extends Controller
 		//return $entries;
 
 			$dt = date('dmY');
+		    $sd1 = strtotime($sd);
+			$sd2 = date('jS F, Y H:i:sa', $sd1);
+		    $ed1 = strtotime($ed);
+			$ed2 = date('jS F, Y H:i:sa', $ed1);
 
 			header("Content-Type: application/vnd.ms-excel;");
 			header("Content-disposition: attachment; filename=$rt.$dt.xls");
@@ -1564,7 +1568,7 @@ class PagesController extends Controller
 			echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=Windows-1252\">";
 			echo '<br /><br />';
 			echo '<body style="background-color: #ffffff;">';
-			echo '<table><tr style="background-color: #ffff00; font-size: 15px;"><td colspan="6"><b>Report Date Range - From: </b> ' . $sd . '  <b>To: </b>' . $ed . '</td></tr></table>';
+			echo '<table><tr style="background-color: #ffff00; font-size: 15px;"><td colspan="6"><b>Report Date Range - From: </b> ' . $sd2 . '  <b>To: </b>' . $ed2 . '</td></tr></table>';
 			echo '<table border="1" style="font-family: tahoma, sans-serif; font-size:12px;">';
 			echo '<tr>';
 			echo '<td bgcolor="#1b95cd" style="width:60px; vertical-align:middle;" align="center"><b>ID</b></td>';
@@ -1885,7 +1889,7 @@ class PagesController extends Controller
 		  'mtime' => 'required'
       ]);
 		
-
+			$mdate = $request->input('mdate');
 
               //Create New Registration
 		
@@ -1908,7 +1912,7 @@ class PagesController extends Controller
               $reg->gender = '';
               $reg->mobile_no = $request->input('mobile');
               $reg->job_title = $request->input('job_title');
-              $reg->rfid = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email'));
+              $reg->rfid = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email').'|'. $mdate);
               $reg->email = $request->input('email');
               $reg->email_verified_at = now();
               $reg->password = bcrypt($request->input('mobile'));
@@ -1930,7 +1934,7 @@ class PagesController extends Controller
 					  $reg->account_id = auth()->user()->account_id;
 					  $reg->mobile_no = $request->input('mobile');
 					  $reg->job_title = $request->input('job_title');
-					  $reg->rfid = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email'));
+					  $reg->rfid = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email').'|'. $mdate);
 					  $reg->email = $request->input('email');
 					  $reg->email_verified_at = now();
 					  $reg->password = bcrypt($request->input('mobile'));
@@ -1965,7 +1969,7 @@ class PagesController extends Controller
 		      $with_name2 = User::where('id', auth()->user()->id)->pluck('last_name');
 			  $wname = $with_name[0] . ' ' . $with_name2[0];
 			  
-			  $qrC = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email'));
+			  $qrC = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email').'|'. $mdate);
 		  
 		 //Send email notification
 		 //=======================

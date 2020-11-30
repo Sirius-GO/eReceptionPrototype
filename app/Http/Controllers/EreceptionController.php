@@ -184,13 +184,21 @@ class EreceptionController extends Controller
         $fname = $u->first_name;
         //Are you cureently signed in?
         $check_status = $u->current_status;
+		$vis_com = $u->vis_company;
+		$staff_id = $u->account_id;
       }
 
-      $company = Company::where('id', $cid)->take(1)->get();
-      foreach($company as $c){
-        $cname = $c->company_name;
-      }
-      
+		if($cid > 0){
+		  $company = Company::where('id', $cid)->take(1)->get();
+		  foreach($company as $c){
+			$cname = $c->company_name;
+		  }
+		} else {
+			$cname = $vis_com;
+		}
+		
+		
+		
       if($check_status === 'Out'){
         //Insert new record into registers
         $signin =  new Register;
@@ -214,6 +222,40 @@ class EreceptionController extends Controller
         $signin->checker = $checker;
         $signin->sign_out_time = now();
         $signin->save();
+		  
+		  
+		  
+		if($cid === 0){
+			//Inform Staff Member of Visitor Arrival
+			$staff_fn = User::where('id', $staff_id)->pluck('first_name');
+			$staff_ln = User::where('id', $staff_id)->pluck('last_name');
+			$staff_email = User::where('id', $staff_id)->pluck('email');
+			$staff = $staff_fn[0] . ' ' . $staff_ln[0];
+		    $to = $staff_email[0];
+			$subject = 'eReception Hub Notification Message';
+			$addressee = $staff_fn[0];
+			$from = 'notifications@ereceptionhub.co.uk';
+		  
+		 //Send email notification
+		 //=======================
+		 //
+			  
+		
+		  $txt = '<html><head><title>eReceptionHub Mail</title><style>body { font-family: tahoma, sans-serif; width: 100%; background-color: #ddd;}</style></head><body><img src="https://ereceptionhub.co.uk/storage/images/banner1.jpg" style="margin-top: -10px;"><span style="max-width: 90%; margin: 0px 5% 0px 5%;"><br><br>';
+		  $txt .= 'Hello ';
+		  $txt .= $addressee;
+		  $txt .= ', <br><br> You have a visitor waiting for you. <br><br> Your visitor is ';
+		  $txt .= $name;
+		  $txt .= ', from ';
+		  $txt .= $cname;
+		  $txt .= '.<br><br>Thank you,<br><br><b>eReception Hub<br><span style="color: #777;">System Messaging Service</span></b><br><br><br>Need to report this message? Please forward it to admin@ereceptionhub.co.uk with your comments.<br>';
+		  $txt .= '</span></body></html>';
+		  // To send HTML mail, the Content-type header must be set
+		  $headers = 'Content-type: text/html; charset=iso-8859-1' . '\r\n';
+		  //SEND MAIL
+		  mail($to,$subject,$txt,$headers,"-f ".$from); 
+			
+		}
 
 
         $reg = Register::orderby('id', 'desc')->where('user_id', $uid)->take(1)->get();
@@ -232,7 +274,11 @@ class EreceptionController extends Controller
       }
 
       //Redirect back to home ready for the next users to sign in or out
-      return redirect('/hub')->with('success',  $salutation . ' ' . $fname . ', you have signed in successfully!');
+	  if($cid > 0){
+      	return redirect('/hub')->with('success',  $salutation . ' ' . $fname . ', you have signed in successfully!');
+	  } else {
+		 return redirect('/hub')->with('success',  $salutation . ' ' . $fname . ', you have signed in successfully and ' . $staff . ' has been informed of your arrival.'); 
+	  }
 
     }
 
@@ -466,7 +512,7 @@ class EreceptionController extends Controller
         $signin->user_id = '0';
         $signin->name = $name;
         $signin->reg_type = 'Contractor';
-        $signin->sign_out_type = NULL;
+        $signin->sign_out_type = 'MANUAL';
         $signin->current_status = 'In';
         $signin->who = $who;
         $signin->location_id = $loc; // Needs to be included from session data

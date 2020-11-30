@@ -46,5 +46,6 @@ return [
     'checkout_cancel'  => 'Checkout - Transaction Cancelled',
 	'reports'  		   => 'Reports',
 	'msg'              => 'Change Message',
-	'preregister'      => 'Pre-Register a Visitor'
+	'preregister'      => 'Pre-Register a Visitor',
+	'documents'        => 'Hub Documents and E-Sign'
 ];

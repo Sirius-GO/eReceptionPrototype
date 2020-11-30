@@ -42,6 +42,11 @@ Route::post('preregister', ['as' => 'pre.register', 'uses' => 'PagesController@s
 
 
 
+//Documents
+Route::get('/documents', 'DocumentsController@showDoc');
+Route::post('create_doc', ['as' => 'create.doc', 'uses' => 'DocumentsController@createDoc']);
+Route::post('edit_doc', ['as' => 'edit.doc', 'uses' => 'DocumentsController@editDoc']);
+
 
 //DailyChecklist
 Route::get('/daily_checklist', 'PagesController@daily_checklist');

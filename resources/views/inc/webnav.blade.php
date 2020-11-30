@@ -40,6 +40,7 @@
 										<a class="dropdown-item" href="../../preregister"> <i class="fa fa-id-card"> </i> Pre Register a Visitor </a>
                                         <a class="dropdown-item" href="../../firesafety"> <i class="fa fa-fire-extinguisher"> </i> Fire Safety </a>
 										<a class="dropdown-item" href="../../reports"> <i class="fa fa-folder"> </i> Reports </a>
+										<a href="../../documents"> <i class="fa fa-sticky-note"> </i> Hub Documents and E-Sign </a>
                                     @endif
                                     <a class="dropdown-item" href="../../policies"> <i class="fa fa-file"> </i> Policies </a>
                                     @if(auth()->user()->user_level > '4')
