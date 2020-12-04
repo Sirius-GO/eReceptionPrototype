@@ -45,7 +45,9 @@ return [
 	'reports'  		   => 'Adroddiadau',
 	'msg'              => 'Newid Neges',
 	'preregister'      => 'Rhag-gofrestru Ymwelydd',
-	'documents'        => 'Dogfennau Hwb ac E-Arwydd'
+	'documents'        => 'Dogfennau Hwb ac E-Arwydd',
+	'sign'             => 'eReception Hub e-Arwydd',
+	'docs'             => 'Darllenwch y canlynol yn ofalus'
 
 
 

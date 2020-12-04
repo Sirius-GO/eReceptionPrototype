@@ -46,7 +46,10 @@ Route::post('preregister', ['as' => 'pre.register', 'uses' => 'PagesController@s
 Route::get('/documents', 'DocumentsController@showDoc');
 Route::post('create_doc', ['as' => 'create.doc', 'uses' => 'DocumentsController@createDoc']);
 Route::post('edit_doc', ['as' => 'edit.doc', 'uses' => 'DocumentsController@editDoc']);
-
+Route::get('/hub_docs', ['uses' => 'DocumentsController@hub_docs']);
+Route::get('/sign/{id}', ['uses' => 'DocumentsController@esign_doc']);
+Route::get('/esign/{id}', ['uses' => 'DocumentsController@esign_show']);
+Route::post('esign', ['as' => 'esign.store', 'uses' => 'DocumentsController@esign_store']);
 
 //DailyChecklist
 Route::get('/daily_checklist', 'PagesController@daily_checklist');
@@ -97,6 +100,7 @@ Route::get('signin/{id}', ['uses' => 'EreceptionController@signin']);
 Route::get('signout/{id}', ['uses' => 'EreceptionController@signout']);
 Route::post('scan_in', ['as' => 'ereception.scan_in', 'uses' => 'EreceptionController@scan_in']);
 Route::post('scan_out', ['as' => 'ereception.scan_out', 'uses' => 'EreceptionController@scan_out']);
+
 
 
 //Registrations Controller

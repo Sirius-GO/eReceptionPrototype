@@ -7,6 +7,15 @@ use App\Layout;
 
 class EnvironmentController extends Controller
 {
+	
+	
+	public function __construct()
+    {
+        $this->middleware('auth');
+
+    }
+	
+	
     public function colourStore(Request $request){
 
                 //Validate the form

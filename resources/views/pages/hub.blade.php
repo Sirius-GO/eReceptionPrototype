@@ -70,8 +70,11 @@
                 @if(count($layout ?? '') > 0)
                     @foreach($layout ?? '' as $l)
 						@if($l->hub_msg_ctrl === 1)
-                       		<div style="padding: 20px; width: 70%; font-size: 17px; border-radius: 20px; font-weight: 550; background-color: rgba(0,0,0,0.4); margin: auto;">
-								<span style="white-space: pre-wrap;">{{$l->hub_msg}}</span>
+                       		<div style="position: relative; padding: 20px; width: 100%; font-size: 17px; border-radius: 20px; font-weight: 550; background-color: rgba(0,0,0,0.4); margin: auto; height: 120px; overflow-y: scroll;">
+								<div style="position: absolute; right: 20px; top: 20px;"> 
+									<i class="fa fa-arrows-v fa-lg"></i>
+								</div>
+								<div style="white-space: pre-wrap;">{{$l->hub_msg}}</div>
 					   		</div>
 						@endif
                     @endforeach

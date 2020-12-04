@@ -47,5 +47,7 @@ return [
 	'reports'  		   => 'Reports',
 	'msg'              => 'Change Message',
 	'preregister'      => 'Pre-Register a Visitor',
-	'documents'        => 'Hub Documents and E-Sign'
+	'documents'        => 'Hub Documents and E-Sign',
+	'sign'             => 'eReception Hub e-Sign',
+	'docs'             => 'Please Read The Following Carefully'
 ];

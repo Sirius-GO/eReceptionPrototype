@@ -63,10 +63,12 @@ $layouts = Layout::where('company_id', auth()->user()->company_id)->take(1)->get
         color: #eee !important;
         background-color: <?php echo $c; ?> !important;
         background-image: URL(<?php echo $bg_url; ?>);
-        height: 100%;
+        /*height: relative;*/
+		height: 100%;
+		width: 100%;
         background-repeat: no-repeat;
         background-size: cover;
-        overflow-x: hidden;
+        overflow: hidden;
         } 
         
         .butns {
@@ -196,12 +198,14 @@ $layouts = Layout::where('company_id', auth()->user()->company_id)->take(1)->get
     .wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-}
+    min-height: 100%;
+	}
     
     footer {
         position: relative;
         margin-top: auto;
+		/*bottom: 0px;
+		left: 0px;*/
         width: 100%;
         background-color: rgba(0, 0, 0, 0.3);
     }
@@ -361,7 +365,7 @@ $layouts = Layout::where('company_id', auth()->user()->company_id)->take(1)->get
         @include('inc.messages')
         <div class="fade-in">
             @yield('content')
-            <br><br>
+     
         </div>
         @include('inc.footer')
     </div>

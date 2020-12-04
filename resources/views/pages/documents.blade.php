@@ -14,6 +14,13 @@
 					
 					
 					<div class="col-sm-12 col-md-12 text-center">
+						<a href="#" 
+						   class="btn btn-warning" 
+						   data-toggle="modal" 			   
+						   data-target="#instr" > 
+							<i class="fa fa-info fa-lg"></i> Document Formatting Instructions 
+						</a>
+						<br><br>
 						<form action="{{route('create.doc')}}" method="post" style="padding: 20px; background-color: rgba(255,255,255,0.4); border-radius: 20px;">
 							{{ csrf_field() }}
 							<div class="form-group">
@@ -21,21 +28,29 @@
       				             <input type="text" class="form-control" name="title" placeholder="Document Title (Max 150 Chars)" size="150"><br>	
  		   			             <label>Document Content</label>
 								 <textarea class="form-control" style="white-space: pre-wrap;"  name="content" rows="10" placeholder="Document Content (Max 10000 Chars)" size="150"></textarea><br>
-									<div class="col-sm=12 col-md-6">
+									<div class="col-sm=12 col-md-4">
 										 <label>Signature Required</label>
 										 <input type="checkbox" name="sig_req" value="1">
 									</div>
-									<div class="col-sm=12 col-md-6">
-										 <label>Slot</label>
-										 <select name="doc_no" style="color: #333;">
-											 <option value=""> Please Choose a Slot</option>
+									<div class="col-sm-12 col-md-4">
+										 <label>Docs</label>
+										 <select name="doc_no" style="color: #333;" required>
+											 <option value=""> Document Order</option>
 											 <option value="1"> - 1 - </option>
 											 <option value="2"> - 2 - </option>
 											 <option value="3"> - 3 - </option>
 										</select> 
 									</div>
+									<div class="col-sm-12 col-md-4">
+										 <label>Display Options</label>
+										 <select name="on_off" style="color: #333;" required>
+											 <option value="">Display Options</option>
+											 <option value="1"> Show </option>
+											 <option value="0"> Don't Show </option>
+										</select> 
+									</div>
 								    <br><br>									
-								<button type="submit" class="btn btn-primary"> Add a New  Hub Document</button>
+								<button type="submit" class="btn btn-primary"> Add / Overwrite a Hub Document</button>
 							</div>
 						</form>
 					</div>
@@ -48,7 +63,7 @@
 								@if($d->doc_no === 1)
 									<div class="row"> 
 										<div class="col-sm-12 col-md-6">
-											SLOT {{$d->doc_no}}: <b>{{$d->title}}</b>
+											DOC {{$d->doc_no}}: <b>{{$d->title}}</b>
 										</div>
 										<div class="col-sm-12 col-md-3">
 											<a href="#" 
@@ -66,7 +81,7 @@
 											   data-target="#slote" 
 											   class="btn btn-primary btn-sm pull-right" 
 											   style="margin: 0px 0px 0px 10px;" 
-											   onclick="slotedit(`{{$d->title}}`, `<?php echo str_replace("", "&bull;", $d->content); ?>`, '{{$d->doc_no}}', '{{$d->sig_req}}', '{{$d->id}}')"> 
+											   onclick="slotedit(`{{$d->title}}`, `<?php echo str_replace("", "&bull;", $d->content); ?>`, '{{$d->doc_no}}', '{{$d->sig_req}}', '{{$d->id}}', '{{$d->on_off}}')"> 
 												<i class="fa fa-edit"></i> Edit Document 
 											</a>
 										</div>
@@ -76,7 +91,7 @@
 								@if($d->doc_no === 2)
 									<div class="row"> 
 										<div class="col-sm-12 col-md-6">
-											SLOT {{$d->doc_no}}: <b>{{$d->title}}</b>
+											DOC {{$d->doc_no}}: <b>{{$d->title}}</b>
 										</div>
 										<div class="col-sm-12 col-md-3">
 											<a href="#" 
@@ -94,7 +109,7 @@
 											   data-target="#slote" 
 											   class="btn btn-primary btn-sm pull-right" 
 											   style="margin: 0px 0px 0px 10px;" 
-											   onclick="slotedit(`{{$d->title}}`, `<?php echo str_replace("", "&bull;", $d->content); ?>`, '{{$d->doc_no}}', '{{$d->sig_req}}', '{{$d->id}}')"> 
+											   onclick="slotedit(`{{$d->title}}`, `<?php echo str_replace("", "&bull;", $d->content); ?>`, '{{$d->doc_no}}', '{{$d->sig_req}}', '{{$d->id}}', '{{$d->on_off}}')"> 
 												<i class="fa fa-edit"></i> Edit Document 
 											</a>
 										</div>
@@ -104,7 +119,7 @@
 								@if($d->doc_no === 3)
 									<div class="row">
 										<div class="col-sm-12 col-md-6">
-											SLOT {{$d->doc_no}}: <b>{{$d->title}}</b>
+											DOC {{$d->doc_no}}: <b>{{$d->title}}</b>
 										</div>
 										<div class="col-sm-12 col-md-3">
 											<a href="#" 
@@ -122,7 +137,7 @@
 											   data-target="#slote" 
 											   class="btn btn-primary btn-sm pull-right" 
 											   style="margin: 0px 0px 0px 10px;" 
-											   onclick="slotedit(`{{$d->title}}`, `<?php echo str_replace("", "&bull;", $d->content); ?>`, '{{$d->doc_no}}', '{{$d->sig_req}}', '{{$d->id}}')"> 
+											   onclick="slotedit(`{{$d->title}}`, `<?php echo str_replace("", "&bull;", $d->content); ?>`, '{{$d->doc_no}}', '{{$d->sig_req}}', '{{$d->id}}', '{{$d->on_off}}')"> 
 												<i class="fa fa-edit"></i> Edit Document 
 											</a>
 										</div>	
@@ -144,13 +159,39 @@
 </div>
 
 
+  <div class="modal fade" tabindex="-1" role="dialog" id="instr">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-warning" style="color: #333;">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title">Document Formatting Instructions </h4>
+        </div>
+        <div class="modal-body" style="color: #333;">
+			<p>eReception Hub supports a list of html tags that you can use to format your <b>documents content</b>. <br>
+			<h6>(This does not apply to the tilte, only the content of your documents.)</h6>	
+			See some examples below:<br><br>
+			</p>
+			<b>bold text:</b> <xmp> <b>...</b> </xmp>
+			<i>italic text:</i> <xmp> <i>...</i> </xmp>
+			<u>underline text:</u> <xmp> <u>...</u> </xmp>
+			<s>strike textstrike text:</s> <xmp> <s>…</s> </xmp>
+			<p>paragraph:<p> <xmp> <p>…</p> </xmp>
+			<h3>Headings - h1(largest) to h6(smallest) - (This text is h3)</h3> <xmp> <h1>...</h1> </xmp>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal --> 
+
+
+
+
 
   <div class="modal fade" tabindex="-1" role="dialog" id="slotv">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header bg-success" style="color: #333;">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<h4 class="modal-title">Document Preview - Slot <span id="sn"></span></h4>
+			<h4 class="modal-title">Document Preview - Doc <span id="sn"></span></h4>
         </div>
         <div class="modal-body" style="color: #333;">
 			<div><u><h4><span id="aaa"></span></h4></u></div>
@@ -176,7 +217,7 @@
       <div class="modal-content">
         <div class="modal-header bg-success" style="color: #333;">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<h4 class="modal-title">Edit Document - Slot <span id="ccc"></span></h4>
+			<h4 class="modal-title">Edit Document - Doc <span id="ccc"></span></h4>
         </div>
         <div class="modal-body" style="color: #333;">
 			<form action="{{route('edit.doc')}}" method="post" style="padding: 20px; background-color: rgba(255,255,255,0.4); border-radius: 20px;">
@@ -187,18 +228,27 @@
 					<input type="text" class="form-control" name="title" size="150" id="aa"><br>	
 					
 					<label>Document Content</label>
-					<textarea class="form-control" style="white-space: pre-wrap;"  name="content" rows="10" size="150" id="bb"></textarea><br>
-					
-					<div class="col-sm=12 col-md-6">
-						<label>Slot</label>
-						<input type="text" name="doc_no" id="cc">
-					</div>					
-					<div class="col-sm=12 col-md-6">
+					<textarea class="form-control" style="white-space: pre-wrap;"  name="content" rows="10" size="150" id="bb"></textarea><br>					
+					<div class="col-sm-12 col-md-6">
 						<label>Signature Required</label>
 						<input type="checkbox" name="sig_req" id="dd" value="1">
 					</div>
+					<div class="col-sm-12 col-md-6">
+						<label>Display Options</label>
+						<select name="on_off" style="color: #333;" required id="onoroff">
+							<script>
+								if document.getElementById("onoroff").value === '1'){
+							</script>
+							<option value="1" selected> Show </option>
+							<script>
+								} else {
+							</script>
+							<option value="0" selected> Don't Show </option>
+							<script> } </script>
+						</select> 
+					</div>
 
-					
+					<input type="hidden" name="doc_no" id="cc">	
 					<input type="hidden" name="id" id="ee">	
 					
 					<br><br>									
@@ -207,13 +257,14 @@
 			</form>
             <br> 
 			<script>
-				function slotedit(a, b, c, d, e){
+				function slotedit(a, b, c, d, e, f){
 					var title = a;
 					var content = b;
 					var sl = c;
 					var slt = c;
 					var sig = d;
 					var did = e;
+					var onf = f;
 					
 					console.log(sl);
 					
@@ -227,6 +278,7 @@
 						document.getElementById("dd").checked = false;
 					}
 					document.getElementById('ee').value = did;	
+					document.getElementById('onoroff').value = onf;	
 				}
 			</script>
         </div>
