@@ -1,6 +1,18 @@
 @extends('layouts.app2')
+<?php
+	use App\Account;
+	$accounts_check = Account::where('company_id', auth()->user()->company_id)->get();
 
+		if(count($accounts_check) > 0){
+			foreach($accounts_check as $a){
+				//Get Vars
+				$active = $a->status;
+				$sub_type = $a->type;
+			}
+		}
+?>
 @section('content')
+@include('inc.status_check')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12">
@@ -118,11 +130,18 @@
         
                         <a href="hue_sat_vis" class="btn btn-primary" style="position: absolute; bottom: 5px; width: 90%; left: 50%; margin-left: -45%;"> <i class="fa fa-paint-brush fa-lg"> </i> {{ __('messages.vis_col') }} </a><br><br>
                     </div></div>
+					@if($sub_type === 'Silver' || $sub_type === 'Gold')
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3"><div style="height: 200px;">
                         <p><span class="badge" style="background-color: #1e7553;">eReceptionHub Message: </span><br>
        					<div style="width: 100%; height: relative; border: solid 1px #fff; padding: 10px;"> Message Message Message Message Message Message Message Message Message Message... </div> 
                         <a href="#" data-toggle="modal" data-target="#change_msg" class="btn btn-primary" style="position: absolute; bottom: 5px; width: 90%; left: 50%; margin-left: -45%;"> <i class="fa fa-comment fa-lg"> </i> {{ __('messages.msg') }} </a><br><br>
                     </div></div>
+					@else
+					<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3"><div style="height: 200px;">
+                        <p><span class="badge" style="background-color: #1e7553;">eReceptionHub Message: </span><br>
+       					<p>Upgrade your account to a Siver or Gold subscription to get access.<br><br>
+                    </div></div>
+					@endif
 
 
                 </div>

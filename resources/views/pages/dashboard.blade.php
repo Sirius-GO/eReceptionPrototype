@@ -18,6 +18,7 @@ use App\Location;
 
 
 @section('content')
+@include('inc.status_check')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12">

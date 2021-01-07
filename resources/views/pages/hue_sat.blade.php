@@ -1,6 +1,7 @@
 @extends('layouts.app2')
 
 @section('content')
+@include('inc.status_check')
     <div class="container">
         <div class="slidecontainer" style="width: 50vw; margin: auto; background-color: rgba(0,0,0,0.5); color: #fff; padding: 20px;">
             <form action="{{ route('environment.colourstore') }}" method="post">

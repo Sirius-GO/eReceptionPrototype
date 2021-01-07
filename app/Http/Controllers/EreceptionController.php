@@ -10,6 +10,7 @@ use App\Location;
 use App\Departments;
 use App\Register;
 use App\Previsitor;
+use App\Document;
 use DB;
 
 class EreceptionController extends Controller
@@ -123,11 +124,11 @@ class EreceptionController extends Controller
         $signin->from_company = $cname;
         $signin->company_id = auth()->user()->company_id;
         $signin->img = $img;
-        $signin->doc_id_1 = NULL;
+        $signin->doc_id_1 = '|';
         $signin->signature_1 = NULL;
-        $signin->doc_id_2 = NULL;
+        $signin->doc_id_2 = '|';
         $signin->signature_2 = NULL;
-        $signin->doc_id_3 = NULL;
+        $signin->doc_id_3 = '|';
         $signin->signature_3 = NULL;
         $signin->checker = $checker;
         $signin->sign_out_time = now();
@@ -231,11 +232,11 @@ class EreceptionController extends Controller
         $signin->from_company = $cname;
         $signin->company_id = auth()->user()->company_id;
         $signin->img = $img;
-        $signin->doc_id_1 = NULL;
+        $signin->doc_id_1 = '|';
         $signin->signature_1 = NULL;
-        $signin->doc_id_2 = NULL;
+        $signin->doc_id_2 = '|';
         $signin->signature_2 = NULL;
-        $signin->doc_id_3 = NULL;
+        $signin->doc_id_3 = '|';
         $signin->signature_3 = NULL;
         $signin->checker = $checker;
         $signin->sign_out_time = now();
@@ -365,8 +366,31 @@ class EreceptionController extends Controller
       } else {
         return redirect('/hub')->with('error', $salutation . ' ' . $fname . ', you are already signed in!');
       }
-
-		 return redirect('/hub')->with('success',  $salutation . ' ' . $fname . ', you have signed in successfully and ' . $staff . ' has been informed of your arrival.'); 
+		
+		//Determine if there are any documents to read
+		$docs = Document::where('company_id', auth()->user()->company_id)->where('on_off', '1')->orderby('doc_no', 'asc')->get();
+		if(count($docs)>0){
+			foreach($docs as $d){
+				//Update Docs to Register Record
+				$reg_doc = Register::Find($reg_id);
+				if($d->doc_no === 1){
+					$reg_doc->doc_id_1 = $d->title . '|' . $d->content;
+				}
+				if($d->doc_no === 2){
+					$reg_doc->doc_id_2 = $d->title . '|' . $d->content;
+				}
+				if($d->doc_no === 3){
+					$reg_doc->doc_id_3 = $d->title . '|' . $d->content;
+				}
+				$reg_doc->save();
+			}
+			//Display Docs and Pass Vars
+			return view('pages.hub_docs')->with('docs', $docs)->with('reg_id', $reg_id)->with('success',  $salutation . ' ' . $fname . ', you have signed in successfully and ' . $staff . ' has been informed of your arrival. Please read the following information.');
+		} else {	
+		 	return redirect('/hub')->with('success',  $salutation . ' ' . $fname . ', you have signed in successfully and ' . $staff . ' has been informed of your arrival.'); 	
+		}
+		
+		
     }
 	
 	
@@ -391,6 +415,7 @@ class EreceptionController extends Controller
       $company = strtolower($company);
       $company = ucwords($company);
       $img = 'avatar.png';
+		
 
       $t = now();
       $checker = '0' . ' | ' . $name . ' | ' .  $company . ' | ' . substr($t, 0 , 10);
@@ -400,7 +425,7 @@ class EreceptionController extends Controller
         $loc = '0';
       }
 
-      $check_reg = Register::where('checker', $checker)->take(1)->get();
+      $check_reg = Register::where('checker', $checker)->where('current_status', 'In')->take(1)->get();
 
       if(count($check_reg) === 0){
         //Insert new record into registers
@@ -416,11 +441,11 @@ class EreceptionController extends Controller
         $signin->from_company = $company;
         $signin->company_id = auth()->user()->company_id;
         $signin->img = $img;
-        $signin->doc_id_1 = NULL;
+        $signin->doc_id_1 = '|';
         $signin->signature_1 = NULL;
-        $signin->doc_id_2 = NULL;
+        $signin->doc_id_2 = '|';
         $signin->signature_2 = NULL;
-        $signin->doc_id_3 = NULL;
+        $signin->doc_id_3 = '|';
         $signin->signature_3 = NULL;
         $signin->checker = $checker;
         $signin->sign_out_time = now();
@@ -428,11 +453,19 @@ class EreceptionController extends Controller
 		  
 		  
 		  
+	  	//Get Register ID
+		$reg = Register::orderby('id', 'desc')->where('reg_type', 'Visitor')->where('name', $name)->take(1)->get();
+        foreach($reg as $r){
+          $reg_id = $r->id;
+        }		  
+		  
 		//================================= SEND AN EMAIL NOTIFICATION ==============================
 		  
 			//Email Vars
 		  	  $visiting_email = User::where('id', $who)->pluck('email');
 			  $visiting_name = User::where('id', $who)->pluck('first_name');
+		  	  $visiting_name2 = User::where('id', $who)->pluck('last_name');
+		      $staff = $visiting_name[0] . ' ' . $visiting_name2[0];
 		   	  $to = $visiting_email[0];
 			  $subject = 'eReception Hub Notification Message';
 			  $addressee = $visiting_name[0];
@@ -459,11 +492,32 @@ class EreceptionController extends Controller
 		  
       
       } else {
-        return redirect('/hub')->with('error', 'You have already signed in today!');
+        return redirect('/hub')->with('error', 'You are already signed in!');
       }
-
-      //Redirect back to home ready for the next users to sign in or out
-      return redirect('/hub')->with('success', 'Thank you ' . $name . ', you have signed in successfully!');
+		
+		
+		//Determine if there are any documents to read
+		$docs = Document::where('company_id', auth()->user()->company_id)->where('on_off', '1')->orderby('doc_no', 'asc')->get();
+		if(count($docs)>0){
+			foreach($docs as $d){
+				//Update Docs to Register Record
+				$reg_doc = Register::Find($reg_id);
+				if($d->doc_no === 1){
+					$reg_doc->doc_id_1 = $d->title . '|' . $d->content;
+				}
+				if($d->doc_no === 2){
+					$reg_doc->doc_id_2 = $d->title . '|' . $d->content;
+				}
+				if($d->doc_no === 3){
+					$reg_doc->doc_id_3 = $d->title . '|' . $d->content;
+				}
+				$reg_doc->save();
+			}
+			//Display Docs and Pass Vars
+			return view('pages.hub_docs')->with('docs', $docs)->with('reg_id', $reg_id)->with('success',  'Thank you ' . $name . ', you have signed in successfully and ' . $staff . ' has been informed of your arrival. Please read the following information.');
+		} else {	
+		 	return redirect('/hub')->with('success',  'Thank you ' . $name . ', you have signed in successfully and ' . $staff . ' has been informed of your arrival.'); 	
+		}
 
     }
 
@@ -509,11 +563,11 @@ class EreceptionController extends Controller
         $signin->from_company = $company;
         $signin->company_id = auth()->user()->company_id;
         $signin->img = $img;
-        $signin->doc_id_1 = NULL;
+        $signin->doc_id_1 = '|';
         $signin->signature_1 = NULL;
-        $signin->doc_id_2 = NULL;
+        $signin->doc_id_2 = '|';
         $signin->signature_2 = NULL;
-        $signin->doc_id_3 = NULL;
+        $signin->doc_id_3 = '|';
         $signin->signature_3 = NULL;
         $signin->checker = $checker;
         $signin->sign_out_time = now();
@@ -587,7 +641,7 @@ class EreceptionController extends Controller
         $loc = '0';
       }
 
-      $check_reg = Register::where('checker', $checker)->take(1)->get();
+      $check_reg = Register::where('checker', $checker)->where('current_status', 'In')->take(1)->get();
 
       if(count($check_reg) === 0){
         //Insert new record into registers
@@ -603,22 +657,28 @@ class EreceptionController extends Controller
         $signin->from_company = $company;
         $signin->company_id = auth()->user()->company_id;
         $signin->img = $img;
-        $signin->doc_id_1 = NULL;
+        $signin->doc_id_1 = '|';
         $signin->signature_1 = NULL;
-        $signin->doc_id_2 = NULL;
+        $signin->doc_id_2 = '|';
         $signin->signature_2 = NULL;
-        $signin->doc_id_3 = NULL;
+        $signin->doc_id_3 = '|';
         $signin->signature_3 = NULL;
         $signin->checker = $checker;
         $signin->sign_out_time = now();
         $signin->save();
 		  
-		  
+	  	//Get Register ID
+		$reg = Register::orderby('id', 'desc')->where('reg_type', 'Contractor')->where('name', $name)->take(1)->get();
+        foreach($reg as $r){
+          $reg_id = $r->id;
+        }			  
 		//================================= SEND AN EMAIL NOTIFICATION ==============================
 		  
 			//Email Vars
 		  	  $visiting_email = User::where('id', $who)->pluck('email');
 			  $visiting_name = User::where('id', $who)->pluck('first_name');
+		  	  $visiting_name2 = User::where('id', $who)->pluck('last_name');
+		      $staff = $visiting_name[0] . ' ' . $visiting_name2[0];
 		   	  $to = $visiting_email[0];
 			  $subject = 'eReception Hub Contractor Notification Message';
 			  $addressee = $visiting_name[0];
@@ -644,11 +704,35 @@ class EreceptionController extends Controller
 		  mail($to,$subject,$txt,$headers,"-f ".$from); 
       
       } else {
-        return redirect('/hub')->with('error', 'You have already signed in today!');
+        return redirect('/hub')->with('error', 'You are already signed in!');
       }
-
-      //Redirect back to home ready for the next users to sign in or out
-      return redirect('/hub')->with('success', 'Thank you ' . $name . ', you have signed in successfully!');
+		
+		
+		//Determine if there are any documents to read
+		$docs = Document::where('company_id', auth()->user()->company_id)->where('on_off', '1')->orderby('doc_no', 'asc')->get();
+		
+		//return $docs;
+		
+		if(count($docs)>0){
+			foreach($docs as $d){
+				//Update Docs to Register Record
+				$reg_doc = Register::Find($reg_id);
+				if($d->doc_no === 1){
+					$reg_doc->doc_id_1 = $d->title . '|' . $d->content;
+				}
+				if($d->doc_no === 2){
+					$reg_doc->doc_id_2 = $d->title . '|' . $d->content;
+				}
+				if($d->doc_no === 3){
+					$reg_doc->doc_id_3 = $d->title . '|' . $d->content;
+				}
+				$reg_doc->save();
+			}
+			//Display Docs and Pass Vars
+			return view('pages.hub_docs')->with('docs', $docs)->with('reg_id', $reg_id)->with('success',  'Thank you ' . $name . ', you have signed in successfully and ' . $staff . ' has been informed of your arrival. Please read the following information.');
+		} else {	
+		 	return redirect('/hub')->with('success',  'Thank you ' . $name . ', you have signed in successfully and ' . $staff . ' has been informed of your arrival.'); 	
+		}
 
     }
 
@@ -662,7 +746,14 @@ class EreceptionController extends Controller
         //Are you currently signed out?
         $check_status = $u->current_status;
         $user_id = $u->user_id;
+		$reg_type = $u->reg_type; 
       }
+		
+	  //Determine if a Previsitor
+	  if($reg_type === 'Visitor'){
+		  //Check if a previsitor recor exists
+		  $prev = Previsitor::where('id', $user_id)->get();
+	  }
 
       if($check_status === 'In'){
         //Update registers
@@ -672,7 +763,7 @@ class EreceptionController extends Controller
         $signout->sign_out_time = now();
         $signout->save();
 
-        if($user_id > 0){
+        if($user_id > 0 && $reg_type === 'Staff'){
           //Update users table for user($id) - current_status and last_time
           $users = User::find($user_id);
           $users->current_status = 'Out';
@@ -680,6 +771,17 @@ class EreceptionController extends Controller
           $users->reg_id = $id;
           $users->save();
         }
+		
+		if($reg_type === 'Visitor'){
+			if(count($prev)>0){
+			  //Update users table for user($id) - current_status and last_time
+			  $users = Previsitor::find($user_id);
+			  $users->current_status = 'Out';
+			  $users->last_time = time();
+			  $users->reg_id = $id;
+			  $users->save();
+			}
+		}
         
       } else {
         return redirect('/hub')->with('error', 'You are already signed out!');

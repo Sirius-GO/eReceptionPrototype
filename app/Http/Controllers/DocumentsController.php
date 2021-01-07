@@ -38,9 +38,14 @@ class DocumentsController extends Controller
 			'doc_no' => 'required',
 			'title' => 'required',
 			'content' => 'required',
-			'sig_req' => 'required',
 			'on_off' => 'required'
 		]);
+		
+		if($request->input('sig_req')){
+			$sig = $request->input('sig_req');
+		} else {
+			$sig = 0;
+		}
 		
 		try{
 			//Insert new record into documents
@@ -50,7 +55,7 @@ class DocumentsController extends Controller
 			$doc->doc_no = $request->input('doc_no');
 			$doc->title = $request->input('title');
 			$doc->content = $request->input('content');
-			$doc->sig_req = $request->input('sig_req');
+			$doc->sig_req = $sig;
 			$doc->checker = auth()->user()->company_id .' | ' . $request->input('doc_no');
 			$doc->on_off = $request->input('on_off');
 			$doc->save();
@@ -84,13 +89,19 @@ class DocumentsController extends Controller
 			'doc_no' => 'required',
 			'title' => 'required',
 			'content' => 'required',
-			'sig_req' => 'required',
 			'on_off' => 'required',
 			'id' => 'required'
 		]);
 		
-		$id = $request->input('id');
-	
+			$id = $request->input('id');
+		
+			if($request->input('sig_req')){
+				$sig = $request->input('sig_req');
+			} else {
+				$sig = 0;
+			}
+		
+		
 			//Update document record
 			$doc =  Document::find($id);
 			$doc->company_id = auth()->user()->company_id;
@@ -98,7 +109,7 @@ class DocumentsController extends Controller
 			$doc->doc_no = $request->input('doc_no');
 			$doc->title = $request->input('title');
 			$doc->content = $request->input('content');
-			$doc->sig_req = $request->input('sig_req');
+			$doc->sig_req = $sig;
 			$doc->checker = auth()->user()->company_id .' | ' . $request->input('doc_no');
 		    $doc->on_off = $request->input('on_off');
 			$doc->save();	
@@ -165,7 +176,7 @@ class DocumentsController extends Controller
 		}
 		
 		$get_name = Register::where('id', $id)->pluck('name');
-		$name = $get_name[0];
+		$name = str_replace(" ", "_", $get_name[0]);
 		$output_file = "captured/signature" . date("d-m-Y-H-i-s-").time().'_'.$name. ".png";
 		base64_to_png($imagefile, $output_file);
 		add_stp($output_file, $output_file);
@@ -178,9 +189,16 @@ class DocumentsController extends Controller
 		
 		
 		
-		return back()->with('success', 'Job Done!')->with('output_file', $output_file);	
+		return redirect('/hub')->with('success', 'Thank you! Please take a seat. We\'ll be with you shortly.');	
 		
-	}	
+	}
+	
+	
+	
+	public function tas(){
+		//Take a seat notification after confirmimg a document
+		return redirect('/hub')->with('success', 'Thank you! Please take a seat. We\'ll be with you shortly.');
+	}
 	
 	
 }

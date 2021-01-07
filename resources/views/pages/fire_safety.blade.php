@@ -1,6 +1,7 @@
 @extends('layouts.fire')
 
 @section('content')
+@include('inc.status_check')
 <div class="container">
     <div class="row">
         <div class="col-12">

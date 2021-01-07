@@ -1,7 +1,7 @@
 @extends('layouts.hub')
 
 @section('content')
-
+@include('inc.status_check')
 <div class="row">
     <center>
             <video id="preview"></video>

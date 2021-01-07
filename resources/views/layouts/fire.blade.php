@@ -30,7 +30,7 @@
         body, html {
         color: #eee;
         background-color: #eee !important;
-        background-image: URL('https://eceptionhub.co.uk/storage/images/bg_tile3.png');
+        background-image: URL('https://ereceptionhub.co.uk/storage/images/bg_tile3.png');
         background-repeat: repeat;
         overflow-x: hidden;
         } 

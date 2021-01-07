@@ -8,6 +8,8 @@ use App\Location;
 use App\Departments;
 use App\Layout;
 use Exception;
+use App\Account;
+use App\Register;
 
 class RegistrationsController extends Controller
 {
@@ -39,6 +41,25 @@ class RegistrationsController extends Controller
         return view('admin.index')
                 ->with('company', $company)
                 ->with('department', $department)
+                ->with('registrations', $registrations)
+                ->with('layout', $layout);
+
+    }
+	
+	
+	public function visitor_index()
+    {
+        $registrations = Register::orderby('created_at', 'desc')
+                        ->where('company_id', auth()->user()->company_id)
+                        ->where('reg_type', 'Visitor')
+						->where('current_status', 'In')
+						->orWhere('reg_type', 'Contracrtor')
+						->where('company_id', auth()->user()->company_id)
+						->where('current_status', 'In')
+                        ->get();
+        $layout = Layout::WHERE('company_id', auth()->user()->company_id)->get();
+    
+        return view('admin.visitors_index')
                 ->with('registrations', $registrations)
                 ->with('layout', $layout);
 

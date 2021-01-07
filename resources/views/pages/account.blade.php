@@ -4,10 +4,21 @@
 <?php 
 use App\Location; 
 use App\Departments; 
+use App\Account;
+$accounts_check = Account::where('company_id', auth()->user()->company_id)->get();
+
+if(count($accounts_check) > 0){
+	foreach($accounts_check as $a){
+		//Get Vars
+		$active = $a->status;
+		$sub_type = $a->type;
+	}
+}
 ?>
 
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12">
@@ -42,12 +53,20 @@ use App\Departments;
                                 @endif
                             </p>
                         </div>
+						@if($sub_type === 'Silver' || $sub_type === 'Gold')
                         <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="min-height: 160px; border-bottom: dotted 1px;">
                             <p><span class="badge" style="background-color: #1e7553;">Avatar: </span><br>
                                 <img src="../../storage/mug_shots/{{ auth()->user()->avatar }}" style="height: 100px; border-radius: 50%;  border: solid 1px #eee;">
                                 <a href="capture_cam"><span class="btn btn-primary"><i class="fa fa-upload fa-lg"> </i> Upload </span></a>
                             </p>
                         </div>
+						@else
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="min-height: 160px; border-bottom: dotted 1px;">
+                            <p><span class="badge" style="background-color: #1e7553;">Avatar:</span><br>
+							Upragde to a Silver or Gold account to get access.
+							</p>
+                        </div>						 
+						@endif
                         <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="min-height: 160px; border-bottom: dotted 1px;">
                             <p><span class="badge" style="background-color: #1e7553;">Email Address: </span><br>
                                 {{ auth()->user()->email }}<br> 

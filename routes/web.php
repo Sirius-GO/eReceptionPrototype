@@ -37,6 +37,7 @@ Route::get('/reports', 'PagesController@reports');
 Route::post('reports', ['as' => 'download.report', 'uses' => 'PagesController@downloadReport']);
 Route::post('reports2', ['as' => 'download.failed', 'uses' => 'PagesController@downloadFailed']);
 Route::post('reports3', ['as' => 'download.in', 'uses' => 'PagesController@downloadSignedIn']);
+Route::post('reports4', ['as' => 'download.vcp', 'uses' => 'PagesController@downloadVisitorParking']);
 Route::get('/preregister', 'PagesController@preregister');
 Route::post('preregister', ['as' => 'pre.register', 'uses' => 'PagesController@storePreRegister']);
 
@@ -50,6 +51,7 @@ Route::get('/hub_docs', ['uses' => 'DocumentsController@hub_docs']);
 Route::get('/sign/{id}', ['uses' => 'DocumentsController@esign_doc']);
 Route::get('/esign/{id}', ['uses' => 'DocumentsController@esign_show']);
 Route::post('esign', ['as' => 'esign.store', 'uses' => 'DocumentsController@esign_store']);
+Route::get('/tas', ['uses' => 'DocumentsController@tas']);
 
 //DailyChecklist
 Route::get('/daily_checklist', 'PagesController@daily_checklist');
@@ -109,7 +111,7 @@ Route::post('/account', ['as' => 'clogo.store', 'uses' => 'RegistrationsControll
 Route::post('mug_shot', ['as' => 'mugshot.store', 'uses' => 'RegistrationsController@mugShotStore']);
 Route::post('administration/create', 'RegistrationsController@store');
 Route::post('administration', ['as' => 'bulk_reg.store', 'uses' => 'RegistrationsController@bulkUploadStore']);
-
+Route::get('/visitor_index', 'RegistrationsController@visitor_index');
 
 //Website Controller
 Route::get('/', 'WebsiteController@index');

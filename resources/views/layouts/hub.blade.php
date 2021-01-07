@@ -134,12 +134,12 @@ $layouts = Layout::where('company_id', auth()->user()->company_id)->take(1)->get
         top: 55px;
         z-index: 3;
 
-        animation:message_bar 3s 1;
-        -webkit-animation:message_bar 3s 1;
+        animation:message_bar 6s 1;
+        -webkit-animation:message_bar 6s 1;
         animation-fill-mode: forwards;
 
-        animation-delay:3.5s;
-        -webkit-animation-delay:3.5s; /* Safari and Chrome */
+        animation-delay:6s;
+        -webkit-animation-delay:6s; /* Safari and Chrome */
         -webkit-animation-fill-mode: forwards;
 
         } 

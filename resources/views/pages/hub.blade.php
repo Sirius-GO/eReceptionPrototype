@@ -1,6 +1,18 @@
 @extends('layouts.hub')
+<?php
+	use App\Account;
+	$accounts_check = Account::where('company_id', auth()->user()->company_id)->get();
 
+		if(count($accounts_check) > 0){
+			foreach($accounts_check as $a){
+				//Get Vars
+				$active = $a->status;
+				$sub_type = $a->type;
+			}
+		}
+?>
 @section('content')
+@include('inc.status_check')
     <div class="container">
         <div class="row">
             <div class="logo">
@@ -65,7 +77,7 @@
             </div>
         </div>
 		
-		
+		@if($sub_type === 'Silver' || $sub_type === 'Gold')
 		<div class="row">
                 @if(count($layout ?? '') > 0)
                     @foreach($layout ?? '' as $l)
@@ -80,7 +92,7 @@
                     @endforeach
                 @endif
 		</div>
-		
+		@endif
 		
     </div>
 

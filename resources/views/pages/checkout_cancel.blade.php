@@ -1,5 +1,32 @@
 @extends('layouts.app2')
+<?php
+use App\Transaction;
 
+//Update transactions with cancellation
+if(!empty($_GET['token'])){
+	$token = $_GET['token'];
+	
+	try{
+		$trans = New Transaction;
+		$trans->user_id = auth()->user()->id;
+		$trans->package_type = 'Cancelled by User';
+		$trans->expiry_days = 0;
+		$trans->package_description = 'Cancelled by User';
+		$trans->package_price = 0;
+		$trans->tx_code = $token;
+		$trans->save();
+	} catch(\Exception $exception){
+		$errorCode = $exception->errorInfo[1]; 
+		if($errorCode === 1062){
+			Session::flash('error', 'Error - Attempted Duplicate Transaction.');
+		}
+	}
+	
+} else {
+	Session::flash('error', 'Error - Transaction has no ID.');			
+}
+
+?>
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -10,7 +37,7 @@
                         <center>
                             <h3>Need help checking out?<br><br>Click here for help</h3>
                             <br>
-                            <button class="btn btn-default btn-lg"> Help <i class="fa fa-info fa-lg"></i></button>
+                            <a href="/subscriptions" class="btn btn-default btn-lg"> Help <i class="fa fa-info fa-lg"></i></a>
                             <br><br>
                             <h3>Alternatively, click here to go back to your Account Page</h3><br>
                             <a href="account" class="btn btn-primary"> <i class="fa fa-arrow-left fa-lg"></i> Back to Account Page </a>

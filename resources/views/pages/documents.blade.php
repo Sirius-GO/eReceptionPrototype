@@ -1,6 +1,18 @@
 @extends('layouts.app2')
+<?php
+	use App\Account;
+	$accounts_check = Account::where('company_id', auth()->user()->company_id)->get();
 
+		if(count($accounts_check) > 0){
+			foreach($accounts_check as $a){
+				//Get Vars
+				$active = $a->status;
+				$sub_type = $a->type;
+			}
+		}
+?>
 @section('content')
+@include('inc.status_check')
 <div class="container">
 
     <div class="row justify-content-center">
@@ -10,6 +22,7 @@
 
 				
                 <div class="panel-body">
+					@if($sub_type === 'Silver' || $sub_type ==='Gold')
 					<br><br>
 					
 					
@@ -25,9 +38,9 @@
 							{{ csrf_field() }}
 							<div class="form-group">
  		   			             <label>Document Title</label>
-      				             <input type="text" class="form-control" name="title" placeholder="Document Title (Max 150 Chars)" size="150"><br>	
+      				             <input type="text" class="form-control" name="title" placeholder="Document Title (Max 150 Chars)" maxlength="150"><br>	
  		   			             <label>Document Content</label>
-								 <textarea class="form-control" style="white-space: pre-wrap;"  name="content" rows="10" placeholder="Document Content (Max 10000 Chars)" size="150"></textarea><br>
+								 <textarea class="form-control" style="white-space: pre-wrap;"  name="content" rows="10" placeholder="Document Content (Max 4500 Chars)" maxlength="4500"></textarea><br>
 									<div class="col-sm=12 col-md-4">
 										 <label>Signature Required</label>
 										 <input type="checkbox" name="sig_req" value="1">
@@ -151,7 +164,9 @@
 					</div>
 					
 					
-	
+					@else
+					<p>Please Upgrade your account to a Silver or Gold subscription to get access to this facility. <br>Thank you.</p>
+				    @endif
 				</div>		
             </div>
         </div>
@@ -225,10 +240,10 @@
 				<div class="form-group">
 					
 					<label>Document Title</label>
-					<input type="text" class="form-control" name="title" size="150" id="aa"><br>	
+					<input type="text" class="form-control" name="title" maxlength="150" id="aa"><br>	
 					
 					<label>Document Content</label>
-					<textarea class="form-control" style="white-space: pre-wrap;"  name="content" rows="10" size="150" id="bb"></textarea><br>					
+					<textarea class="form-control" style="white-space: pre-wrap;"  name="content" rows="10" maxlength="4500" id="bb"></textarea><br>					
 					<div class="col-sm-12 col-md-6">
 						<label>Signature Required</label>
 						<input type="checkbox" name="sig_req" id="dd" value="1">

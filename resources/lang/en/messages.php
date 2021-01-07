@@ -49,5 +49,6 @@ return [
 	'preregister'      => 'Pre-Register a Visitor',
 	'documents'        => 'Hub Documents and E-Sign',
 	'sign'             => 'eReception Hub e-Sign',
-	'docs'             => 'Please Read The Following Carefully'
+	'docs'             => 'Please Read The Following Carefully',
+	'visitor'          => 'Currently Signed In Visitors'
 ];

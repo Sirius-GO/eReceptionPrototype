@@ -1,6 +1,9 @@
 @extends('layouts.hub')
 
 @section('content')
+@if(!empty($success))
+  <div class="alert alert-success message_bar"> {{ $success }}</div>
+@endif
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12">
@@ -8,7 +11,7 @@
                 <div class="panel-header"><h2>{{ __('messages.docs') }} <i class="fa fa-arrows-v pull-right"></i> </h2></div>
 
                 <div class="panel-body">
-					<?php $x = 0; $id = 171; ?>
+					<?php $x = 0; $id = $reg_id; ?>
 					@if(count($docs)>0)
 						@foreach($docs as $d)
 							<?php 
@@ -20,7 +23,6 @@
 							<span style="white-space: pre-wrap; line-height: 2;"><?php echo str_replace("", "&bull;", $d->content); ?></span>
 							<br><br>
 						@endforeach
-					{{$sig_req}}
 					@endif
                 </div>
             </div>

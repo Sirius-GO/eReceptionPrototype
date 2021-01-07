@@ -22,6 +22,7 @@ if(strpos($my_url, 'reg') == false){
 
 
 @section('content')
+@include('inc.status_check')
 <div class="container">
     <div class="row">
         <div class="panel" style="background-color: rgba(0,0,0,0.5); color: #fff; padding: 20px; width: 100%; max-width: 90vw; margin: auto;">
@@ -375,10 +376,60 @@ if(strpos($my_url, 'reg') == false){
                                             </div>
                                             <div class="card-footer" style="height: 30px; width: 100%;  background-color: rgba(0,0,0,0.3);">
                                                 <!-- Footer Controls -->
+												<!-- Set Vars for Docs -->
+												<?php
+													if($rec->doc_id_1){
+														$doc1 = explode("|", $rec->doc_id_1);
+													}
+													if($rec->doc_id_2){
+														$doc2 = explode("|", $rec->doc_id_2);
+													}
+													if($rec->doc_id_3){
+														$doc3 = explode("|", $rec->doc_id_3);
+													}
+												?>
                                                 <div style="position: relative; top: 5px; display: inline-block;">
-                                                    <a href="" style="display: inline-block; margin-left: 15px;"><span class="bnt btn-info btn-sm"> <i class="fa fa-file"></i> Doc 1 </span></a>
-                                                    <a href="" style="display: inline-block; margin-left: 25px;"><span class="bnt btn-info btn-sm"> <i class="fa fa-file"></i> Doc 2 </span></a>
-                                                    <a href="" style="display: inline-block; margin-left: 25px;"><span class="bnt btn-info btn-sm"> <i class="fa fa-file"></i> Doc 3 </span></a>
+
+													@if($rec->doc_id_1 !== '|')
+													<a href="#" data-toggle="modal" data-target="#doc" style="display: inline-block; margin-left: 15px;" onclick="docView('{{$doc1[0]}}', `{{$doc1[1]}}`, '{{$rec->rid}}', `{{$rec->signature_1}}`)">
+														<span class="bnt btn-info btn-sm">
+															<i class="fa fa-file"></i> Doc 1 
+														</span>
+													</a>
+													@else
+													<a style="display: inline-block; margin-left: 15px;">
+														<span class="bnt btn-default btn-sm" style="color: #bbb;"> 
+															<i class="fa fa-file"></i> Doc 1 
+														</span>	
+													</a>
+													@endif
+													@if($rec->doc_id_2 !== '|')
+													<a href="#" data-toggle="modal" data-target="#doc" style="display: inline-block; margin-left: 25px;" onclick="docView('{{$doc2[0]}}', `{{$doc2[1]}}`, '{{$rec->rid}}', `{{$rec->signature_2}}`)">
+														<span class="bnt btn-info btn-sm"> 
+															<i class="fa fa-file"></i> Doc 2 
+														</span>
+													</a>
+													@else
+													<a style="display: inline-block; margin-left: 25px;">
+														<span class="bnt btn-default btn-sm" style="color: #bbb;"> 
+															<i class="fa fa-file"></i> Doc 2 
+														</span>	
+													</a>												
+													@endif
+													@if($rec->doc_id_3 !== '|')
+													<a href="#" data-toggle="modal" data-target="#doc" style="display: inline-block; margin-left: 25px;" onclick="docView('{{$doc3[0]}}', `{{$doc3[1]}}`, '{{$rec->rid}}', `{{$rec->signature_3}}`)">
+														<span class="bnt btn-info btn-sm"> 
+															<i class="fa fa-file"></i> Doc 3 
+														</span>
+													</a>
+													@else
+													<a style="display: inline-block; margin-left: 25px;">
+														<span class="bnt btn-default btn-sm" style="color: #bbb;"> 
+															<i class="fa fa-file"></i> Doc 3 
+														</span>	
+													</a>
+													@endif
+													
                                                 </div>
                                             </div>
                                         </div>
@@ -447,4 +498,38 @@ if(strpos($my_url, 'reg') == false){
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+		
+		
+  <div class="modal fade" tabindex="-1" role="dialog" id="doc">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-success" style="color: #333;">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title">Document Preview - Register ID: <span id="sn"></span></h4>
+        </div>
+        <div class="modal-body" style="color: #333;">
+			<div><u><h4><span id="aaa"></span></h4></u></div>
+			<div style="white-space: pre-wrap; line-height: 2;"><span id="bbb"></span></div>
+            <br> 
+			<div><img src="" id="sig"></div>
+			<script>
+				function docView(a, b, c, d){
+					var aa = a;
+					var bb = b;
+					var cc = c;
+					var dd = d;
+					
+					if(dd === ''){
+						var dd = 'storage/images/logo_w_s.png';	
+					}
+					document.getElementById('aaa').innerHTML = aa;
+					document.getElementById('bbb').innerHTML = bb;
+					document.getElementById('sn').innerHTML = cc;
+					document.getElementById("sig").src = "https://ereceptionhub.co.uk/" + dd;
+				}
+			</script>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal --> 
 @endsection

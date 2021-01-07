@@ -3,10 +3,20 @@
 <?php 
 
 use App\Company;
+use App\Account;
+$accounts_check = Account::where('company_id', auth()->user()->company_id)->get();
 
+if(count($accounts_check) > 0){
+	foreach($accounts_check as $a){
+		//Get Vars
+		$active = $a->status;
+		$sub_type = $a->type;
+	}
+}
 ?>
 
 @section('content')
+@include('inc.status_check')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12">
@@ -83,7 +93,17 @@ use App\Company;
                             </div>
 
                                     <div class="col-6 col-sm-6 col-md-3 col-lg-3" style="background-color: rgba(0,0,0,0.1); padding: 10px; display: inline-block; border: solid 1px #aaa; margin-top: 3px;">
-                                        <a href="#" onclick="printID({{$reg->id}})" class="btn btn-default btn-sm" style="position: absolute; top: 3px; right: 3px;"><i class="fa fa-print"></i> Print ID </a><br>
+                                       @if($sub_type === 'Silver' || $sub_type === 'Gold')
+											<a href="#" onclick="printID({{$reg->id}})" class="btn btn-default btn-sm" style="position: absolute; top: 3px; right: 3px;">
+												<i class="fa fa-print"></i> Print ID 
+											</a>
+											<br>
+										@else
+											<span class="badge" style="width: 100%">
+												Print ID not Available<br>Uprage to a Silver Account for access
+											</span>
+											<br><br>
+										@endif
                                         <script>
                                             function printID(id){
                                                 var printContents = document.getElementById('id_card_' + id).innerHTML;

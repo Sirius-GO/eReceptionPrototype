@@ -19,7 +19,7 @@
             <br>
             <ul class="uls" style="text-align: left; font-size: 15px;">
                 <li>Unlimited Sign In's</li><br>
-                <li>Email or SMS Notifications</li><br>
+                <li>Email Notifications</li><br>
                 <li>QR Code Sign In / Out</li><br>
                 <li>Pre Register Visitors</li><br>
                 <li>Fire Safety</li><br>
@@ -30,7 +30,7 @@
             <p style="text-align: left; margin-left: 10px;">
                 Note! Please see the feature list for each package to find out which features are included.
                 <br><br>
-                Packages start from only £25.00 per calendar month.
+                Packages start from only £35.00 per calendar month.
             </p>        
         </div>
     </div>
@@ -47,11 +47,13 @@
             <li>Unlimited Sign-in's</li>
             <li>Secure Access</li>
             <li>Real-Time Dashboard</li>
-            <li>Data Exports *</li>
+            <li>Fire Drills / Reporting *</li>
             <li>Unlimited Email Notifications</li>
-            <li>Custom Branding</li>
+            <li>Custom Branding / Hub Environment Settings</li>
             <li>GDPR Compliant</li>
-            <li>Health &amp; Safety Briefing</li>
+			<li>Currently Signed In Report</li>
+			<li>Visitor Parking Report</li>
+			<li>User Administration / Bulk Registration</li>
         <hr>
         * Extensive Fire Reports
         <br>         
@@ -73,17 +75,17 @@
             <h6>Everything offered in Bronze, plus</h6>
             <li>Bespoke Documentation with E-Sign</li>
             <li>Staff ID Badge Printing *</li>
-            <li>Visitor Pass Printing **</li>
-            <li>Parking Registraion</li>
+            <li>Visitor Pass Printing</li>
             <li>Pre Register Visitors</li>
             <li>Staff Photos</li>
-            <br>
+            <li>Failed to Sign Out Report **</li>
+			<li>eReception Hub Message</li>
             <br>
             <br>
             <hr>
-            * External ID badge printer required
+            * Printer required
             <br>
-            ** Photo ID not included
+            ** Flags anybody onsite for more than 15 hours
             <a href="" class="btn btn-primary" style="position: absolute; bottom: 10px; width: 120px; left: 50%; margin-left: -60px;"> Find Out More </a>
         </ul>
         </div>
@@ -98,20 +100,19 @@
             <hr>
         <ul class="uls">
             <h6>Everything offered in Silver, plus</h6>
-            <li>Hourly Paid Attendance Data Export</li>
+            <li>Hourly Paid Attendance Data Export *</li>
 			<li>Site Attendance Staff Data Export</li>
 			<li>Site Attendance Visitors Data Export</li>
-            <li>Clocking In and Out *</li>
-            <li>Future Updates Included</li>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
+            <li>Deliveries and Collections Report</li>
+			<li>Contractors Attendance Report</li>
+			<li>Combined Attendance Report</li>
+            <li>Forced Sign Out Report</li>
+            <li>1 x Bespoke Report of your choice **</li>
+			<li>Future Updates Included</li>
             <hr>
-            * Download a CSV for payroll
+            * Download a Spreadsheet for payroll
             <br>
-	    
+	    	** Within System Parameters
             <a href="" class="btn btn-primary" style="position: absolute; bottom: 10px; width: 120px; left: 50%; margin-left: -60px;"> Find Out More </a>
         </ul>
         </div>

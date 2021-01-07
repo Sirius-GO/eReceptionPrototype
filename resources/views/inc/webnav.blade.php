@@ -26,7 +26,7 @@
                             <li><a href="{{ route('login') }}" style="font-size: 15px; color: #fff;"> <i class="fa fa-sign-in fa-lg"> </i> Login</a></li>&nbsp;&nbsp;&nbsp;
                             <li><a href="{{ route('register') }}" style="font-size: 15px; color: #fff;"> <i class="fa fa-user-plus"> </i> Registration</a></li>
                         @else
-                            <li class="nav-item dropdown" style="padding-right: 60px;">
+                            <li class="nav-item dropdown" style="padding-right: 100px;">
                                 <a href="#" class="nav-link dropdown-toggle" id="dropdown01"  data-toggle="dropdown" role="button" aria-expanded="false" style="color: #fff;">
                                         <i class="fa fa-user fa-lg"> </i> {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                                 </a>
@@ -37,10 +37,11 @@
                                     <a class="dropdown-item" href="../../account"> <i class="fa fa-user"> </i> My Account </a>
                                     @if(auth()->user()->user_level > '4')
                                         <a class="dropdown-item" href="../../administration"> <i class="fa fa-user-plus"> </i> User Administration </a>
+										<a class="dropdown-item" href="../../visitor_index"> <i class="fa fa-id-card"> </i> Visitor Passes </a>
 										<a class="dropdown-item" href="../../preregister"> <i class="fa fa-id-card"> </i> Pre Register a Visitor </a>
                                         <a class="dropdown-item" href="../../firesafety"> <i class="fa fa-fire-extinguisher"> </i> Fire Safety </a>
 										<a class="dropdown-item" href="../../reports"> <i class="fa fa-folder"> </i> Reports </a>
-										<a href="../../documents"> <i class="fa fa-sticky-note"> </i> Hub Documents and E-Sign </a>
+										<a class="dropdown-item" href="../../documents"> <i class="fa fa-sticky-note"> </i> Hub Documents and E-Sign </a>
                                     @endif
                                     <a class="dropdown-item" href="../../policies"> <i class="fa fa-file"> </i> Policies </a>
                                     @if(auth()->user()->user_level > '4')

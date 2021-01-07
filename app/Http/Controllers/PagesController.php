@@ -1873,7 +1873,103 @@ class PagesController extends Controller
 
 	}
 
-	
+	public function downloadVisitorParking(Request $request){
+		
+
+		
+		            $entries = Register::select(\DB::raw("*, users.id as uid, registers.id as rid, registers.current_status as curstat, registers.created_at as crestat, registers.sign_out_time as upstat"))
+                        ->leftJoin('users', 'registers.user_id', '=', 'users.id')
+                        ->leftJoin('locations', 'registers.location_id', 'locations.id')
+                        ->leftJoin('companies', 'users.company_id', 'companies.id')
+                        ->leftJoin('departments', 'users.department_id', 'departments.id')
+                        ->where('registers.company_id', auth()->user()->company_id)
+						->where('registers.current_status', 'in')
+						->where('registers.reg_type', 'Visitor')
+						->orwhere('registers.reg_type', 'Contractor')
+						->where('registers.company_id', auth()->user()->company_id)
+						->where('registers.current_status', 'in')
+                        ->orderby('registers.id', 'asc')
+                        ->get();
+
+
+
+			$rt = 'VisitorParking';
+			$dt = date('dmY');
+
+
+			header("Content-Type: application/vnd.ms-excel");
+			header("Content-disposition: attachment; filename=$rt.$dt.xls");
+		
+
+			echo '<html>';
+			echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=Windows-1252\">";
+			echo '<br /><br />';
+			echo '<body style="background-color: #ffffff;">';
+			echo '<br><br><table border="1" style="font-family: tahoma, sans-serif; font-size:12px;">';
+			echo '<tr>';
+			echo '<td bgcolor="#1c971c" style="color: #fff; width:60px; vertical-align:middle;" align="center"><b>ID</b></td>';
+			echo '<td bgcolor="#1c971c" style="color: #fff; width:150px; vertical-align:middle;"align="center"><b>Name</b></td>';
+			echo '<td bgcolor="#1c971c" style="color: #fff; width:150px; vertical-align:middle;"align="center"><b>Car Reg</b></td>';
+			echo '<td bgcolor="#1c971c" style="color: #fff; width:100px; vertical-align:middle;"align="center"><b>Sign Type</b></td>';
+			echo '<td bgcolor="#1c971c" style="color: #fff; width:120px; vertical-align:middle;" align="center"><b>Sign Location</b></td>';
+			echo '<td bgcolor="#1c971c" style="color: #fff; width:250px; vertical-align:middle;"align="center"><b>Company</b></td>';
+			echo '<td bgcolor="#1c971c" style="color: #fff; width:90px; vertical-align:middle;"align="center"><b>In Date</b></td>';
+			echo '<td bgcolor="#1c971c" style="color: #fff; width:70px; vertical-align:middle;"align="center"><b>In Time</b></td>';
+			echo '<td bgcolor="#1c971c" style="color: #fff; width:140px; vertical-align:middle;"align="center"><b>Time On-site (D:H:M:S)</b></td>';
+			echo '<br />';
+			echo '</tr>';
+
+		if(count($entries)> 0){
+			foreach($entries as $ent){
+				$a = $ent->uid .' | '.$ent->rid;;
+				$b = $ent->name;
+				$c = $ent->car_reg;
+				$e = $ent->sign_out_type;
+				$g = $ent->location_name;
+				$i = $ent->from_company;
+				$j = $ent->crestat;
+				$jj = strtotime($j);
+				$kk = time();
+				$diff = $kk - $jj;
+				$m = $ent->hourly_rate;
+				
+				$days = floor($diff / (60 * 60 * 24));
+				$diff -= $days * (60 * 60 * 24);
+
+				$hours = floor($diff / (60 * 60));
+				$diff -= $hours * (60 * 60);
+
+				$minutes = floor($diff / 60);
+				$diff -= $minutes * 60;
+
+				$seconds = floor($diff);
+				$diff -= $seconds;
+
+				$onsite = "{$days}d {$hours}h {$minutes}m {$seconds}s";
+					echo '<tr>';
+							echo '<td bgcolor="#eeeeee" align="center">' . $a . '</td>';
+							echo '<td bgcolor="#eeeeee" align="left">' . $b . '</td>';
+							echo '<td bgcolor="#eeeeee" align="center">' . $c . '</td>';
+							echo '<td bgcolor="#eeeeee" align="left">' . $e . '</td>';
+							echo '<td bgcolor="#eeeeee" align="left">' . $g . '</td>';
+							echo '<td bgcolor="#eeeeee" align="left">' . $i . '</td>';
+							echo '<td bgcolor="#eeeeee" align="center" style="vnd.ms-excel.dateformat:dd.mm.yy">' . substr($j, 0, 10) . '</td>';
+							echo '<td bgcolor="#eeeeee" align="center">' . substr($j, 11, 8) . '</td>';
+							echo '<td bgcolor="#eeeeee" align="center">' . $onsite .'</td>';
+							echo '<br />';
+					echo '</tr>';	
+
+
+			}// End of foreach
+		}//end of main if
+		echo '</table>';
+		echo '</body>';
+		echo '</html>';	
+		
+		
+	//return back()->with('success', 'Your Report has been prepared and downoaded - Double-Click to open. Thank you.');
+
+	}	
 	public function preregister(){
 
 		return view('pages.preregister');
@@ -1892,12 +1988,14 @@ class PagesController extends Controller
 		  'company' => 'required',
           'job_title' => 'required',
 		  'mdate' => 'required',
-		  'mtime' => 'required'
+		  'mtime' => 'required',
+		  'dur' => 'required'
       ]);
 		
 			$mdate = $request->input('mdate');
 			$mtime = $request->input('mtime');
-	
+			$dur = $request->input('dur');
+			$msg = $request->input('message');
 		
             //Create New Visitor Pre Registration
 		
@@ -1980,11 +2078,13 @@ class PagesController extends Controller
 			  $wname = $with_name[0] . ' ' . $with_name2[0];
 			  
 			  $qrC = sha1($request->input('first_name').'|'.$request->input('last_name').'|'.$request->input('email').'|'. $mdate .'|'. $mtime);
-		  
+		
+		//return $startTime;
+		
+
 		 //Send email notification
 		 //=======================
 		 //
-		
 		  $txt = '<html><head><title>eReceptionHub Mail</title><style>body { font-family: tahoma, sans-serif; width: 100%; background-color: #ddd;}</style></head><body><img src="https://ereceptionhub.co.uk/storage/images/banner1.jpg" style="margin-top: -10px;"><span style="max-width: 90%; margin: 0px 5% 0px 5%;"><br><br>'. "\r\n";
 		  $txt .= 'Hello ';
 		  $txt .= $addressee;
@@ -1999,7 +2099,8 @@ class PagesController extends Controller
 		  $txt .= ' at ';
 		  $txt .= $mtm;
 		  $txt .= '.'. "\r\n";
-		  $txt .= '<br><br>On arrival, please click  the <b>Scan In</b> button on our Reception Console and scan the QR code below. You can do this either directly from your smartphone or alternatively you can print this email and scan the printed copy.<br><br>We look forward to seeing you on the day. '. "\r\n";
+		  $txt .= '<br><br><b>Please Note! You will receive a further email containing a calendar entry for this meeting.</b><br><br>On arrival, please click  the <b>Scan In</b> button on our Reception Console and scan the QR code below. You can do this either directly from your smartphone or alternatively you can print this email and scan the printed copy.<br><br>We look forward to seeing you on the day. <br><br>'. "\r\n";
+		  $txt .= $msg;
 		  $txt .= '<br><br><img style="width: 100px;" src="https://ereceptionhub.co.uk/qr-code.php?text=';
 		  $txt .= $qrC;
 		  $txt .= '&size=200" alt="QR Code">';
@@ -2014,6 +2115,55 @@ class PagesController extends Controller
 		  $headers = 'Content-type: text/html; charset=iso-8859-1' . '\r\n';
 		  //SEND MAIL
 		  mail($to,$subject,$txt,$headers,"-f ".$from); 
+
+		//Send Calendar invite
+
+			$domain = 'https://ereceptionhub.co.uk'; 
+			$duration = strtotime($mtime) + $dur;        
+			$startTime = date('Ymd', $mdate2) . 'T' . date('His', $mtime2);        
+			$endTime = date('Ymd', $mdate2) . 'T' . date('His', $duration); 
+			$location = $company_name[0] . ' ' . $company_address[0];
+			$mime_boundary = "----Meeting Booking----".MD5(TIME());
+			$ical = 'BEGIN:VCALENDAR' . "\r\n" .
+					'PRODID:-//Microsoft Corporation//Outlook 10.0 MIMEDIR//EN' . "\r\n" .
+					'VERSION:2.0' . "\r\n" .
+					'METHOD:REQUEST' . "\r\n" .
+					'BEGIN:VEVENT' . "\r\n" .
+					'ORGANIZER;CN="'.$addressee.'":MAILTO:'.$from. "\r\n" .
+					'ATTENDEE;CN="'.$wname.'";ROLE=REQ-PARTICIPANT;RSVP=TRUE:MAILTO:'.$to. "\r\n" .
+					'LAST-MODIFIED:' . $startTime . "\r\n" .
+					'UID:'.date('Ymd').'T'.date('His').rand()."@".$domain."\r\n" .
+					'DTSTAMP:'.date('Ymd').'T'.date('His'). "\r\n" .
+					'DTSTART;TZID=Europe/London:'.$startTime. "\r\n" .
+					'DTEND;TZID=Europe/London:'.$endTime. "\r\n" .
+					'TRANSP:OPAQUE'. "\r\n" .
+					'SEQUENCE:1'. "\r\n" .
+					'SUMMARY:' . $subject . "\r\n" .
+					'LOCATION:' . $location . "\r\n" .
+					'CLASS:PUBLIC'. "\r\n" .
+					'PRIORITY:5'. "\r\n" .
+					'BEGIN:VALARM' . "\r\n" .
+					'TRIGGER:-PT15M' . "\r\n" .
+					'ACTION:DISPLAY' . "\r\n" .
+					'DESCRIPTION:Reminder' . "\r\n" .
+					'END:VALARM' . "\r\n" .
+					'END:VEVENT'. "\r\n" .
+					'END:VCALENDAR'. "\r\n";
+		
+
+		  $txt = "--$mime_boundary\r\n";
+		  $txt .= 'Content-Type: text/calendar;name="meeting.ics";method=REQUEST'."\n";
+    	  $txt .= "Content-Transfer-Encoding: 8bit\n\n";
+		  $txt .= $ical;
+		
+		  $headers = "From: ".$wname." <".$from.">\n";
+    	  $headers .= "Reply-To: ".$addressee." <".$to.">\n";
+		  $headers .= "MIME-Version: 1.0\n";
+    	  $headers .= "Content-Type: multipart/alternative; boundary=\"$mime_boundary\"\n";
+    	  $headers .= "Content-class: urn:content-classes:calendarmessage\n";
+		  //SEND MAIL
+		  mail($to,$subject,$txt,$headers,"-f ".$from); 
+		
 
           return back()->with('success', 'Pre Registration Successful');
 

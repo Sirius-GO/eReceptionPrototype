@@ -35,7 +35,7 @@ $tm_days = substr($tm, 8, 2);
                                     <h1 class="text-center"><?php echo strtoupper($sdet->reg_type); ?> <a href="../fire" class="btn btn-primary btn-lg pull-right" style="margin-top: -10px; margin-right: 15px;"> <i class="fa fa-arrow-left"> </i> Go Back </a></h1>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 details_box">
-                                    <img src="http://localhost:8080/ereceptionhub/storage/app/public/mug_shots/{{ $sdet->img }}" style="position: relative; height: 100px; border-radius: 50%;  border: solid 1px #eee; left: 50%; margin-left: -50px;">
+                                    <img src="http://ereceptionhub.co.uk/storage/mug_shots/{{ $sdet->img }}" style="position: relative; height: 100px; border-radius: 50%;  border: solid 1px #eee; left: 50%; margin-left: -50px;">
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 details_box">
                                     <p style="color: #333; font-size: 16px;">
@@ -84,7 +84,7 @@ $tm_days = substr($tm, 8, 2);
                                     </p>    
                                 </div>
                                 <div class="col-sm-12 col-md-12 col-lg-12" style="background-color: rgba(0, 0, 0, 0.5); padding: 10px; border-radius: 0 0 10px 10px;">
-                                    Footer
+                                    Staff Record
                                 </div>
                             @endforeach
                         @else 
@@ -93,7 +93,7 @@ $tm_days = substr($tm, 8, 2);
                                     <h1 class="text-center"><?php echo strtoupper($det->reg_type); ?> <a href="../fire" class="btn btn-primary btn-lg pull-right" style="margin-top: -10px; margin-right: 15px;"> <i class="fa fa-arrow-left"> </i> Go Back </a></h1>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 details_box">
-                                    <img src="http://localhost:8080/ereceptionhub/storage/app/public/mug_shots/{{ $det->img }}" style="position: relative; height: 100px; border-radius: 50%;  border: solid 1px #eee; left: 50%; margin-left: -50px;">
+                                    <img src="http://ereceptionhub.co.uk/storage/mug_shots/{{ $det->img }}" style="position: relative; height: 100px; border-radius: 50%;  border: solid 1px #eee; left: 50%; margin-left: -50px;">
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 details_box">
                                     <p style="color: #333; font-size: 16px;">
@@ -142,7 +142,7 @@ $tm_days = substr($tm, 8, 2);
                                     </p>    
                                 </div>
                                 <div class="col-sm-12 col-md-12 col-lg-12" style="background-color: rgba(0, 0, 0, 0.5); padding: 10px; border-radius: 0 0 10px 10px;">
-                                    Footer
+                                    Visitor Record
                                 </div>
                             @endforeach
                         @endif
