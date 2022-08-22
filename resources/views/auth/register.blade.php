@@ -63,8 +63,8 @@
                                 <select id="account_type" class="form-control @error('account_type') is-invalid @enderror" name="account_type" value="{{ old('account_type') }}" required>
                                     <option value=""> -- Please Select an Account Type -- </option>
                                     <option value="Business">Business</option>
-                                    <option value="Education">Education</option>
-                                    <option value="Health">Health</option>
+                                    <option value="Education" disabled="true">Education (Coming Soon!)</option>
+                                    <option value="Health" disabled="true">Health (Coming Soon!)</option>
                                 </select>    
 
                                 @error('account_type')

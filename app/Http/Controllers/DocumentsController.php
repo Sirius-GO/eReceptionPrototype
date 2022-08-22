@@ -187,13 +187,9 @@ class DocumentsController extends Controller
 		$reg->signature_3 = $output_file;
 		$reg->save();
 		
-		
-		
 		return redirect('/hub')->with('success', 'Thank you! Please take a seat. We\'ll be with you shortly.');	
 		
 	}
-	
-	
 	
 	public function tas(){
 		//Take a seat notification after confirmimg a document

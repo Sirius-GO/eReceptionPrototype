@@ -8,7 +8,7 @@
             <img src="../../storage/images/logo.png"><br>
             <h2 style="color: #222; font-weight: 600;">Digital Sign-in for Staff, Visitors, Contractors, Deliveries and Collections</h2>
             <h3 style="color: #222;">Replace your paper visitors book and safeguard your personal information</h3>
-    </ceneter>
+    </center>
     
 <div class="row">
     <div class="col-12 col-md-6 col-lg-6 col-xl-3 mybox">
@@ -30,7 +30,7 @@
             <p style="text-align: left; margin-left: 10px;">
                 Note! Please see the feature list for each package to find out which features are included.
                 <br><br>
-                Packages start from only £35.00 per calendar month.
+                <span style="font-weight: bold; font-size: 20px;">Packages start from only £35.00 per calendar month.</span>
             </p>        
         </div>
     </div>
@@ -56,8 +56,11 @@
 			<li>User Administration / Bulk Registration</li>
         <hr>
         * Extensive Fire Reports
-        <br>         
-        <a href="" class="btn btn-primary" style="position: absolute; bottom: 10px; width: 120px; left: 50%; margin-left: -60px;"> Find Out More </a>
+        <br>  
+		<div style="position: absolute; bottom: 50px; width: 170px; left: 50%; margin-left: -85px; padding: 5px; border-radius: 5px; background-color: rgba(255,255,255,0.5); font-weight: bold;">
+			£35.00 PCM / £365.00 PA
+		</div>
+        <a href="about" class="btn btn-primary" style="position: absolute; bottom: 10px; width: 120px; left: 50%; margin-left: -60px;"> Find Out More </a>
         </ul>
 
         <br>
@@ -86,7 +89,10 @@
             * Printer required
             <br>
             ** Flags anybody onsite for more than 15 hours
-            <a href="" class="btn btn-primary" style="position: absolute; bottom: 10px; width: 120px; left: 50%; margin-left: -60px;"> Find Out More </a>
+		<div style="position: absolute; bottom: 50px; width: 170px; left: 50%; margin-left: -85px; padding: 5px; border-radius: 5px; background-color: rgba(255,255,255,0.5); font-weight: bold;">
+			£45.00 PCM / £498.00 PA
+		</div>
+            <a href="about" class="btn btn-primary" style="position: absolute; bottom: 10px; width: 120px; left: 50%; margin-left: -60px;"> Find Out More </a>
         </ul>
         </div>
     </div>
@@ -113,7 +119,10 @@
             * Download a Spreadsheet for payroll
             <br>
 	    	** Within System Parameters
-            <a href="" class="btn btn-primary" style="position: absolute; bottom: 10px; width: 120px; left: 50%; margin-left: -60px;"> Find Out More </a>
+		<div style="position: absolute; bottom: 50px; width: 170px; left: 50%; margin-left: -85px; padding: 5px; border-radius: 5px; background-color: rgba(255,255,255,0.5); font-weight: bold;">
+			£60.00 PCM / £650.00 PA
+		</div>
+            <a href="about" class="btn btn-primary" style="position: absolute; bottom: 10px; width: 120px; left: 50%; margin-left: -60px;"> Find Out More </a>
         </ul>
         </div>
     </div>  

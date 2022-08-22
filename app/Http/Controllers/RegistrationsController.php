@@ -74,7 +74,7 @@ class RegistrationsController extends Controller
     {
 
         if(auth()->user()->user_level < '5'){
-            return redirect('/account')->with('error', 'Unauthorised Page');
+            return redirect('/account')->with('error', 'Please wait...');
         }
 
         $company = Company::WHERE('id', auth()->user()->company_id)->take(1)->get();
@@ -95,7 +95,7 @@ class RegistrationsController extends Controller
     {
 
         if(auth()->user()->user_level < '5'){
-            return redirect('/account')->with('error', 'Unauthorised Page');
+            return redirect('/account')->with('error', 'Please wait...');
         }
 
       //Validate the form
@@ -147,7 +147,7 @@ class RegistrationsController extends Controller
     public function bulkUploadStore(Request $request){
 
         if(auth()->user()->user_level < '10'){
-            return redirect('/account')->with('error', 'Unauthorised Page');
+            return redirect('/account')->with('error', 'Please wait...');
         }
 
       //Validate the form
@@ -228,7 +228,7 @@ class RegistrationsController extends Controller
     {
 
         if(auth()->user()->user_level < '5'){
-            return redirect('/account')->with('error', 'Unauthorised Page');
+            return redirect('/account')->with('error', 'Please wait...');
         }
 
         $registration = User::orderby('created_at', 'desc')->where('id', $id)->get();
@@ -256,7 +256,7 @@ class RegistrationsController extends Controller
     {
 
         if(auth()->user()->user_level < '5'){
-            return redirect('/account')->with('error', 'Unauthorised Page');
+            return redirect('/account')->with('error', 'Please wait...');
         }
 
         $registration = User::find($id);
@@ -282,7 +282,7 @@ class RegistrationsController extends Controller
     {
 
         if(auth()->user()->user_level < '5'){
-            return redirect('/account')->with('error', 'Unauthorised Page');
+            return redirect('/account')->with('error', 'Please wait...');
         }
 
       //Validate the form
@@ -340,7 +340,7 @@ class RegistrationsController extends Controller
         $reg = User::find($id);
 
         if(auth()->user()->user_level !='10'){
-            return redirect('/account')->with('error', 'Unauthorised Page');
+            return redirect('/account')->with('error', 'Please wait...');
         }
 
         if($reg->avatar !='avatar.png'){

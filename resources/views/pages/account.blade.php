@@ -21,6 +21,12 @@ if(count($accounts_check) > 0){
 
 <div class="container">
     <div class="row justify-content-center">
+		
+		
+		
+		
+		
+		
         <div class="col-12">
             <div class="panel" style="background-color: rgba(0,0,0,0.5); color: #fff; padding: 20px; max-width: 90vw; margin: auto;">
                 <div class="panel-header"><h2>{{ __('messages.account') }}</h2></div>
@@ -29,6 +35,59 @@ if(count($accounts_check) > 0){
 
 
                     <div id="main">
+						
+						
+						
+                        <br>
+                        <div class="row">
+                            <!-- Account Credentials -->
+                            <div class="row" style="background-color: rgba(255,255,255,0.5); padding: 10px;">
+                                <h3>Account Credentials
+                                    <a href="#" data-toggle="modal" data-target="#account_cred"><span class="btn btn-primary pull-right"><i class="fa fa-pencil fa-lg"> </i> Edit </span></a>
+                                </h3>                                
+                            </div>                                
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="min-height: 160px; border-bottom: dotted 1px;">
+                                <p><span class="badge" style="background-color: #1e7553;">Account Status: </span><br>
+                                    @if(count($account) > 0)
+                                        @foreach($account as $ac)
+                                            {{ $ac->status }}<br>
+                                            @if($ac->status === 'Inactive')
+                                                <a href="subscriptions" class="btn btn-primary"> Buy Subscription </a>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </p>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="min-height: 160px; border-bottom: dotted 1px;">
+                                <p><span class="badge" style="background-color: #1e7553;">Account Type: </span><br>
+                                    @if(count($account) > 0)
+                                        @foreach($account as $ac)
+                                            {{ $ac->type }}
+                                            @if( $ac->type == '') 
+                                                Not Set<br>
+                                            @endif 
+                                        @endforeach
+                                    @endif
+                                </p>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="min-height: 160px; border-bottom: dotted 1px;">
+                                <p><span class="badge" style="background-color: #1e7553;">Account Classification: </span><br>
+                                    @if(count($account) > 0)
+                                        @foreach($account as $ac)
+                                            {{ $ac->classification }}<br>
+                                        @endforeach
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+						
+						
+						
+						
+						
+						
+						
+					<br>	
                      <div class="row">
                    <!-- User Credentials -->
                     <div class="row" style="background-color: rgba(255,255,255,0.5); padding: 10px;">
@@ -239,48 +298,7 @@ if(count($accounts_check) > 0){
                         </div>
                         </div>
 
-                        <br>
-                        <div class="row">
-                            <!-- Account Credentials -->
-                            <div class="row" style="background-color: rgba(255,255,255,0.5); padding: 10px;">
-                                <h3>Account Credentials
-                                    <a href="#" data-toggle="modal" data-target="#account_cred"><span class="btn btn-primary pull-right"><i class="fa fa-pencil fa-lg"> </i> Edit </span></a>
-                                </h3>                                
-                            </div>                                
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="min-height: 160px; border-bottom: dotted 1px;">
-                                <p><span class="badge" style="background-color: #1e7553;">Account Status: </span><br>
-                                    @if(count($account) > 0)
-                                        @foreach($account as $ac)
-                                            {{ $ac->status }}<br>
-                                            @if($ac->status === 'Inactive')
-                                                <a href="subscriptions" class="btn btn-primary"> Buy Subscription </a>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                </p>
-                            </div>
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="min-height: 160px; border-bottom: dotted 1px;">
-                                <p><span class="badge" style="background-color: #1e7553;">Account Type: </span><br>
-                                    @if(count($account) > 0)
-                                        @foreach($account as $ac)
-                                            {{ $ac->type }}
-                                            @if( $ac->type == '') 
-                                                Not Set<br>
-                                            @endif 
-                                        @endforeach
-                                    @endif
-                                </p>
-                            </div>
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4" style="min-height: 160px; border-bottom: dotted 1px;">
-                                <p><span class="badge" style="background-color: #1e7553;">Account Classification: </span><br>
-                                    @if(count($account) > 0)
-                                        @foreach($account as $ac)
-                                            {{ $ac->classification }}<br>
-                                        @endforeach
-                                    @endif
-                                </p>
-                            </div>
-                        </div>
+
                         
                         <br>
                         <div class="row">

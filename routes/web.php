@@ -6,6 +6,8 @@
 Route::get('/hub', 'PagesController@hub');
 Route::get('/sign_in_options', 'PagesController@sign_in_options');
 Route::get('/policies', 'PagesController@policies');
+Route::get('/privacy', 'PagesController@privacy');
+Route::get('/terms', 'PagesController@terms');
 
 //Auth Pages
 Route::get('/hue_sat', 'PagesController@hue_sat');

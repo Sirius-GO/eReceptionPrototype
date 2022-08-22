@@ -1,9 +1,31 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J9QDYXSGS4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J9QDYXSGS4');
+</script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content= "eReception Hub is a staff and visitor reception management system. It is a collection of tools designed to replace traditional visitors books and staff and visitor site logging systems. It also has extensive fire safety features, plus much much more. Find out more!" />
+    <meta name="robots" content= "index, follow">
+    <link rel="canonical"  href="https://www.ereceptionhub.co.uk">
+    <meta property="og:title" content="Replace your paper visitors book and safeguard your personal information - eReceptionHub" />
+    <meta property="og:type" content="Images" />
+    <meta property="og:url" content="https://ereceptionhub.co.uk" />
+    <meta property="og:image" content="https://ereceptionhub.co.uk/storage/images/Welcome.png" />
+    <meta property="og:description" content="eReception Hub is a staff and visitor reception management system. It is a collection of tools designed to replace traditional visitors books and staff and visitor site logging systems. It also has extensive fire safety features, plus much much more. Find out more!" />
+	
+	
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 

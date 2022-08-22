@@ -17,6 +17,9 @@
         <li class="nav-item" id="contact">
             <a class="nav-link" href="/contact"> <i class="fa fa-phone"></i> Contact Us</a>
         </li>
+        <li class="nav-item" id="policies">
+            <a class="nav-link" href="/policies"> <i class="fa fa-file"></i> Policies</a>
+        </li>
     </ul>
 
                     <!-- Right Side Of Navbar -->

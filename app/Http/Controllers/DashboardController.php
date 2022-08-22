@@ -77,8 +77,6 @@ class DashboardController extends Controller
         ->groupBy('department_id')
         ->get()->toArray();
 
-
-
         $data = User::get('id')->all();
 
         
@@ -103,14 +101,6 @@ class DashboardController extends Controller
         $usersChart->dataset('Employees', 'bar', $deps)
         ->color($borderColors)
         ->backgroundcolor($fillColors);
-
-        
-        
-        
-        /*->fill(false)
-        ->linetension(0.1)
-        ->dashed([1]);
-        */
 
         $usersChart1 = new UserChart;
         $usersChart1->minimalist(false)
@@ -173,11 +163,6 @@ class DashboardController extends Controller
             ->orderby('created_at', 'asc')
             ->groupBy(\DB::raw('reg_type'))
             ->pluck('del'); 
-
-
-       /* $data = User::select('*')
-        ->leftJoin('departments', 'users.company_id', '=', 'departments.company_id')
-        ->get();*/
 
         $in = Register::select(\DB::raw("COUNT(current_status) as n"))
             ->where('current_status', '<>', 'NA')

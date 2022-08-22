@@ -1,6 +1,15 @@
 <!DOCTYPE HTML>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J9QDYXSGS4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-J9QDYXSGS4');
+</script>
        <meta charset="utf-8">
        <link rel="icon" type="image/png" sizes="64x64" href="https://ereceptionhub.co.uk/storage/images/erec.ico">
        <link rel="apple-touch-icon" sizes="180x180" href="https://ereceptionhub.co.uk/storage/images/erec_180.png">
@@ -9,7 +18,20 @@
        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
        <link rel="apple-touch-startup-image" href="https://ereceptionhub.co.uk/storage/images/launch.png">
        <link rel="manifest" href="https://ereceptionhub.co.uk/js/manifest.json">
-        <title>eReception Hub</title>
+        <title>Digital Sign-in for Staff, Visitors, Contractors, Deliveries and Collections - eReception Hub</title>
+		
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content= "eReception Hub is a staff and visitor reception management system. It is a collection of tools designed to replace traditional visitors books and staff and visitor site logging systems. It also has extensive fire safety features, plus much much more. Find out more!" />
+    <meta name="robots" content= "index, follow">
+    <link rel="canonical"  href="https://www.ereceptionhub.co.uk">
+    <meta property="og:title" content="Digital Sign-in for Staff, Visitors, Contractors, Deliveries and Collections -Replace your paper visitors book and safeguard your personal information - eReceptionHub" />
+    <meta property="og:type" content="Images" />
+    <meta property="og:url" content="https://ereceptionhub.co.uk" />
+    <meta property="og:image" content="https://ereceptionhub.co.uk/storage/images/Welcome.png" />
+    <meta property="og:description" content="eReception Hub is a staff and visitor reception management system. It is a collection of tools designed to replace traditional visitors books and staff and visitor site logging systems. It also has extensive fire safety features, plus much much more. Find out more!" />
+		
+		
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -111,7 +133,7 @@
                 }
                 .mybox2{
                     width: 98%;
-                    height: 620px;
+                    height: 640px;
                     padding: 10px;
                     border-radius: 10px;
                     background-color: rgba(0, 0, 0, 0.1);

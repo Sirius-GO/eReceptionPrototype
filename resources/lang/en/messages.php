@@ -50,5 +50,7 @@ return [
 	'documents'        => 'Hub Documents and E-Sign',
 	'sign'             => 'eReception Hub e-Sign',
 	'docs'             => 'Please Read The Following Carefully',
-	'visitor'          => 'Currently Signed In Visitors'
+	'visitor'          => 'Currently Signed In Visitors',
+	'privacy_policy'   => 'Privacy Policy',
+	'terms'            => 'Terms and Conditions'
 ];

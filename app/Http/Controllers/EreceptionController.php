@@ -982,14 +982,6 @@ class EreceptionController extends Controller
 
     public function loc_edit(Request $request)
     {
-        //Validate the form
-        //$this->validate($request, [
-        //  'user_id' => 'required',
-        //  'location_id' => 'required',
-        //  'location_name' => 'required|max:100',
-        //  'location_code' => 'required|max:100',
-        //  'location_address' => 'required|max:100'
-        //]);
 
       //Do update here
       foreach($request->get('location', []) as $loc) {
@@ -1023,15 +1015,6 @@ class EreceptionController extends Controller
 
     public function dep_edit(Request $request)
     {
-
-      //Validate the form
-      //$this->validate($request, [
-      //    'user_id' => 'required',
-      //    'department_id' => 'required',
-      //    'company_id' => 'required',
-      //    'department_name' => 'required|max:100'
-      //]);
-
 
       foreach($request->get('department', []) as $dep) {
         Departments::where('id', $dep['department_id'])->update(array_except($dep, ['department_id']));

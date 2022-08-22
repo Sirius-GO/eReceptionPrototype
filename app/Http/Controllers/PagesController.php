@@ -23,17 +23,12 @@ class PagesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
 
-            /*$this->middleware('auth', 
+            $this->middleware('auth', 
                         ['except' => 
-                            ['index', 'show',
-                            'sign_in_options', 'show',
-                            'policies', 'show',
-                            'scan', 'show',
-                            'sign_in', 'show'
-                            ]
-                        ]);*/
+                            ['policies', 'privacy', 'terms']
+                        ]);
 
     }
 
@@ -66,6 +61,16 @@ class PagesController extends Controller
     //policies
     public function policies(){
         return view('pages.policies');
+    }
+
+    //policies
+    public function privacy(){
+        return view('pages.privacy');
+    }
+	
+    //policies
+    public function terms(){
+        return view('pages.terms');
     }
 
     // ====================== Authenticated Accessable Pages ========================

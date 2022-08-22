@@ -48,7 +48,9 @@ return [
 	'documents'        => 'Dogfennau Hwb ac E-Arwydd',
 	'sign'             => 'eReception Hub e-Arwydd',
 	'docs'             => 'Darllenwch y canlynol yn ofalus',
-	'visitor'          => 'Arwyddwyr wedi\'u Llofnodi ar hyn o bryd'
+	'visitor'          => 'Arwyddwyr wedi\'u Llofnodi ar hyn o bryd',
+	'privacy_policy'   => 'Polisi Preifatrwydd',
+	'terms'            => 'Telerau ac Amodau'
 
 
 
